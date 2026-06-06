@@ -44,20 +44,26 @@ const EMPTY_STATE: GameState = {
   timeTaken: null,
 }
 
-export function useGameState(_events: Event[]) {
+export function useGameState(events: Event[]) {
   const [persisted, setPersisted] = useLocalStorage<GameState | null>('apush-game-state', null)
+  const [savedCount, setSavedCount] = useLocalStorage<number>('apush-event-count', 0)
 
   const [state, dispatch] = useReducer(reducer, (() => {
-    if (persisted) {
+    if (persisted && savedCount === events.length) {
       // Migrate: fill in any missing fields from EMPTY_STATE
       return { ...EMPTY_STATE, ...persisted }
     }
+    // Event list has changed (new events added) — start fresh
     return EMPTY_STATE
   })())
 
   useEffect(() => {
     setPersisted(state)
   }, [state, setPersisted])
+
+  useEffect(() => {
+    setSavedCount(events.length)
+  }, [events.length, setSavedCount])
 
   const newGame = (filteredEvents: Event[]) => dispatch({ type: 'NEW_GAME', events: filteredEvents })
   const setTentative = (slot: number | null) => dispatch({ type: 'SET_TENTATIVE', slot })
