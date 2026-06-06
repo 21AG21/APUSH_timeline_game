@@ -56,6 +56,10 @@ html, body, #root {
   padding: 0;
 }
 
+html {
+  font-size: 18px;
+}
+
 body {
   font-family: 'DM Sans', system-ui, sans-serif;
 }

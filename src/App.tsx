@@ -126,6 +126,10 @@ export default function App() {
   const handleNewGame = () => {
     const filtered = getFilteredEvents()
     if (filtered.length < 2) return
+    // Reset stale refs so feedback detection starts clean for the new game
+    if (feedbackTimer.current) clearTimeout(feedbackTimer.current)
+    prevAttempts.current = 0
+    prevScore.current = 0
     newGame(filtered)
     setLastCorrect(null)
     setWrongFeedback(null)
@@ -152,6 +156,9 @@ export default function App() {
     setSettings((s) => ({ ...s, filterUnits: units, filterRegions: regions }))
     const filtered = filterPool(allEvents, units, regions)
     if (filtered.length >= 2) {
+      if (feedbackTimer.current) clearTimeout(feedbackTimer.current)
+      prevAttempts.current = 0
+      prevScore.current = 0
       newGame(filtered)
       if (settings.timedMode) startTimer(settings.timerSeconds)
     }
@@ -209,22 +216,13 @@ export default function App() {
         onToggleTimedMode={() => setSettings((s) => ({ ...s, timedMode: !s.timedMode }))}
         onFilterChange={handleFilterChange}
       />
-      <Scoreboard
-        score={state.score}
-        attempts={state.attempts}
-        poolSize={state.pool.length}
-        timelineSize={state.timeline.length}
-        streak={state.streak}
-        done={state.done}
-        gameOver={state.gameOver}
-        timedMode={settings.timedMode}
-        timerSecondsLeft={timerLeft}
-        onNewGame={handleNewGame}
-      />
+
       <div className="flex flex-1 overflow-hidden">
-        {/* Left panel: placement card + collapsible journal */}
-        <div className="w-96 shrink-0 flex flex-col border-r border-om-border bg-om-surface overflow-y-auto">
-          <div className="shrink-0">
+        {/* Left panel: placement card + stats + actions */}
+        <div className="w-[440px] shrink-0 flex flex-col border-r border-om-border bg-om-surface">
+          {/* Scrollable content area */}
+          <div className="flex-1 overflow-y-auto">
+            {/* Placement card or end state */}
             {state.current && !gameOver ? (
               <PlacementCard
                 event={state.current}
@@ -234,33 +232,44 @@ export default function App() {
               />
             ) : (
               <div className="p-4 space-y-4">
-                {state.done && !state.gameOver && (
-                  <ResultsSummary state={state} settings={settings} allEvents={allEvents} />
-                )}
-                {state.gameOver && !settings.hardMode && (
+                {(state.done || state.gameOver) && (
                   <ResultsSummary state={state} settings={settings} allEvents={allEvents} />
                 )}
               </div>
             )}
+
+            {/* Divider */}
+            <div className="border-t border-om-border mx-4" />
+
+            {/* Stats */}
+            <Scoreboard
+              score={state.score}
+              attempts={state.attempts}
+              poolSize={state.pool.length}
+              timelineSize={state.timeline.length}
+              streak={state.streak}
+              done={state.done}
+              gameOver={state.gameOver}
+              timedMode={settings.timedMode}
+              timerSecondsLeft={timerLeft}
+            />
           </div>
 
-          {/* Journal toggle + content */}
-          <button
-            onClick={() => setJournalOpen((o) => !o)}
-            className="flex items-center justify-between px-4 py-2.5 border-t border-om-border text-sm font-semibold text-om-text hover:bg-om-slot-hover transition-colors"
-          >
-            <span>Study Journal</span>
-            <span className="text-om-muted">{journalOpen ? '▼' : '▶'}</span>
-          </button>
-          {journalOpen && (
-            <StudyJournal
-              allEvents={allEvents}
-              timelineEvents={state.timeline}
-              notes={notes}
-              onSaveNote={saveNote}
-              onDeleteNote={deleteNote}
-            />
-          )}
+          {/* Fixed bottom actions */}
+          <div className="shrink-0 border-t border-om-border p-4 space-y-2">
+            <button
+              onClick={handleNewGame}
+              className="w-full py-3 text-base font-semibold rounded bg-om-accent hover:bg-om-accent-hover text-white transition-colors"
+            >
+              New Game
+            </button>
+            <button
+              onClick={() => setJournalOpen(true)}
+              className="w-full py-2 text-sm text-om-muted hover:text-om-text border border-om-border rounded transition-colors"
+            >
+              Study Journal
+            </button>
+          </div>
         </div>
 
         {/* Main: timeline */}
@@ -277,6 +286,36 @@ export default function App() {
           onDrop={handleDrop}
         />
       </div>
+
+      {/* Journal drawer overlay */}
+      {journalOpen && (
+        <div className="fixed inset-0 z-50 flex">
+          {/* Drawer panel */}
+          <div className="w-[80vw] bg-om-surface border-r border-om-border flex flex-col shadow-2xl">
+            <div className="flex items-center justify-between px-6 py-4 border-b border-om-border shrink-0">
+              <h2 className="text-2xl font-serif font-bold text-om-text">Study Journal</h2>
+              <button
+                onClick={() => setJournalOpen(false)}
+                className="text-om-muted hover:text-om-text text-3xl leading-none"
+              >
+                ×
+              </button>
+            </div>
+            <StudyJournal
+              allEvents={allEvents}
+              timelineEvents={state.timeline}
+              notes={notes}
+              onSaveNote={saveNote}
+              onDeleteNote={deleteNote}
+            />
+          </div>
+          {/* Backdrop — click to close */}
+          <div
+            className="flex-1 bg-black/40 cursor-pointer"
+            onClick={() => setJournalOpen(false)}
+          />
+        </div>
+      )}
 
       {/* Modals */}
       {showHardModeReview && (
