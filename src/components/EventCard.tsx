@@ -16,7 +16,7 @@ export function EventCard({ event, index, hideDates, hardMode, note }: Props) {
           <span className="text-xs font-bold text-om-muted w-5 text-right shrink-0">
             {index + 1}
           </span>
-          <h3 className="text-base font-semibold text-om-text">{event.title}</h3>
+          <h3 className="text-xl font-bold text-om-text leading-tight">{event.title}</h3>
         </div>
         {!hideDates && (
           <span className="shrink-0 text-sm font-mono text-om-muted">

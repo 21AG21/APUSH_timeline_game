@@ -24,11 +24,11 @@ export function Header({
 }: Props) {
   return (
     <header className="bg-om-surface border-b border-om-border px-4 py-3 flex items-center justify-between gap-4 flex-wrap">
-      <div>
+      <div className="inline-block">
         <h1 className="text-4xl font-serif font-bold text-om-text tracking-tight leading-none">
           APUSH Timeline
         </h1>
-        <div className="mt-2 h-0.5 bg-om-gold w-36" />
+        <div className="mt-1.5 h-[3px] bg-om-gold rounded-full w-full" />
       </div>
       <div className="flex items-center gap-3 flex-wrap">
         <Toggle label="Hide Dates" checked={settings.hideDates} onChange={onToggleHideDates} />

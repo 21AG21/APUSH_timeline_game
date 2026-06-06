@@ -24,76 +24,69 @@ export function Scoreboard({
   const total = score + poolSize + (done || gameOver ? 0 : 1)
 
   return (
-    <div className="px-4 py-4 space-y-4">
+    <div className="px-5 py-5 space-y-5">
       {/* Top row: Score + Attempts */}
       <div className="grid grid-cols-2 gap-3">
-        <Stat label="Score" value={`${score} / ${total}`} />
-        <Stat label="Attempts" value={String(attempts)} />
+        <StatCard label="Score" value={`${score}/${total}`} />
+        <StatCard label="Attempts" value={String(attempts)} />
       </div>
 
-      {/* Streak — centered, prominent */}
-      <div className="flex flex-col items-center py-1">
-        <div className="flex items-center gap-3">
-          {streak > 0 && <span className="text-3xl select-none">🔥</span>}
-          <span
-            className={`text-5xl font-black font-mono leading-none ${
-              streak >= 3 ? 'text-om-accent' : 'text-om-text'
-            }`}
-          >
-            {streak}
-          </span>
-          {streak > 0 && <span className="text-3xl select-none">🔥</span>}
-        </div>
-        <span className="text-xs font-bold text-om-muted uppercase tracking-widest mt-1.5">
+      {/* Streak — centered, polished */}
+      <div className="flex flex-col items-center py-3 bg-om-bg rounded-xl border border-om-border">
+        <span
+          className={`text-6xl font-black font-mono leading-none tabular-nums ${
+            streak > 0 ? 'streak-rainbow' : 'text-om-text'
+          }`}
+        >
+          {streak}
+        </span>
+        <span className="text-sm font-bold text-om-muted uppercase tracking-[0.2em] mt-2">
           Streak
         </span>
       </div>
 
       {/* Bottom row: Timeline + Remaining */}
       <div className="grid grid-cols-2 gap-3">
-        <Stat label="Timeline" value={String(timelineSize)} />
-        <Stat label="Remaining" value={String(poolSize)} />
+        <StatCard label="Timeline" value={String(timelineSize)} />
+        <StatCard label="Remaining" value={String(poolSize)} />
       </div>
 
       {/* Timer (timed mode) */}
       {timedMode && timerSecondsLeft !== null && (
-        <div className="flex justify-center">
-          <Stat
-            label="Time"
-            value={`${timerSecondsLeft}s`}
-            highlight={timerSecondsLeft <= 10}
-            danger={timerSecondsLeft <= 10}
-          />
-        </div>
+        <StatCard
+          label="Time"
+          value={`${timerSecondsLeft}s`}
+          danger={timerSecondsLeft <= 10}
+        />
       )}
 
       {/* Completion message */}
       {done && !gameOver && (
-        <p className="text-sm font-semibold text-om-success text-center">
-          Complete! Final: {score} / {total}
-        </p>
+        <div className="text-center py-2 bg-om-success-bg rounded-lg border border-om-border">
+          <p className="text-base font-bold text-om-success">
+            Complete! {score}/{total}
+          </p>
+        </div>
       )}
     </div>
   )
 }
 
-function Stat({
+function StatCard({
   label,
   value,
-  highlight,
   danger,
 }: {
   label: string
   value: string
-  highlight?: boolean
   danger?: boolean
 }) {
   return (
-    <div className="flex flex-col items-center bg-om-bg rounded-lg px-3 py-2">
-      <span className="text-xs text-om-muted uppercase tracking-wide font-medium">{label}</span>
+    <div className="flex flex-col items-center bg-om-bg rounded-xl border border-om-border px-4 py-3">
+      <span className="text-xs text-om-muted uppercase tracking-wider font-semibold">{label}</span>
       <span
-        className={`text-2xl font-bold font-mono mt-0.5 ${
-          danger ? 'text-om-error' : highlight ? 'text-om-accent' : 'text-om-text'
+        className={`text-3xl font-bold font-mono mt-1 leading-none tabular-nums ${
+          danger ? 'text-om-error' : 'text-om-text'
         }`}
       >
         {value}

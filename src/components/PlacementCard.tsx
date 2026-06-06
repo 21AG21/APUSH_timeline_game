@@ -22,14 +22,14 @@ export function PlacementCard({ event, hideDates, hardMode, onDragStart }: Props
         {hardMode ? (
           <div>
             <div className="flex items-center gap-2">
-              <h2 className="text-lg font-bold text-om-text">{event.title}</h2>
+              <h2 className="text-2xl font-bold text-om-text leading-tight">{event.title}</h2>
               <span className="text-sm text-om-error font-medium">Hard</span>
             </div>
           </div>
         ) : (
           <>
             <div className="flex items-start justify-between gap-2">
-              <h2 className="text-lg font-bold text-om-text">{event.title}</h2>
+              <h2 className="text-2xl font-bold text-om-text leading-tight">{event.title}</h2>
               {!hideDates && (
                 <span className="shrink-0 text-sm font-mono text-om-gold bg-om-tag rounded px-2 py-0.5">
                   {event.year}

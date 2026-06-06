@@ -287,11 +287,10 @@ export default function App() {
         />
       </div>
 
-      {/* Journal drawer overlay */}
+      {/* Journal drawer overlay — slides in from left */}
       {journalOpen && (
         <div className="fixed inset-0 z-50 flex">
-          {/* Drawer panel */}
-          <div className="w-[80vw] bg-om-surface border-r border-om-border flex flex-col shadow-2xl">
+          <div className="drawer-panel w-[80vw] bg-om-surface border-r border-om-border flex flex-col shadow-2xl">
             <div className="flex items-center justify-between px-6 py-4 border-b border-om-border shrink-0">
               <h2 className="text-2xl font-serif font-bold text-om-text">Study Journal</h2>
               <button
@@ -309,9 +308,8 @@ export default function App() {
               onDeleteNote={deleteNote}
             />
           </div>
-          {/* Backdrop — click to close */}
           <div
-            className="flex-1 bg-black/40 cursor-pointer"
+            className="drawer-backdrop flex-1 bg-black/40 cursor-pointer"
             onClick={() => setJournalOpen(false)}
           />
         </div>
