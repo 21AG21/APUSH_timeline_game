@@ -38,15 +38,20 @@ export function EventCard({ event, index, hideDates, showUnderstanding, note }: 
       {note && (
         <div className="mt-2 ml-7 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded p-2 text-xs">
           <p className="font-semibold text-yellow-700 dark:text-yellow-400 mb-0.5">YOUR NOTES</p>
-          {note.summary && <p className="text-gray-700 dark:text-gray-300">{note.summary}</p>}
           {note.cause && (
-            <p className="text-gray-600 dark:text-gray-400 mt-0.5">
+            <p className="text-gray-700 dark:text-gray-300 mt-0.5">
               <span className="font-medium text-amber-600 dark:text-amber-400">Cause:</span> {note.cause}
             </p>
           )}
           {note.effect && (
             <p className="text-gray-600 dark:text-gray-400 mt-0.5">
               <span className="font-medium text-emerald-600 dark:text-emerald-400">Effect:</span> {note.effect}
+            </p>
+          )}
+          {note.significance && (
+            <p className="text-gray-600 dark:text-gray-400 mt-0.5">
+              <span className="font-medium text-indigo-600 dark:text-indigo-400">Significance:</span>{' '}
+              {note.significance}
             </p>
           )}
         </div>

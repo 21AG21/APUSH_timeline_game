@@ -6,6 +6,9 @@
     "description": "Pilgrims aboard the Mayflower signed a self-governing agreement establishing a democratic colony in Plymouth.",
     "cause": "The Pilgrims had no legal authority to settle in the area and needed a governing framework to maintain order.",
     "effect": "Established an early precedent for self-governance and majority rule in the American colonies.",
+    "causes": ["Pilgrims lacked a royal charter for their landing site", "Fear of mutiny without a governing structure"],
+    "effects": ["Created a precedent for written self-government in North America", "Majority-rule principle influenced later colonial governance"],
+    "significance": ["One of the first examples of self-governance in North America", "Foreshadowed the democratic principles embedded in the Constitution"],
     "region": "New England",
     "units": [1],
     "course": "apush"
@@ -17,6 +20,9 @@
     "description": "England enacted mercantilist laws requiring colonial trade to flow through English ships and ports.",
     "cause": "England sought to consolidate economic control over its colonies and exclude Dutch traders.",
     "effect": "Fueled resentment in the colonies and contributed to a tradition of smuggling and resistance to British authority.",
+    "causes": ["England wanted to profit from colonial trade under mercantilism", "Competition with Dutch shipping threatened English commercial dominance"],
+    "effects": ["Colonial smuggling became widespread", "Planted seeds of resentment toward British economic control"],
+    "significance": ["Embodied mercantilist imperial policy toward the colonies", "Created long-term colonial grievances that contributed to the Revolution"],
     "region": "Atlantic",
     "units": [1, 2],
     "course": "apush"
@@ -28,6 +34,9 @@
     "description": "Nathaniel Bacon led armed Virginia colonists against Governor Berkeley and Native Americans on the frontier.",
     "cause": "Frontier settlers were angered by Berkeley's refusal to protect them from Native American raids and by elite political control.",
     "effect": "Led planters to shift from indentured servants to enslaved Africans as a more controllable labor force.",
+    "causes": ["Elite political corruption under Governor Berkeley", "Frustrated indentured servants with no land access after completing service"],
+    "effects": ["Planters shifted to enslaved African labor to avoid future rebellions by freed servants", "Revealed deep class tensions in colonial Virginia"],
+    "significance": ["Pivotal turning point accelerating the growth of race-based slavery in Virginia", "Demonstrated the dangers of a large class of discontented, landless colonists"],
     "region": "Chesapeake",
     "units": [1],
     "course": "apush"
@@ -39,6 +48,9 @@
     "description": "England's Protestant monarchs William and Mary accepted parliamentary supremacy, reshaping colonial charters.",
     "cause": "Protestant opposition to the Catholic King James II forced his abdication.",
     "effect": "Strengthened colonial assemblies and reinforced the concept of constitutional limits on government power.",
+    "causes": ["Protestant fears of Catholic rule under James II", "Parliament sought supremacy over the monarchy"],
+    "effects": ["Colonial assemblies gained more independence from royal governors", "Established constitutional monarchy as England's governing model"],
+    "significance": ["Reinforced the idea that government authority derives from law, not divine right", "Influenced the political philosophy behind the American Revolution"],
     "region": "Atlantic",
     "units": [1, 2],
     "course": "apush"
@@ -50,6 +62,9 @@
     "description": "A wave of witchcraft accusations in Salem, Massachusetts led to twenty executions.",
     "cause": "Social tensions, religious anxiety, and political instability in Puritan Massachusetts created a climate of fear.",
     "effect": "Weakened the authority of Puritan clergy and prompted greater skepticism of spectral evidence in courts.",
+    "causes": ["Social and economic tensions between Salem Village and Salem Town", "Political instability after the revocation of the Massachusetts Bay Charter"],
+    "effects": ["Discredited use of spectral evidence in legal proceedings", "Accelerated decline of Puritan theocratic authority in New England"],
+    "significance": ["Illustrated the dangers of religious extremism and mob mentality", "Marked a turning point toward greater legal rationalism in the colonies"],
     "region": "New England",
     "units": [1],
     "course": "apush"
@@ -61,6 +76,9 @@
     "description": "Britain and its colonial allies defeated France and its Native allies in a conflict over North American territory.",
     "cause": "Competing British and French territorial claims in the Ohio River Valley escalated into open warfare.",
     "effect": "Britain gained vast territory but accumulated massive debt, leading to new colonial taxes that sparked revolution.",
+    "causes": ["French expansion into the Ohio River Valley threatened British colonists", "Both empires sought dominance over the lucrative fur trade"],
+    "effects": ["Britain doubled its territorial holdings in North America", "War debt prompted Britain to tax the colonies, igniting the Revolution"],
+    "significance": ["Transformed North American politics by eliminating French power east of the Mississippi", "Directly triggered the taxation disputes that led to American independence"],
     "region": "North America",
     "units": [2],
     "course": "apush"
@@ -72,6 +90,9 @@
     "description": "Britain imposed a direct tax on printed materials in the colonies to help pay war debts.",
     "cause": "Britain needed revenue after the French and Indian War and believed colonists should help pay for their defense.",
     "effect": "United colonial opposition under the 'no taxation without representation' slogan and led to the Stamp Act Congress.",
+    "causes": ["Britain's £140 million war debt after the French and Indian War", "British belief that colonists should contribute to their own defense costs"],
+    "effects": ["Sparked colonial boycotts of British goods", "Led to the first intercolonial political body, the Stamp Act Congress"],
+    "significance": ["First direct internal tax on colonists, violating their tradition of self-taxation", "Crystallized the 'no taxation without representation' principle"],
     "region": "Atlantic",
     "units": [2],
     "course": "apush"
@@ -83,6 +104,9 @@
     "description": "British soldiers fired into a crowd of colonists in Boston, killing five people.",
     "cause": "Tensions between Boston residents and British troops stationed in the city had been escalating for months.",
     "effect": "Inflamed anti-British sentiment; Paul Revere's engraving became a powerful piece of revolutionary propaganda.",
+    "causes": ["Resentment over the Quartering Act forcing colonists to house British troops", "Economic tensions caused by the presence of soldiers competing for jobs"],
+    "effects": ["Paul Revere's propaganda engraving shaped colonial public opinion against Britain", "Accelerated the push toward colonial independence"],
+    "significance": ["Turned a street brawl into a rallying symbol for colonial resistance", "Demonstrated the power of print media in shaping political opinion"],
     "region": "New England",
     "units": [2],
     "course": "apush"
@@ -94,6 +118,9 @@
     "description": "Colonial protesters dumped 342 chests of British East India Company tea into Boston Harbor.",
     "cause": "The Tea Act gave the East India Company a monopoly and colonists protested taxation without representation.",
     "effect": "Prompted Britain to pass the Intolerable Acts, which further unified colonial resistance.",
+    "causes": ["The Tea Act threatened colonial merchants by granting a monopoly to the East India Company", "Colonists rejected Parliament's right to tax them without representation"],
+    "effects": ["Britain responded with the Coercive (Intolerable) Acts, closing Boston Harbor", "Twelve colonies sent representatives to the First Continental Congress"],
+    "significance": ["Transformed protest from economic boycott to direct political defiance", "Brought colonies closer to unified resistance against British authority"],
     "region": "New England",
     "units": [2],
     "course": "apush"
@@ -105,6 +132,9 @@
     "description": "The Second Continental Congress formally declared the thirteen colonies independent from Britain.",
     "cause": "Escalating military conflict, failed petitions to the Crown, and Enlightenment ideas inspired the break.",
     "effect": "Established Enlightenment principles—equality, natural rights, consent of the governed—as the foundation of American political thought.",
+    "causes": ["Continued military conflict after Lexington and Concord", "Thomas Paine's Common Sense shifted public opinion toward independence"],
+    "effects": ["Established Enlightenment ideals of natural rights as the basis of American government", "Provided a framework for evaluating American democracy across history"],
+    "significance": ["Articulated a universal theory of human rights that influenced revolutions worldwide", "Remains the founding statement of American political identity"],
     "region": "North America",
     "units": [3],
     "course": "apush"
@@ -116,6 +146,9 @@
     "description": "The first U.S. constitution created a weak central government with most power reserved to the states.",
     "cause": "States feared a powerful central government after their experience under British rule.",
     "effect": "Proved inadequate for governing the new nation, leading to the Constitutional Convention of 1787.",
+    "causes": ["States feared that a strong central government would replicate British tyranny", "Revolutionary ideology emphasized local self-governance"],
+    "effects": ["Congress could not tax, regulate commerce, or enforce laws effectively", "Shays' Rebellion exposed the weakness of the national government"],
+    "significance": ["First attempt at national self-governance in America", "Its failures directly led to the creation of the stronger Constitution of 1787"],
     "region": "North America",
     "units": [3],
     "course": "apush"
@@ -127,6 +160,9 @@
     "description": "Nine states ratified the new Constitution, replacing the Articles of Confederation.",
     "cause": "Shays' Rebellion and economic instability under the Articles revealed the need for stronger central authority.",
     "effect": "Created the federal system with separation of powers that remains the framework of American government.",
+    "causes": ["Economic chaos and Shays' Rebellion demonstrated the Articles' failures", "Commercial interests demanded a stable national currency and trade rules"],
+    "effects": ["Created a federal government with the power to tax, regulate commerce, and enforce laws", "Established the separation of powers and checks and balances"],
+    "significance": ["Created the world's oldest surviving written national constitution", "Defined the balance between federal authority and states' rights that still shapes American politics"],
     "region": "North America",
     "units": [3],
     "course": "apush"
@@ -138,6 +174,9 @@
     "description": "The first ten amendments to the Constitution guaranteed individual liberties and limited federal power.",
     "cause": "Anti-Federalists demanded explicit protections for individual rights as a condition of ratification.",
     "effect": "Established foundational civil liberties that shaped American law and culture.",
+    "causes": ["Anti-Federalists feared a powerful central government would trample individual freedoms", "Several states made ratification contingent on adding a bill of rights"],
+    "effects": ["Guaranteed fundamental freedoms including speech, religion, and due process", "Became the constitutional foundation for civil rights claims across American history"],
+    "significance": ["Defined the relationship between the individual and the federal government", "Provided legal tools for expanding rights across subsequent centuries"],
     "region": "North America",
     "units": [3],
     "course": "apush"
@@ -149,6 +188,9 @@
     "description": "The United States purchased approximately 828,000 square miles from France, doubling the nation's size.",
     "cause": "Napoleon's military setbacks in Haiti and ambitions in Europe made him eager to sell French North American territory.",
     "effect": "Fueled westward expansion, intensified debates over slavery's extension, and raised constitutional questions about presidential power.",
+    "causes": ["Napoleon abandoned his American empire after the Haitian Revolution crushed his army", "Jefferson sought control of the Mississippi River and New Orleans for western trade"],
+    "effects": ["Doubled the size of the United States", "Intensified debates over whether slavery would expand into new territories"],
+    "significance": ["Greatest territorial acquisition in American history, enabling westward expansion", "Raised unresolved questions about slavery in new territories that would haunt the nation for decades"],
     "region": "West",
     "units": [4],
     "course": "apush"
@@ -160,6 +202,9 @@
     "description": "The United States declared war on Britain over impressment of sailors and British support for Native American resistance.",
     "cause": "British violations of American neutrality and impressment of American sailors inflamed public opinion.",
     "effect": "Fostered American nationalism and effectively ended significant Native American resistance east of the Mississippi.",
+    "causes": ["British impressment of American sailors into the Royal Navy", "British support for Native American confederacies led by Tecumseh threatening U.S. expansion"],
+    "effects": ["Sparked an era of American nationalism (the 'Era of Good Feelings')", "Destroyed the pan-Indian resistance movement east of the Mississippi after Tecumseh's death"],
+    "significance": ["Consolidated U.S. sovereignty and ended British interference in American affairs", "Marked the end of viable Native American resistance to U.S. expansion in the East"],
     "region": "North America",
     "units": [4],
     "course": "apush"
@@ -171,6 +216,9 @@
     "description": "Congress admitted Missouri as a slave state and Maine as a free state, drawing a line at 36°30'.",
     "cause": "Missouri's application for statehood as a slave state threatened the balance of free and slave states in the Senate.",
     "effect": "Temporarily settled the slavery expansion debate but established a precedent that would be revisited by later crises.",
+    "causes": ["Missouri's 1819 statehood application threatened to tip the Senate balance toward slave states", "Northerners feared the political power of expanding slaveholder representation"],
+    "effects": ["Preserved sectional balance in the Senate for three decades", "Drew the 36°30' line as a geographic boundary for slavery's expansion"],
+    "significance": ["Demonstrated that slavery was becoming the central, unresolvable fault line in American politics", "Established the pattern of legislative compromise that delayed but could not prevent civil war"],
     "region": "South",
     "units": [4],
     "course": "apush"
@@ -182,6 +230,9 @@
     "description": "Congress authorized the forced relocation of Native American tribes from the Southeast to lands west of the Mississippi.",
     "cause": "White settlers demanded fertile southeastern land and the federal government prioritized expansion over Native rights.",
     "effect": "Led to the Trail of Tears and the displacement and deaths of tens of thousands of Native Americans.",
+    "causes": ["Discovery of gold in Cherokee territory in Georgia intensified settler demand for Native land", "Jackson's political philosophy rejected federal protection of Native sovereignty"],
+    "effects": ["Forced removal of the Five Civilized Tribes in the Trail of Tears, killing thousands", "Cleared millions of acres for cotton cultivation and slavery's expansion"],
+    "significance": ["Represents a defining episode of ethnic cleansing in American history", "Established federal precedent for violating treaty obligations with Native nations"],
     "region": "South",
     "units": [4],
     "course": "apush"
@@ -193,6 +244,9 @@
     "description": "The first women's rights convention produced the Declaration of Sentiments demanding equality for women.",
     "cause": "Women reformers, many active in abolition, began applying democratic ideals to their own exclusion from public life.",
     "effect": "Launched the organized women's suffrage movement that culminated in the 19th Amendment in 1920.",
+    "causes": ["Women abolitionists were excluded from speaking at the 1840 World Anti-Slavery Convention", "Reformers like Stanton applied the ideals of democracy to women's legal and political exclusion"],
+    "effects": ["Created the first formal organization for women's rights in America", "Launched a 72-year campaign for women's suffrage culminating in the 19th Amendment"],
+    "significance": ["Marked the beginning of the organized women's rights movement in the United States", "Applied the principles of the Declaration of Independence to argue for women's equality"],
     "region": "Northeast",
     "units": [4, 5],
     "course": "apush"
@@ -204,6 +258,9 @@
     "description": "A series of acts admitted California as a free state and strengthened the Fugitive Slave Law.",
     "cause": "California's application for statehood after the Mexican-American War reignited the slavery extension debate.",
     "effect": "Temporarily delayed disunion but the Fugitive Slave Act intensified Northern opposition to slavery.",
+    "causes": ["California's gold rush population demanded statehood as a free state", "Southern states demanded protections for slavery to balance the new free state"],
+    "effects": ["The Fugitive Slave Act forced Northerners to participate in slavery enforcement", "Harriet Beecher Stowe wrote Uncle Tom's Cabin in direct response"],
+    "significance": ["Represented the last major sectional compromise before the Civil War", "The Fugitive Slave Act converted many Northerners from indifference to active opposition to slavery"],
     "region": "South",
     "units": [5],
     "course": "apush"
@@ -215,6 +272,9 @@
     "description": "Congress repealed the Missouri Compromise and allowed popular sovereignty to determine slavery in new territories.",
     "cause": "Senator Stephen Douglas wanted to organize territories for a transcontinental railroad and proposed popular sovereignty.",
     "effect": "Led to 'Bleeding Kansas,' destroyed the Whig Party, and gave rise to the Republican Party.",
+    "causes": ["Douglas needed Southern support to organize the Nebraska territory for a northern railroad route", "Popular sovereignty was his proposed compromise to avoid the Missouri Compromise line"],
+    "effects": ["Bleeding Kansas turned the territory into a violent battleground between pro- and anti-slavery settlers", "Destroyed the Whig Party and gave rise to the Republican Party"],
+    "significance": ["Reopened the question of slavery's expansion that the Missouri Compromise had settled for 34 years", "Directly led to the creation of the Republican Party and set the stage for Lincoln's rise"],
     "region": "West",
     "units": [5],
     "course": "apush"
@@ -226,6 +286,9 @@
     "description": "The Supreme Court ruled that African Americans were not citizens and Congress could not ban slavery in territories.",
     "cause": "Dred Scott sued for his freedom after living in free territories with his enslaved status intact.",
     "effect": "Outraged Northerners, emboldened Southerners, and pushed the nation closer to civil war.",
+    "causes": ["Scott argued that residing in free territories made him legally free", "Abolitionists backed the case to challenge the constitutionality of slavery"],
+    "effects": ["Declared the Missouri Compromise unconstitutional, inflaming Northern opinion", "Effectively declared that slavery could spread to all territories, making compromise impossible"],
+    "significance": ["Widely considered one of the worst Supreme Court decisions in history", "Pushed the nation irrevocably toward civil war by removing the possibility of legislative compromise on slavery"],
     "region": "South",
     "units": [5],
     "course": "apush"
@@ -237,6 +300,9 @@
     "description": "President Lincoln declared enslaved people in Confederate states to be free as a war measure.",
     "cause": "Lincoln sought to weaken the Confederacy, energize Union troops, and deter European intervention on the South's behalf.",
     "effect": "Transformed the Civil War into a war for freedom and enabled African Americans to enlist in the Union Army.",
+    "causes": ["Military setbacks made Lincoln willing to use emancipation as a war strategy", "Britain and France were considering recognizing the Confederacy; Lincoln wanted to make slavery the central issue"],
+    "effects": ["Nearly 180,000 African Americans served in the Union Army", "Prevented Britain and France from formally recognizing the Confederacy"],
+    "significance": ["Transformed the Civil War's purpose from union to freedom", "Paved the way for the 13th Amendment and the end of slavery"],
     "region": "South",
     "units": [5],
     "course": "apush"
@@ -248,6 +314,9 @@
     "description": "The amendment granted citizenship to formerly enslaved people and guaranteed equal protection under the law.",
     "cause": "Congress sought to enshrine the Civil Rights Act of 1866 in the Constitution to protect freedpeople's rights.",
     "effect": "Became the constitutional basis for civil rights decisions throughout the 20th century and beyond.",
+    "causes": ["Southern states passed Black Codes to effectively re-enslave freedpeople after the war", "Congress needed constitutional protection for Black citizenship that could not be repealed by statute"],
+    "effects": ["Overturned Dred Scott by granting citizenship to all born in the U.S.", "Became the foundation for most 20th-century civil rights and civil liberties decisions"],
+    "significance": ["Most important constitutional amendment since the Bill of Rights", "The basis of nearly all modern civil rights law, from school desegregation to same-sex marriage"],
     "region": "South",
     "units": [5],
     "course": "apush"
@@ -259,6 +328,9 @@
     "description": "The Central Pacific and Union Pacific railroads met at Promontory Summit, Utah, connecting the continent by rail.",
     "cause": "The federal government funded construction to bind the nation together and facilitate western settlement.",
     "effect": "Accelerated industrialization, enabled mass western migration, and devastated Native American peoples and bison herds.",
+    "causes": ["Federal government issued land grants and loans to incentivize private railroad construction", "Post-Civil War leaders saw a continental railroad as essential to national unity and economic growth"],
+    "effects": ["Enabled mass settlement of the Great Plains, displacing Native American nations", "Fueled industrial capitalism by integrating national markets"],
+    "significance": ["Transformed the American economy by creating a truly national market", "Accelerated the destruction of Native American cultures and bison herds of the Great Plains"],
     "region": "West",
     "units": [6],
     "course": "apush"
@@ -270,6 +342,9 @@
     "description": "Congress passed the first federal law to limit monopolies and protect competitive markets.",
     "cause": "Public outrage over Standard Oil, railroads, and other trusts that fixed prices and crushed competition.",
     "effect": "Established the legal framework for antitrust enforcement, though weakly applied until the Progressive Era.",
+    "causes": ["The Gilded Age saw massive monopolistic trusts control oil, steel, and railroads", "Farmers and small businesses demanded federal protection from price manipulation"],
+    "effects": ["Created the legal basis for breaking up monopolies, though rarely enforced until TR", "Gave future presidents a tool to challenge corporate power"],
+    "significance": ["First federal recognition that unregulated capitalism could harm the public interest", "Laid the groundwork for the Progressive Era's trust-busting reforms"],
     "region": "Northeast",
     "units": [6],
     "course": "apush"
@@ -281,6 +356,9 @@
     "description": "The U.S. defeated Spain in a brief war, gaining Guam, Puerto Rico, and the Philippines.",
     "cause": "Yellow journalism, the sinking of the USS Maine, and Cuban rebels' struggle for independence rallied U.S. public opinion.",
     "effect": "Launched the United States as an imperial power with overseas territories and global military commitments.",
+    "causes": ["Yellow journalism by Hearst and Pulitzer inflamed public opinion against Spain", "American business interests in Cuba and strategic interest in Pacific trade routes"],
+    "effects": ["U.S. acquired its first overseas empire: Cuba, Puerto Rico, Guam, and the Philippines", "Sparked the Philippine-American War as Filipinos resisted American colonialism"],
+    "significance": ["Marked the United States' emergence as a global imperial power", "Created ongoing moral debates about American colonialism that echo today"],
     "region": "Caribbean",
     "units": [7],
     "course": "apush"
@@ -292,6 +370,9 @@
     "description": "Women gained the constitutional right to vote in all U.S. elections.",
     "cause": "Decades of suffragist organizing, women's wartime service in WWI, and President Wilson's belated support.",
     "effect": "Enfranchised millions of women, though literacy tests and poll taxes continued to block many women of color.",
+    "causes": ["72 years of suffragist organizing since Seneca Falls (1848)", "Women's massive contributions to the World War I effort strengthened the case for suffrage"],
+    "effects": ["Enfranchised approximately 26 million women", "Literacy tests and poll taxes still prevented most Southern Black women from voting"],
+    "significance": ["Largest single expansion of voting rights in American history", "Demonstrated that sustained organized activism could achieve constitutional change"],
     "region": "North America",
     "units": [7],
     "course": "apush"
@@ -303,6 +384,9 @@
     "description": "FDR launched sweeping federal programs to provide relief, recovery, and reform during the Great Depression.",
     "cause": "The Great Depression left a quarter of Americans unemployed and previous administrations' laissez-faire policies had failed.",
     "effect": "Permanently expanded the federal government's role in the economy and created the modern social safety net.",
+    "causes": ["25% unemployment and massive bank failures demanded unprecedented government intervention", "Hoover's laissez-faire approach failed to stop the economic collapse"],
+    "effects": ["Created Social Security, the FDIC, the SEC, and other lasting federal institutions", "Established the Democratic coalition of labor, minorities, and liberals that dominated politics for decades"],
+    "significance": ["Fundamentally redefined the relationship between the federal government and American citizens", "Created the modern regulatory state and social safety net that still exists today"],
     "region": "North America",
     "units": [7],
     "course": "apush"
@@ -314,6 +398,9 @@
     "description": "Japan's surprise attack on the U.S. naval base brought America into World War II.",
     "cause": "Japan sought to neutralize American naval power while it expanded its empire in Asia and the Pacific.",
     "effect": "United American public opinion behind the war effort and brought the U.S. into WWII the following day.",
+    "causes": ["U.S. oil embargo threatened Japan's imperial expansion in Asia", "Japan calculated that a preemptive strike would cripple U.S. naval response"],
+    "effects": ["Ended American isolationism and unified public opinion for war", "Led to the forced internment of Japanese Americans under Executive Order 9066"],
+    "significance": ["Ended U.S. isolationism and transformed America into the world's dominant military power", "The internment of Japanese Americans remains one of the most significant civil liberties violations in U.S. history"],
     "region": "Pacific",
     "units": [7],
     "course": "apush"
@@ -325,6 +412,9 @@
     "description": "The Supreme Court unanimously ruled that racial segregation in public schools was unconstitutional.",
     "cause": "NAACP lawyers, led by Thurgood Marshall, challenged separate-but-equal schooling as inherently unequal.",
     "effect": "Overturned Plessy v. Ferguson and accelerated the Civil Rights Movement by legitimizing integration.",
+    "causes": ["NAACP pursued a deliberate legal strategy to dismantle Jim Crow through the courts", "Psychologist Kenneth Clark's doll experiments showed the psychological harm of segregation"],
+    "effects": ["Overturned Plessy v. Ferguson's 'separate but equal' doctrine", "Galvanized the Civil Rights Movement and triggered massive resistance in the South"],
+    "significance": ["Most consequential Supreme Court decision of the 20th century", "Demonstrated that the 14th Amendment could be used as a tool for racial equality"],
     "region": "South",
     "units": [8],
     "course": "apush"
@@ -336,6 +426,9 @@
     "description": "Landmark legislation outlawed discrimination based on race, color, religion, sex, or national origin.",
     "cause": "Televised brutality against peaceful protesters and the assassination of JFK created political will for reform.",
     "effect": "Prohibited employment discrimination and segregation in public places, transforming American society.",
+    "causes": ["Televised footage of Bull Connor's fire hoses and police dogs in Birmingham shocked the nation", "LBJ used JFK's assassination to push for the stalled civil rights bill"],
+    "effects": ["Outlawed segregation in public accommodations and employment discrimination", "Created the Equal Employment Opportunity Commission (EEOC)"],
+    "significance": ["Most comprehensive civil rights legislation since Reconstruction", "Extended protections to women and other minorities beyond race"],
     "region": "South",
     "units": [8],
     "course": "apush"

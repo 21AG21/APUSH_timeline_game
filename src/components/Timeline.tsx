@@ -2,6 +2,13 @@ import { useState, useEffect, useCallback } from 'react'
 import type { Event, Note } from '../data/types'
 import { EventCard } from './EventCard'
 import { SlotMarker } from './SlotMarker'
+import { EraBandHeader } from './EraBands'
+import { handleKeyPress } from '../lib/keyboard'
+
+interface WrongFeedback {
+  prevYear: number | null
+  nextYear: number | null
+}
 
 interface Props {
   timeline: Event[]
@@ -9,8 +16,10 @@ interface Props {
   hasCurrentEvent: boolean
   hideDates: boolean
   showUnderstanding: boolean
+  hardMode: boolean
   notes: Note[]
   lastPlacementCorrect: boolean | null
+  wrongFeedback: WrongFeedback | null
   onSlotClick: (slot: number) => void
   onSlotConfirm: (slot: number) => void
   onDrop: (slot: number) => void
@@ -22,8 +31,10 @@ export function Timeline({
   hasCurrentEvent,
   hideDates,
   showUnderstanding,
+  hardMode,
   notes,
   lastPlacementCorrect,
+  wrongFeedback,
   onSlotClick,
   onSlotConfirm,
   onDrop,
@@ -33,26 +44,21 @@ export function Timeline({
   const handleKeyDown = useCallback(
     (e: KeyboardEvent) => {
       if (!hasCurrentEvent) return
+      // Don't intercept keys while typing in inputs/textareas
+      if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return
+
       const slotCount = timeline.length + 1
-      if (e.key >= '1' && e.key <= '9') {
-        const slot = parseInt(e.key) - 1
-        if (slot < slotCount) {
-          onSlotClick(slot)
-          e.preventDefault()
-        }
-      } else if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
-        e.preventDefault()
-        const next = tentativeSlot === null ? 0 : Math.min(tentativeSlot + 1, slotCount - 1)
-        onSlotClick(next)
-      } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
-        e.preventDefault()
-        const prev = tentativeSlot === null ? slotCount - 1 : Math.max(tentativeSlot - 1, 0)
-        onSlotClick(prev)
-      } else if (e.key === 'Enter' && tentativeSlot !== null) {
-        e.preventDefault()
-        onSlotConfirm(tentativeSlot)
-      } else if (e.key === 'Escape') {
-        onSlotClick(tentativeSlot === null ? -1 : -1) // clear
+      const result = handleKeyPress(e.key, tentativeSlot, slotCount)
+
+      if (result.type === 'noop') return
+      e.preventDefault()
+
+      if (result.type === 'tentative' || result.type === 'step') {
+        onSlotClick(result.slot)
+      } else if (result.type === 'confirm') {
+        onSlotConfirm(result.slot)
+      } else if (result.type === 'clear') {
+        onSlotClick(-1)
       }
     },
     [hasCurrentEvent, timeline.length, tentativeSlot, onSlotClick, onSlotConfirm]
@@ -64,61 +70,83 @@ export function Timeline({
   }, [handleKeyDown])
 
   const noteMap = new Map(notes.map((n) => [n.eventId, n]))
+  const slotCount = timeline.length + 1
+
+  const renderSlot = (index: number) => (
+    <SlotMarker
+      index={index}
+      slotCount={slotCount}
+      isTentative={tentativeSlot === index}
+      isDragOver={dragOverSlot === index}
+      onClick={() => onSlotClick(index)}
+      onConfirm={() => onSlotConfirm(index)}
+      onDragOver={() => setDragOverSlot(index)}
+      onDragLeave={() => setDragOverSlot(null)}
+      onDrop={(e) => {
+        e.preventDefault()
+        setDragOverSlot(null)
+        onDrop(index)
+      }}
+    />
+  )
+
+  const renderCard = (event: Event, i: number) => (
+    <EventCard
+      event={event}
+      index={i}
+      hideDates={hideDates}
+      showUnderstanding={showUnderstanding}
+      note={noteMap.get(event.id)}
+    />
+  )
 
   const items: React.ReactNode[] = []
 
   if (hasCurrentEvent) {
-    items.push(
-      <SlotMarker
-        key="slot-0"
-        index={0}
-        isTentative={tentativeSlot === 0}
-        isDragOver={dragOverSlot === 0}
-        onClick={() => onSlotClick(0)}
-        onDragOver={() => setDragOverSlot(0)}
-        onDragLeave={() => setDragOverSlot(null)}
-        onDrop={(e) => { e.preventDefault(); setDragOverSlot(null); onDrop(0) }}
-      />
-    )
+    items.push(<div key="slot-0">{renderSlot(0)}</div>)
   }
 
   timeline.forEach((event, i) => {
-    items.push(
-      <EventCard
-        key={event.id}
-        event={event}
-        index={i}
-        hideDates={hideDates}
-        showUnderstanding={showUnderstanding}
-        note={noteMap.get(event.id)}
-      />
-    )
-    if (hasCurrentEvent) {
+    const prevYear = i > 0 ? timeline[i - 1].year : null
+    if (!hardMode) {
       items.push(
-        <SlotMarker
-          key={`slot-${i + 1}`}
-          index={i + 1}
-          isTentative={tentativeSlot === i + 1}
-          isDragOver={dragOverSlot === i + 1}
-          onClick={() => onSlotClick(i + 1)}
-          onDragOver={() => setDragOverSlot(i + 1)}
-          onDragLeave={() => setDragOverSlot(null)}
-          onDrop={(e) => { e.preventDefault(); setDragOverSlot(null); onDrop(i + 1) }}
-        />
+        <EraBandHeader key={`era-${event.id}`} year={event.year} prevYear={prevYear} />
       )
+    }
+    items.push(<div key={event.id}>{renderCard(event, i)}</div>)
+    if (hasCurrentEvent) {
+      items.push(<div key={`slot-${i + 1}`}>{renderSlot(i + 1)}</div>)
     }
   })
 
   return (
     <div className="flex-1 overflow-y-auto p-4 space-y-1">
-      {lastPlacementCorrect === false && (
-        <div className="mb-2 px-3 py-2 bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-800 rounded text-sm text-red-700 dark:text-red-400">
-          Incorrect placement — try again. Use the year and context clues.
-        </div>
-      )}
       {lastPlacementCorrect === true && (
         <div className="mb-2 px-3 py-2 bg-green-50 dark:bg-green-900/30 border border-green-200 dark:border-green-800 rounded text-sm text-green-700 dark:text-green-400">
-          Correct! Event placed on the timeline.
+          Correct!
+        </div>
+      )}
+      {lastPlacementCorrect === false && (
+        <div className="mb-2 px-3 py-2 bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-800 rounded text-sm text-red-700 dark:text-red-400">
+          <span className="font-semibold">Incorrect.</span>
+          {wrongFeedback && (
+            <span className="ml-1">
+              That slot is between{' '}
+              {wrongFeedback.prevYear !== null ? (
+                <strong>{wrongFeedback.prevYear}</strong>
+              ) : (
+                'the beginning'
+              )}{' '}
+              and{' '}
+              {wrongFeedback.nextYear !== null ? (
+                <strong>{wrongFeedback.nextYear}</strong>
+              ) : (
+                'the end'
+              )}
+              .
+            </span>
+          )}
+          {!wrongFeedback && ' Try a different slot.'}
         </div>
       )}
       {timeline.length === 0 && !hasCurrentEvent && (

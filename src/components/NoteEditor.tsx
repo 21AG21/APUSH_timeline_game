@@ -11,18 +11,18 @@ interface Props {
 }
 
 export function NoteEditor({ eventId, eventTitle, note, onSave, onDelete, onClose }: Props) {
-  const [summary, setSummary] = useState(note?.summary ?? '')
   const [cause, setCause] = useState(note?.cause ?? '')
   const [effect, setEffect] = useState(note?.effect ?? '')
+  const [significance, setSignificance] = useState(note?.significance ?? '')
 
   useEffect(() => {
-    setSummary(note?.summary ?? '')
     setCause(note?.cause ?? '')
     setEffect(note?.effect ?? '')
+    setSignificance(note?.significance ?? '')
   }, [note, eventId])
 
   const handleSave = () => {
-    onSave({ eventId, summary, cause, effect })
+    onSave({ eventId, cause, effect, significance })
   }
 
   return (
@@ -38,9 +38,27 @@ export function NoteEditor({ eventId, eventTitle, note, onSave, onDelete, onClos
           </button>
         </div>
         <div className="p-4 space-y-3">
-          <Field label="Summary" value={summary} onChange={setSummary} placeholder="Your summary…" />
-          <Field label="Cause" value={cause} onChange={setCause} placeholder="Cause in your words…" />
-          <Field label="Effect" value={effect} onChange={setEffect} placeholder="Effect in your words…" />
+          <Field
+            label="Cause"
+            value={cause}
+            onChange={setCause}
+            placeholder="Cause in your words…"
+            color="amber"
+          />
+          <Field
+            label="Effect"
+            value={effect}
+            onChange={setEffect}
+            placeholder="Effect in your words…"
+            color="emerald"
+          />
+          <Field
+            label="Significance"
+            value={significance}
+            onChange={setSignificance}
+            placeholder="Why does this matter historically?"
+            color="indigo"
+          />
         </div>
         <div className="flex gap-2 px-4 pb-4">
           <button
@@ -69,10 +87,28 @@ export function NoteEditor({ eventId, eventTitle, note, onSave, onDelete, onClos
   )
 }
 
-function Field({ label, value, onChange, placeholder }: { label: string; value: string; onChange: (v: string) => void; placeholder: string }) {
+function Field({
+  label,
+  value,
+  onChange,
+  placeholder,
+  color,
+}: {
+  label: string
+  value: string
+  onChange: (v: string) => void
+  placeholder: string
+  color: 'amber' | 'emerald' | 'indigo'
+}) {
+  const labelColor = {
+    amber: 'text-amber-600 dark:text-amber-400',
+    emerald: 'text-emerald-600 dark:text-emerald-400',
+    indigo: 'text-indigo-600 dark:text-indigo-400',
+  }[color]
+
   return (
     <div>
-      <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">{label}</label>
+      <label className={`block text-xs font-semibold mb-1 ${labelColor}`}>{label}</label>
       <textarea
         value={value}
         onChange={(e) => onChange(e.target.value)}

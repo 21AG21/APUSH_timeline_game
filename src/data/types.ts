@@ -5,6 +5,9 @@ export interface Event {
   description: string
   cause: string
   effect: string
+  causes: string[]
+  effects: string[]
+  significance: string[]
   region: string
   units: number[]
   course: 'apush' | 'apworld'
@@ -12,9 +15,9 @@ export interface Event {
 
 export interface Note {
   eventId: string
-  summary: string
   cause: string
   effect: string
+  significance: string
 }
 
 export interface GameState {
@@ -25,10 +28,22 @@ export interface GameState {
   attempts: number
   tentativeSlot: number | null
   done: boolean
+  gameOver: boolean
+  streak: number
+  bestStreak: number
+  missWeights: Record<string, number>
+  rngSeed: number
+  missedIds: string[]
+  timeTaken: number | null
 }
 
 export interface Settings {
   darkMode: boolean
   hideDates: boolean
   showUnderstanding: boolean
+  hardMode: boolean
+  timedMode: boolean
+  timerSeconds: number
+  filterUnits: number[]
+  filterRegions: string[]
 }
