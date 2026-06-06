@@ -23,10 +23,10 @@ export function Header({
   onFilterChange,
 }: Props) {
   return (
-    <header className="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 px-4 py-3 flex items-center justify-between gap-4 flex-wrap">
+    <header className="bg-om-surface border-b border-om-border px-4 py-3 flex items-center justify-between gap-4 flex-wrap">
       <div>
-        <h1 className="text-xl font-bold text-gray-900 dark:text-white tracking-tight">APUSH Timeline</h1>
-        <p className="text-xs text-gray-500 dark:text-gray-400">Place events in chronological order</p>
+        <h1 className="text-xl font-bold font-serif text-om-text tracking-tight">APUSH Timeline</h1>
+        <p className="text-xs text-om-muted">Place events in chronological order</p>
       </div>
       <div className="flex items-center gap-3 flex-wrap">
         <Toggle label="Hide Dates" checked={settings.hideDates} onChange={onToggleHideDates} />
@@ -46,7 +46,7 @@ export function Header({
         />
         <button
           onClick={onToggleDark}
-          className="px-3 py-1.5 text-sm rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+          className="px-3 py-1.5 text-sm rounded border border-om-border bg-om-surface text-om-text hover:bg-om-slot-hover transition-colors"
         >
           {settings.darkMode ? 'Light' : 'Dark'}
         </button>
@@ -66,15 +66,15 @@ function Toggle({
   onChange: () => void
   danger?: boolean
 }) {
-  const onColor = danger ? 'bg-red-500' : 'bg-indigo-600'
+  const onColor = danger ? 'bg-om-error' : 'bg-om-accent'
   return (
-    <label className="flex items-center gap-1.5 cursor-pointer select-none text-sm text-gray-700 dark:text-gray-300">
+    <label className="flex items-center gap-1.5 cursor-pointer select-none text-sm text-om-text">
       <div
         role="switch"
         aria-checked={checked}
         onClick={onChange}
         className={`relative inline-flex h-5 w-9 items-center rounded-full transition-colors ${
-          checked ? onColor : 'bg-gray-300 dark:bg-gray-600'
+          checked ? onColor : 'bg-om-border'
         }`}
       >
         <span

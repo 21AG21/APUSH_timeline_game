@@ -9,7 +9,6 @@ interface Props {
 }
 
 export function GameOverReview({ state, settings, allEvents, onNewGame }: Props) {
-  // Build what the correct full timeline would look like: timeline + current (missed) + pool, sorted
   const allPlaced = [
     ...state.timeline,
     ...(state.current ? [state.current] : []),
@@ -17,18 +16,18 @@ export function GameOverReview({ state, settings, allEvents, onNewGame }: Props)
   ].sort((a, b) => a.year - b.year)
 
   return (
-    <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4 overflow-y-auto">
-      <div className="bg-white dark:bg-gray-900 rounded-xl shadow-2xl w-full max-w-2xl my-4">
-        <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between">
+    <div className="fixed inset-0 bg-black/70 flex items-end sm:items-center justify-center z-50 p-4 overflow-y-auto">
+      <div className="bg-om-surface rounded-t-xl sm:rounded-lg shadow-2xl w-full max-w-2xl my-4">
+        <div className="px-6 py-4 border-b border-om-border flex items-center justify-between">
           <div>
-            <h2 className="text-lg font-bold text-red-600 dark:text-red-400">Game Over</h2>
-            <p className="text-sm text-gray-500 dark:text-gray-400">
+            <h2 className="text-lg font-bold font-serif text-om-error">Game Over</h2>
+            <p className="text-sm text-om-muted">
               Hard mode — one wrong placement ends the game
             </p>
           </div>
           <button
             onClick={onNewGame}
-            className="px-4 py-2 rounded bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium transition-colors"
+            className="px-4 py-2 rounded bg-om-accent hover:bg-om-accent-hover text-white text-sm font-medium transition-colors"
           >
             New Game
           </button>
@@ -40,7 +39,7 @@ export function GameOverReview({ state, settings, allEvents, onNewGame }: Props)
           </div>
 
           <div>
-            <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+            <h3 className="text-sm font-semibold text-om-text mb-2">
               Correct Timeline
             </h3>
             <div className="space-y-1 max-h-96 overflow-y-auto pr-1">
@@ -52,20 +51,20 @@ export function GameOverReview({ state, settings, allEvents, onNewGame }: Props)
                     key={event.id}
                     className={`rounded border px-3 py-2 text-xs ${
                       isMissed
-                        ? 'border-red-300 dark:border-red-700 bg-red-50 dark:bg-red-900/20'
+                        ? 'border-om-error bg-om-error-bg'
                         : wasPlaced
-                        ? 'border-green-200 dark:border-green-800 bg-green-50 dark:bg-green-900/10'
-                        : 'border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800'
+                        ? 'border-om-success bg-om-success-bg'
+                        : 'border-om-border bg-om-bg'
                     }`}
                   >
                     <div className="flex items-center justify-between gap-2">
-                      <span className="font-medium text-gray-800 dark:text-gray-200">
+                      <span className="font-medium font-serif text-om-text">
                         {i + 1}. {event.title}
                       </span>
-                      <span className="text-gray-500 dark:text-gray-400 font-mono shrink-0">{event.year}</span>
+                      <span className="text-om-muted font-mono shrink-0">{event.year}</span>
                     </div>
                     {isMissed && (
-                      <p className="text-red-600 dark:text-red-400 mt-0.5">← Missed placement</p>
+                      <p className="text-om-error mt-0.5">← Missed placement</p>
                     )}
                   </div>
                 )

@@ -122,12 +122,12 @@ export function Timeline({
   return (
     <div className="flex-1 overflow-y-auto p-4 space-y-1">
       {lastPlacementCorrect === true && (
-        <div className="mb-2 px-3 py-2 bg-green-50 dark:bg-green-900/30 border border-green-200 dark:border-green-800 rounded text-sm text-green-700 dark:text-green-400">
+        <div className="mb-2 px-3 py-2 bg-om-success-bg border border-om-border rounded text-sm text-om-success">
           Correct!
         </div>
       )}
       {lastPlacementCorrect === false && (
-        <div className="mb-2 px-3 py-2 bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-800 rounded text-sm text-red-700 dark:text-red-400">
+        <div className="mb-2 px-3 py-2 bg-om-error-bg border border-om-border rounded text-sm text-om-error">
           <span className="font-semibold">Incorrect.</span>
           {wrongFeedback && (
             <span className="ml-1">
@@ -150,7 +150,7 @@ export function Timeline({
         </div>
       )}
       {timeline.length === 0 && !hasCurrentEvent && (
-        <div className="text-center text-gray-400 dark:text-gray-500 py-8 text-sm">
+        <div className="text-center text-om-muted py-8 text-sm">
           Press "New Game" to start playing.
         </div>
       )}

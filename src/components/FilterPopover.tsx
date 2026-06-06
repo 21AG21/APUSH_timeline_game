@@ -43,21 +43,21 @@ export function FilterPopover({ allEvents, selectedUnits, selectedRegions, onCha
         onClick={() => setOpen((v) => !v)}
         className={`px-3 py-1.5 text-sm rounded border transition-colors ${
           active
-            ? 'border-indigo-400 bg-indigo-50 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300'
-            : 'border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700'
+            ? 'border-om-accent bg-om-accent-light text-om-accent'
+            : 'border-om-border bg-om-surface text-om-text hover:bg-om-slot-hover'
         }`}
       >
         Filter{active ? ` (${selectedUnits.length + selectedRegions.length})` : ''}
       </button>
 
       {open && (
-        <div className="absolute right-0 top-full mt-1 z-40 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-xl p-4 w-72">
+        <div className="absolute right-0 top-full mt-1 z-40 bg-om-surface border border-om-border rounded-lg shadow-xl p-4 w-72">
           <div className="flex items-center justify-between mb-3">
-            <span className="text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wide">
+            <span className="text-xs font-semibold text-om-text uppercase tracking-wide">
               Filter Pool
             </span>
             {active && (
-              <button onClick={reset} className="text-xs text-indigo-600 dark:text-indigo-400 hover:underline">
+              <button onClick={reset} className="text-xs text-om-accent hover:underline">
                 Reset all
               </button>
             )}
@@ -84,7 +84,7 @@ export function FilterPopover({ allEvents, selectedUnits, selectedRegions, onCha
             </div>
           </Section>
 
-          <p className="mt-3 text-xs text-gray-400 dark:text-gray-500">
+          <p className="mt-3 text-xs text-om-muted">
             Empty selection = all. Changing filter starts a new game.
           </p>
         </div>
@@ -96,7 +96,7 @@ export function FilterPopover({ allEvents, selectedUnits, selectedRegions, onCha
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div className="mb-3">
-      <p className="text-xs font-medium text-gray-500 dark:text-gray-400 mb-1.5">{title}</p>
+      <p className="text-xs font-medium text-om-muted mb-1.5">{title}</p>
       {children}
     </div>
   )
@@ -105,12 +105,12 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 function CheckChip({ label, checked, onChange }: { label: string; checked: boolean; onChange: () => void }) {
   return (
     <label className="flex items-center gap-1 cursor-pointer select-none">
-      <input type="checkbox" checked={checked} onChange={onChange} className="w-3 h-3 accent-indigo-600" />
+      <input type="checkbox" checked={checked} onChange={onChange} className="w-3 h-3 accent-om-accent" />
       <span
         className={`text-xs px-1.5 py-0.5 rounded border transition-colors ${
           checked
-            ? 'border-indigo-400 bg-indigo-50 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300'
-            : 'border-gray-200 dark:border-gray-600 text-gray-600 dark:text-gray-400'
+            ? 'border-om-accent bg-om-accent-light text-om-accent'
+            : 'border-om-border text-om-muted'
         }`}
       >
         {label}

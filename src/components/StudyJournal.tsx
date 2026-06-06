@@ -21,19 +21,19 @@ export function StudyJournal({ allEvents, timelineEvents, notes, onSaveNote, onD
   const displayEvents = tab === 'my-notes' ? myNoteEvents : allEvents
 
   return (
-    <aside className="w-72 flex flex-col border-l border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900">
-      <div className="px-4 py-3 border-b border-gray-200 dark:border-gray-700">
-        <h2 className="font-semibold text-gray-900 dark:text-white text-sm">Study Journal</h2>
+    <aside className="w-72 flex flex-col border-l border-om-border bg-om-surface">
+      <div className="px-4 py-3 border-b border-om-border">
+        <h2 className="font-semibold text-om-text text-sm">Study Journal</h2>
       </div>
 
-      <div className="flex border-b border-gray-200 dark:border-gray-700">
+      <div className="flex border-b border-om-border">
         <TabButton label="My Notes" active={tab === 'my-notes'} onClick={() => setTab('my-notes')} />
         <TabButton label="Complete Journal" active={tab === 'complete'} onClick={() => setTab('complete')} />
       </div>
 
       <div className="flex-1 overflow-y-auto p-3 space-y-2">
         {displayEvents.length === 0 && (
-          <p className="text-xs text-gray-400 dark:text-gray-500 text-center py-4">
+          <p className="text-xs text-om-muted text-center py-4">
             {tab === 'my-notes' ? 'No notes yet. Place events to add notes.' : 'No events.'}
           </p>
         )}
@@ -43,51 +43,49 @@ export function StudyJournal({ allEvents, timelineEvents, notes, onSaveNote, onD
           return (
             <div
               key={event.id}
-              className="rounded border border-gray-200 dark:border-gray-700 p-2 text-xs"
+              className="rounded border border-om-border p-2 text-xs"
             >
               <div className="flex items-start justify-between gap-1">
                 <div>
-                  <span className="font-semibold text-gray-800 dark:text-gray-200">{event.title}</span>
-                  <span className="ml-1 text-gray-400 dark:text-gray-500">{event.year}</span>
-                  {onTimeline && <span className="ml-1 text-green-600 dark:text-green-400">✓</span>}
+                  <span className="font-semibold font-serif text-om-text">{event.title}</span>
+                  <span className="ml-1 text-om-muted font-mono">{event.year}</span>
+                  {onTimeline && <span className="ml-1 text-om-success">✓</span>}
                 </div>
                 <button
                   onClick={() => setEditing(event)}
-                  className="shrink-0 text-indigo-600 dark:text-indigo-400 hover:underline"
+                  className="shrink-0 text-om-accent hover:underline"
                 >
                   {note ? 'Edit' : '+ Note'}
                 </button>
               </div>
 
-              {/* Student notes */}
               {note && (
-                <div className="mt-1.5 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded p-1.5 space-y-0.5">
-                  <p className="font-semibold text-yellow-700 dark:text-yellow-400">YOUR NOTES</p>
+                <div className="mt-1.5 bg-om-note border border-om-note-border rounded p-1.5 space-y-0.5">
+                  <p className="font-semibold text-om-note-title">YOUR NOTES</p>
                   {note.cause && (
-                    <p className="text-gray-700 dark:text-gray-300">
-                      <span className="text-amber-600 dark:text-amber-400 font-medium">Cause:</span> {note.cause}
+                    <p className="text-om-text">
+                      <span className="text-om-gold font-medium">Cause:</span> {note.cause}
                     </p>
                   )}
                   {note.effect && (
-                    <p className="text-gray-700 dark:text-gray-300">
-                      <span className="text-emerald-600 dark:text-emerald-400 font-medium">Effect:</span> {note.effect}
+                    <p className="text-om-text">
+                      <span className="text-om-success font-medium">Effect:</span> {note.effect}
                     </p>
                   )}
                   {note.significance && (
-                    <p className="text-gray-700 dark:text-gray-300">
-                      <span className="text-indigo-600 dark:text-indigo-400 font-medium">Significance:</span>{' '}
+                    <p className="text-om-text">
+                      <span className="text-om-accent font-medium">Significance:</span>{' '}
                       {note.significance}
                     </p>
                   )}
                 </div>
               )}
 
-              {/* Complete journal: canonical arrays */}
               {tab === 'complete' && (
                 <div className="mt-1.5 space-y-1">
-                  <CanonicalList label="Causes" items={event.causes} color="amber" />
-                  <CanonicalList label="Effects" items={event.effects} color="emerald" />
-                  <CanonicalList label="Significance" items={event.significance} color="indigo" />
+                  <CanonicalList label="Causes" items={event.causes} color="gold" />
+                  <CanonicalList label="Effects" items={event.effects} color="success" />
+                  <CanonicalList label="Significance" items={event.significance} color="accent" />
                 </div>
               )}
             </div>
@@ -97,7 +95,7 @@ export function StudyJournal({ allEvents, timelineEvents, notes, onSaveNote, onD
 
       {tab === 'my-notes' && (
         <div className="px-3 pb-3">
-          <p className="text-xs text-gray-400 dark:text-gray-500">
+          <p className="text-xs text-om-muted">
             Notes also open automatically after correct placement when "Cause/Effect" is on.
           </p>
         </div>
@@ -130,18 +128,18 @@ function CanonicalList({
 }: {
   label: string
   items: string[]
-  color: 'amber' | 'emerald' | 'indigo'
+  color: 'gold' | 'success' | 'accent'
 }) {
   if (!items?.length) return null
   const labelColor = {
-    amber: 'text-amber-600 dark:text-amber-400',
-    emerald: 'text-emerald-600 dark:text-emerald-400',
-    indigo: 'text-indigo-600 dark:text-indigo-400',
+    gold: 'text-om-gold',
+    success: 'text-om-success',
+    accent: 'text-om-accent',
   }[color]
   return (
     <div>
       <p className={`font-medium ${labelColor}`}>{label}:</p>
-      <ul className="mt-0.5 space-y-0.5 text-gray-600 dark:text-gray-400">
+      <ul className="mt-0.5 space-y-0.5 text-om-muted">
         {items.map((item, i) => (
           <li key={i}>• {item}</li>
         ))}
@@ -156,8 +154,8 @@ function TabButton({ label, active, onClick }: { label: string; active: boolean;
       onClick={onClick}
       className={`flex-1 py-2 text-xs font-medium border-b-2 transition-colors ${
         active
-          ? 'border-indigo-500 text-indigo-600 dark:text-indigo-400'
-          : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300'
+          ? 'border-om-accent text-om-accent'
+          : 'border-transparent text-om-muted hover:text-om-text'
       }`}
     >
       {label}

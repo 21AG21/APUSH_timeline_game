@@ -210,7 +210,7 @@ export default function App() {
   const showHardModeReview = gameOver && state.gameOver && settings.hardMode
 
   return (
-    <div className="h-screen flex flex-col bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-gray-100">
+    <div className="h-screen flex flex-col bg-om-bg text-om-text">
       <Header
         settings={settings}
         allEvents={allEvents}
@@ -235,7 +235,7 @@ export default function App() {
       />
       <div className="flex flex-1 overflow-hidden">
         {/* Left panel: placement card or end state */}
-        <div className="w-80 shrink-0 flex flex-col border-r border-gray-200 dark:border-gray-700 overflow-y-auto bg-white dark:bg-gray-900">
+        <div className="w-80 shrink-0 flex flex-col border-r border-om-border overflow-y-auto bg-om-surface">
           {state.current && !gameOver ? (
             <PlacementCard
               event={state.current}
@@ -247,12 +247,12 @@ export default function App() {
           ) : (
             <div className="p-4 space-y-4">
               {gameOver && !state.gameOver && (
-                <p className="text-sm text-gray-400 dark:text-gray-500 text-center py-4">
+                <p className="text-sm text-om-muted text-center py-4">
                   Press "New Game" to play again.
                 </p>
               )}
               {!gameOver && !state.current && (
-                <p className="text-sm text-gray-400 dark:text-gray-500 text-center py-4">
+                <p className="text-sm text-om-muted text-center py-4">
                   Press "New Game" to start.
                 </p>
               )}
