@@ -8,7 +8,6 @@ interface Props {
   gameOver: boolean
   timedMode: boolean
   timerSecondsLeft: number | null
-  onNewGame: () => void
 }
 
 export function Scoreboard({
@@ -21,71 +20,73 @@ export function Scoreboard({
   gameOver,
   timedMode,
   timerSecondsLeft,
-  onNewGame,
 }: Props) {
   const total = score + poolSize + (done || gameOver ? 0 : 1)
+
   return (
-    <div className="flex items-center gap-4 px-4 py-2.5 bg-om-bg border-b border-om-border flex-wrap">
-      <div className="flex items-center gap-4 flex-wrap">
-        <Stat label="Score" value={`${score} / ${total}`} />
-        <Stat label="Attempts" value={String(attempts)} />
-        <div className="flex flex-col items-center">
-          <span className="text-sm text-om-muted">Streak</span>
-          <span
-            className={`text-xl font-bold font-mono ${
-              streak >= 3 ? 'text-om-accent' : 'text-om-text'
-            }`}
-          >
-            {streak}
-          </span>
-        </div>
-        <Stat label="Timeline" value={String(timelineSize)} />
-        <Stat label="Remaining" value={String(poolSize)} />
-        {timedMode && timerSecondsLeft !== null && (
-          <Stat
-            label="Time"
-            value={`${timerSecondsLeft}s`}
-            highlight={timerSecondsLeft <= 10}
-            danger={timerSecondsLeft <= 10}
-          />
-        )}
+    <div className="px-5 py-5 space-y-5">
+      {/* Top row: Score + Attempts */}
+      <div className="grid grid-cols-2 gap-3">
+        <StatCard label="Score" value={`${score}/${total}`} />
+        <StatCard label="Attempts" value={String(attempts)} />
       </div>
-      <button
-        onClick={onNewGame}
-        className="ml-auto px-4 py-2 text-sm font-medium rounded bg-om-accent hover:bg-om-accent-hover text-white transition-colors"
-      >
-        New Game
-      </button>
-      {done && !gameOver && (
-        <span className="text-sm font-semibold text-om-success">
-          Complete! Final: {score}/{total}
+
+      {/* Streak — centered, polished */}
+      <div className="flex flex-col items-center py-3 bg-om-bg rounded-xl border border-om-border">
+        <span
+          className={`text-6xl font-black font-mono leading-none tabular-nums ${
+            streak > 0 ? 'streak-rainbow' : 'text-om-text'
+          }`}
+        >
+          {streak}
         </span>
+        <span className="text-sm font-bold text-om-muted uppercase tracking-[0.2em] mt-2">
+          Streak
+        </span>
+      </div>
+
+      {/* Bottom row: Timeline + Remaining */}
+      <div className="grid grid-cols-2 gap-3">
+        <StatCard label="Timeline" value={String(timelineSize)} />
+        <StatCard label="Remaining" value={String(poolSize)} />
+      </div>
+
+      {/* Timer (timed mode) */}
+      {timedMode && timerSecondsLeft !== null && (
+        <StatCard
+          label="Time"
+          value={`${timerSecondsLeft}s`}
+          danger={timerSecondsLeft <= 10}
+        />
+      )}
+
+      {/* Completion message */}
+      {done && !gameOver && (
+        <div className="text-center py-2 bg-om-success-bg rounded-lg border border-om-border">
+          <p className="text-base font-bold text-om-success">
+            Complete! {score}/{total}
+          </p>
+        </div>
       )}
     </div>
   )
 }
 
-function Stat({
+function StatCard({
   label,
   value,
-  highlight,
   danger,
 }: {
   label: string
   value: string
-  highlight?: boolean
   danger?: boolean
 }) {
   return (
-    <div className="flex flex-col items-center">
-      <span className="text-sm text-om-muted">{label}</span>
+    <div className="flex flex-col items-center bg-om-bg rounded-xl border border-om-border px-4 py-3">
+      <span className="text-xs text-om-muted uppercase tracking-wider font-semibold">{label}</span>
       <span
-        className={`text-base font-bold font-mono ${
-          danger
-            ? 'text-om-error'
-            : highlight
-            ? 'text-om-accent'
-            : 'text-om-text'
+        className={`text-3xl font-bold font-mono mt-1 leading-none tabular-nums ${
+          danger ? 'text-om-error' : 'text-om-text'
         }`}
       >
         {value}
