@@ -145,6 +145,20 @@ export default function App() {
     }
   }
 
+  // Auto-start a full game on first load when no game is in progress. After the
+  // data-version migration clears a stale save, state is empty (no pool, no
+  // timeline) — start a fresh game so all events are immediately in play rather
+  // than showing a "Press New Game" screen.
+  const didInit = useRef(false)
+  useEffect(() => {
+    if (didInit.current) return
+    didInit.current = true
+    if (state.pool.length === 0 && state.timeline.length === 0 && !state.current) {
+      handleNewGame()
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   const handleFilterChange = (units: number[], regions: string[]) => {
     setSettings((s) => ({ ...s, filterUnits: units, filterRegions: regions }))
     // Start new game with new filters
