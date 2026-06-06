@@ -22,7 +22,7 @@ export function UnderstandingModal({ event, onSave, onSkip }: Props) {
         <div className="px-5 py-4 border-b border-om-border">
           <div className="flex items-start justify-between gap-3">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-wide text-om-success mb-0.5">
+              <p className="text-sm font-semibold uppercase tracking-wide text-om-success mb-0.5">
                 Correct!
               </p>
               <h3 className="font-semibold font-serif text-om-text">{event.title} ({event.year})</h3>
@@ -34,8 +34,8 @@ export function UnderstandingModal({ event, onSave, onSkip }: Props) {
         </div>
 
         <div className="px-5 py-4 space-y-4">
-          <p className="text-xs text-om-muted">
-            Reflect in your own words. Your notes will appear inline on the timeline.
+          <p className="text-sm text-om-muted">
+            Reflect in your own words.
           </p>
 
           <JournalField
@@ -109,7 +109,7 @@ function JournalField({
   return (
     <div>
       <div className="flex items-center justify-between mb-1">
-        <label className={`text-xs font-semibold ${labelColor}`}>{label}</label>
+        <label className={`text-sm font-semibold ${labelColor}`}>{label}</label>
         <button
           onClick={() => setShowHint((v) => !v)}
           className="text-xs text-om-muted hover:text-om-text"

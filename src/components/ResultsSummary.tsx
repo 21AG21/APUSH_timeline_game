@@ -52,29 +52,29 @@ export function ResultsSummary({ state, settings, allEvents }: Props) {
 
   return (
     <div className="bg-om-surface border border-om-border rounded-lg p-4 space-y-3">
-      <h3 className="font-semibold text-om-text text-sm">Game Summary</h3>
-      <div className="grid grid-cols-2 gap-2 text-xs">
+      <h3 className="font-semibold text-om-text text-base">Game Summary</h3>
+      <div className="grid grid-cols-2 gap-2 text-sm">
         <Kv label="Score" value={`${state.score} / ${total}`} />
         <Kv label="Attempts" value={String(state.attempts)} />
         <Kv label="Best Streak" value={String(state.bestStreak)} />
         {timeLine && <Kv label="Time" value={timeLine.replace('Time: ', '')} />}
       </div>
       {modes.length > 0 && (
-        <p className="text-xs text-om-muted">
+        <p className="text-sm text-om-muted">
           <span className="font-medium">Modes:</span> {modes.join(' · ')}
         </p>
       )}
       {missedTitles.length > 0 ? (
         <div>
-          <p className="text-xs font-medium text-om-error mb-1">
+          <p className="text-sm font-medium text-om-error mb-1">
             Missed ({missedTitles.length}):
           </p>
-          <ul className="text-xs text-om-muted space-y-0.5">
+          <ul className="text-sm text-om-muted space-y-0.5">
             {missedTitles.map((t) => <li key={t}>• {t}</li>)}
           </ul>
         </div>
       ) : (
-        <p className="text-xs text-om-success font-medium">No events missed!</p>
+        <p className="text-sm text-om-success font-medium">No events missed!</p>
       )}
       <button
         onClick={handleCopy}
@@ -89,7 +89,7 @@ export function ResultsSummary({ state, settings, allEvents }: Props) {
 function Kv({ label, value }: { label: string; value: string }) {
   return (
     <div className="bg-om-bg rounded px-2 py-1.5">
-      <p className="text-om-muted text-xs">{label}</p>
+      <p className="text-om-muted text-sm">{label}</p>
       <p className="font-bold font-mono text-om-text">{value}</p>
     </div>
   )

@@ -53,7 +53,7 @@ export function FilterPopover({ allEvents, selectedUnits, selectedRegions, onCha
       {open && (
         <div className="absolute right-0 top-full mt-1 z-40 bg-om-surface border border-om-border rounded-lg shadow-xl p-4 w-72">
           <div className="flex items-center justify-between mb-3">
-            <span className="text-xs font-semibold text-om-text uppercase tracking-wide">
+            <span className="text-sm font-semibold text-om-text uppercase tracking-wide">
               Filter Pool
             </span>
             {active && (
@@ -96,7 +96,7 @@ export function FilterPopover({ allEvents, selectedUnits, selectedRegions, onCha
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div className="mb-3">
-      <p className="text-xs font-medium text-om-muted mb-1.5">{title}</p>
+      <p className="text-sm font-medium text-om-muted mb-1.5">{title}</p>
       {children}
     </div>
   )

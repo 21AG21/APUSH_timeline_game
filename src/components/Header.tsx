@@ -26,11 +26,11 @@ export function Header({
     <header className="bg-om-surface border-b border-om-border px-4 py-3 flex items-center justify-between gap-4 flex-wrap">
       <div>
         <h1 className="text-xl font-bold font-serif text-om-text tracking-tight">APUSH Timeline</h1>
-        <p className="text-xs text-om-muted">Place events in chronological order</p>
+        <p className="text-sm text-om-muted">Place events in chronological order</p>
       </div>
       <div className="flex items-center gap-3 flex-wrap">
         <Toggle label="Hide Dates" checked={settings.hideDates} onChange={onToggleHideDates} />
-        <Toggle label="Cause/Effect" checked={settings.showUnderstanding} onChange={onToggleUnderstanding} />
+        <Toggle label="Understanding Prompt" checked={settings.showUnderstanding} onChange={onToggleUnderstanding} />
         <Toggle
           label="Hard Mode"
           checked={settings.hardMode}

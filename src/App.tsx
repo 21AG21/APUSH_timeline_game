@@ -29,10 +29,10 @@ const DEFAULT_SETTINGS: Settings = {
 
 export default function App() {
   const [rawSettings, setSettings] = useLocalStorage<Settings>('apush-settings', DEFAULT_SETTINGS)
-  // Merge with defaults so any newly added keys are always present (guards against stale localStorage)
   const settings: Settings = { ...DEFAULT_SETTINGS, ...rawSettings }
   const [notes, setNotes] = useLocalStorage<Note[]>('apush-notes', [])
   const { state, newGame, setTentative, place, timeout } = useGameState(allEvents)
+  const [journalOpen, setJournalOpen] = useState(false)
 
   // Feedback state
   const [lastCorrect, setLastCorrect] = useState<boolean | null>(null)
@@ -61,20 +61,13 @@ export default function App() {
 
       if (correct) {
         setWrongFeedback(null)
-        // Show understanding modal if prompt is on and not hard mode
         if (settings.showUnderstanding && !settings.hardMode) {
-          // Find the event that was just placed (last item doesn't work since we moved current)
-          // We track via note: open modal for the placed event
-          // The placed event is now in state.timeline; find the one that changed
-          // We'll detect via prevScore change and show the modal for the current event BEFORE it changed
-          // We stash it in a ref
           if (lastPlacedEventRef.current) {
             setUnderstandingEvent(lastPlacedEventRef.current)
           }
         }
         feedbackTimer.current = setTimeout(() => setLastCorrect(null), 2000)
       } else {
-        // Compute neighbors for wrong-feedback (feature 8), only in normal mode
         if (!settings.hardMode && lastAttemptedSlotRef.current !== null) {
           const slot = lastAttemptedSlotRef.current
           const prevYear = slot > 0 ? state.timeline[slot - 1]?.year ?? null : null
@@ -145,10 +138,6 @@ export default function App() {
     }
   }
 
-  // Auto-start a full game on first load when no game is in progress. After the
-  // data-version migration clears a stale save, state is empty (no pool, no
-  // timeline) — start a fresh game so all events are immediately in play rather
-  // than showing a "Press New Game" screen.
   const didInit = useRef(false)
   useEffect(() => {
     if (didInit.current) return
@@ -161,7 +150,6 @@ export default function App() {
 
   const handleFilterChange = (units: number[], regions: string[]) => {
     setSettings((s) => ({ ...s, filterUnits: units, filterRegions: regions }))
-    // Start new game with new filters
     const filtered = filterPool(allEvents, units, regions)
     if (filtered.length >= 2) {
       newGame(filtered)
@@ -234,62 +222,59 @@ export default function App() {
         onNewGame={handleNewGame}
       />
       <div className="flex flex-1 overflow-hidden">
-        {/* Left panel: placement card or end state */}
-        <div className="w-80 shrink-0 flex flex-col border-r border-om-border overflow-y-auto bg-om-surface">
-          {state.current && !gameOver ? (
-            <PlacementCard
-              event={state.current}
-              hideDates={settings.hideDates}
-              showUnderstanding={settings.showUnderstanding}
-              hardMode={settings.hardMode}
-              onDragStart={dragStartHandler}
+        {/* Left panel: placement card + collapsible journal */}
+        <div className="w-96 shrink-0 flex flex-col border-r border-om-border bg-om-surface overflow-y-auto">
+          <div className="shrink-0">
+            {state.current && !gameOver ? (
+              <PlacementCard
+                event={state.current}
+                hideDates={settings.hideDates}
+                hardMode={settings.hardMode}
+                onDragStart={dragStartHandler}
+              />
+            ) : (
+              <div className="p-4 space-y-4">
+                {state.done && !state.gameOver && (
+                  <ResultsSummary state={state} settings={settings} allEvents={allEvents} />
+                )}
+                {state.gameOver && !settings.hardMode && (
+                  <ResultsSummary state={state} settings={settings} allEvents={allEvents} />
+                )}
+              </div>
+            )}
+          </div>
+
+          {/* Journal toggle + content */}
+          <button
+            onClick={() => setJournalOpen((o) => !o)}
+            className="flex items-center justify-between px-4 py-2.5 border-t border-om-border text-sm font-semibold text-om-text hover:bg-om-slot-hover transition-colors"
+          >
+            <span>Study Journal</span>
+            <span className="text-om-muted">{journalOpen ? '▼' : '▶'}</span>
+          </button>
+          {journalOpen && (
+            <StudyJournal
+              allEvents={allEvents}
+              timelineEvents={state.timeline}
+              notes={notes}
+              onSaveNote={saveNote}
+              onDeleteNote={deleteNote}
             />
-          ) : (
-            <div className="p-4 space-y-4">
-              {gameOver && !state.gameOver && (
-                <p className="text-sm text-om-muted text-center py-4">
-                  Press "New Game" to play again.
-                </p>
-              )}
-              {!gameOver && !state.current && (
-                <p className="text-sm text-om-muted text-center py-4">
-                  Press "New Game" to start.
-                </p>
-              )}
-              {state.done && !state.gameOver && (
-                <ResultsSummary state={state} settings={settings} allEvents={allEvents} />
-              )}
-              {state.gameOver && !settings.hardMode && (
-                /* Timeout end state */
-                <ResultsSummary state={state} settings={settings} allEvents={allEvents} />
-              )}
-            </div>
           )}
         </div>
 
-        {/* Center: timeline */}
+        {/* Main: timeline */}
         <Timeline
           timeline={state.timeline}
           tentativeSlot={state.tentativeSlot}
           hasCurrentEvent={!!state.current && !gameOver}
           hideDates={settings.hideDates}
-          showUnderstanding={settings.showUnderstanding}
           hardMode={settings.hardMode}
           notes={notes}
           lastPlacementCorrect={lastCorrect}
-          wrongFeedback={wrongFeedback}
           onSlotClick={handleSlotClick}
           onSlotConfirm={handleSlotConfirm}
           onDrop={handleDrop}
-        />
-
-        {/* Right: journal */}
-        <StudyJournal
-          allEvents={allEvents}
-          timelineEvents={state.timeline}
-          notes={notes}
-          onSaveNote={saveNote}
-          onDeleteNote={deleteNote}
         />
       </div>
 

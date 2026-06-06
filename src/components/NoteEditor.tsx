@@ -29,7 +29,7 @@ export function NoteEditor({ eventId, eventTitle, note, onSave, onDelete, onClos
     <div className="fixed inset-0 bg-black/50 flex items-end sm:items-center justify-center z-50 p-4">
       <div className="bg-om-surface rounded-t-xl sm:rounded-lg shadow-2xl w-full max-w-md">
         <div className="flex items-center justify-between px-4 py-3 border-b border-om-border">
-          <h3 className="font-semibold text-om-text text-sm">Note: {eventTitle}</h3>
+          <h3 className="font-semibold text-om-text text-base">Note: {eventTitle}</h3>
           <button
             onClick={onClose}
             className="text-om-muted hover:text-om-text text-lg leading-none"
@@ -108,7 +108,7 @@ function Field({
 
   return (
     <div>
-      <label className={`block text-xs font-semibold mb-1 ${labelColor}`}>{label}</label>
+      <label className={`block text-sm font-semibold mb-1 ${labelColor}`}>{label}</label>
       <textarea
         value={value}
         onChange={(e) => onChange(e.target.value)}

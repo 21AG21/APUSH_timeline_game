@@ -25,11 +25,20 @@ export function Scoreboard({
 }: Props) {
   const total = score + poolSize + (done || gameOver ? 0 : 1)
   return (
-    <div className="flex items-center gap-4 px-4 py-2 bg-om-bg border-b border-om-border flex-wrap">
-      <div className="flex gap-4 text-sm flex-wrap">
+    <div className="flex items-center gap-4 px-4 py-2.5 bg-om-bg border-b border-om-border flex-wrap">
+      <div className="flex items-center gap-4 flex-wrap">
         <Stat label="Score" value={`${score} / ${total}`} />
         <Stat label="Attempts" value={String(attempts)} />
-        <Stat label="Streak" value={String(streak)} highlight={streak >= 3} />
+        <div className="flex flex-col items-center">
+          <span className="text-sm text-om-muted">Streak</span>
+          <span
+            className={`text-xl font-bold font-mono ${
+              streak >= 3 ? 'text-om-accent' : 'text-om-text'
+            }`}
+          >
+            {streak}
+          </span>
+        </div>
         <Stat label="Timeline" value={String(timelineSize)} />
         <Stat label="Remaining" value={String(poolSize)} />
         {timedMode && timerSecondsLeft !== null && (
@@ -43,7 +52,7 @@ export function Scoreboard({
       </div>
       <button
         onClick={onNewGame}
-        className="ml-auto px-3 py-1.5 text-sm font-medium rounded bg-om-accent hover:bg-om-accent-hover text-white transition-colors"
+        className="ml-auto px-4 py-2 text-sm font-medium rounded bg-om-accent hover:bg-om-accent-hover text-white transition-colors"
       >
         New Game
       </button>
@@ -69,9 +78,9 @@ function Stat({
 }) {
   return (
     <div className="flex flex-col items-center">
-      <span className="text-xs text-om-muted">{label}</span>
+      <span className="text-sm text-om-muted">{label}</span>
       <span
-        className={`font-bold font-mono ${
+        className={`text-base font-bold font-mono ${
           danger
             ? 'text-om-error'
             : highlight

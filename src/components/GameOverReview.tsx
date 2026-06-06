@@ -20,7 +20,7 @@ export function GameOverReview({ state, settings, allEvents, onNewGame }: Props)
       <div className="bg-om-surface rounded-t-xl sm:rounded-lg shadow-2xl w-full max-w-2xl my-4">
         <div className="px-6 py-4 border-b border-om-border flex items-center justify-between">
           <div>
-            <h2 className="text-lg font-bold font-serif text-om-error">Game Over</h2>
+            <h2 className="text-lg font-bold text-om-error">Game Over</h2>
             <p className="text-sm text-om-muted">
               Hard mode — one wrong placement ends the game
             </p>
@@ -39,7 +39,7 @@ export function GameOverReview({ state, settings, allEvents, onNewGame }: Props)
           </div>
 
           <div>
-            <h3 className="text-sm font-semibold text-om-text mb-2">
+            <h3 className="text-base font-semibold text-om-text mb-2">
               Correct Timeline
             </h3>
             <div className="space-y-1 max-h-96 overflow-y-auto pr-1">
@@ -49,7 +49,7 @@ export function GameOverReview({ state, settings, allEvents, onNewGame }: Props)
                 return (
                   <div
                     key={event.id}
-                    className={`rounded border px-3 py-2 text-xs ${
+                    className={`rounded border px-3 py-2 text-sm ${
                       isMissed
                         ? 'border-om-error bg-om-error-bg'
                         : wasPlaced
@@ -58,7 +58,7 @@ export function GameOverReview({ state, settings, allEvents, onNewGame }: Props)
                     }`}
                   >
                     <div className="flex items-center justify-between gap-2">
-                      <span className="font-medium font-serif text-om-text">
+                      <span className="font-medium text-om-text">
                         {i + 1}. {event.title}
                       </span>
                       <span className="text-om-muted font-mono shrink-0">{event.year}</span>

@@ -21,20 +21,16 @@ export function StudyJournal({ allEvents, timelineEvents, notes, onSaveNote, onD
   const displayEvents = tab === 'my-notes' ? myNoteEvents : allEvents
 
   return (
-    <aside className="w-72 flex flex-col border-l border-om-border bg-om-surface">
-      <div className="px-4 py-3 border-b border-om-border">
-        <h2 className="font-semibold text-om-text text-sm">Study Journal</h2>
-      </div>
-
+    <div className="flex flex-col flex-1 min-h-0">
       <div className="flex border-b border-om-border">
         <TabButton label="My Notes" active={tab === 'my-notes'} onClick={() => setTab('my-notes')} />
-        <TabButton label="Complete Journal" active={tab === 'complete'} onClick={() => setTab('complete')} />
+        <TabButton label="All Events" active={tab === 'complete'} onClick={() => setTab('complete')} />
       </div>
 
       <div className="flex-1 overflow-y-auto p-3 space-y-2">
         {displayEvents.length === 0 && (
-          <p className="text-xs text-om-muted text-center py-4">
-            {tab === 'my-notes' ? 'No notes yet. Place events to add notes.' : 'No events.'}
+          <p className="text-sm text-om-muted text-center py-4">
+            {tab === 'my-notes' ? 'No notes yet.' : 'No events.'}
           </p>
         )}
         {displayEvents.map((event) => {
@@ -43,11 +39,11 @@ export function StudyJournal({ allEvents, timelineEvents, notes, onSaveNote, onD
           return (
             <div
               key={event.id}
-              className="rounded border border-om-border p-2 text-xs"
+              className="rounded border border-om-border p-2 text-sm"
             >
               <div className="flex items-start justify-between gap-1">
                 <div>
-                  <span className="font-semibold font-serif text-om-text">{event.title}</span>
+                  <span className="font-semibold text-om-text">{event.title}</span>
                   <span className="ml-1 text-om-muted font-mono">{event.year}</span>
                   {onTimeline && <span className="ml-1 text-om-success">✓</span>}
                 </div>
@@ -61,7 +57,7 @@ export function StudyJournal({ allEvents, timelineEvents, notes, onSaveNote, onD
 
               {note && (
                 <div className="mt-1.5 bg-om-note border border-om-note-border rounded p-1.5 space-y-0.5">
-                  <p className="font-semibold text-om-note-title">YOUR NOTES</p>
+                  <p className="font-semibold text-om-note-title">Your notes</p>
                   {note.cause && (
                     <p className="text-om-text">
                       <span className="text-om-gold font-medium">Cause:</span> {note.cause}
@@ -93,14 +89,6 @@ export function StudyJournal({ allEvents, timelineEvents, notes, onSaveNote, onD
         })}
       </div>
 
-      {tab === 'my-notes' && (
-        <div className="px-3 pb-3">
-          <p className="text-xs text-om-muted">
-            Notes also open automatically after correct placement when "Cause/Effect" is on.
-          </p>
-        </div>
-      )}
-
       {editing && (
         <NoteEditor
           eventId={editing.id}
@@ -117,7 +105,7 @@ export function StudyJournal({ allEvents, timelineEvents, notes, onSaveNote, onD
           onClose={() => setEditing(null)}
         />
       )}
-    </aside>
+    </div>
   )
 }
 
@@ -152,7 +140,7 @@ function TabButton({ label, active, onClick }: { label: string; active: boolean;
   return (
     <button
       onClick={onClick}
-      className={`flex-1 py-2 text-xs font-medium border-b-2 transition-colors ${
+      className={`flex-1 py-2 text-sm font-medium border-b-2 transition-colors ${
         active
           ? 'border-om-accent text-om-accent'
           : 'border-transparent text-om-muted hover:text-om-text'
