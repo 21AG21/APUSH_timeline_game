@@ -16,7 +16,6 @@ export function ResultsSummary({ state, settings, allEvents }: Props) {
 
   const modes: string[] = []
   if (settings.hardMode) modes.push('Hard mode')
-  if (settings.timedMode) modes.push('Timed')
   if (settings.hideDates) modes.push('Dates hidden')
   if (settings.filterUnits.length || settings.filterRegions.length) {
     const parts: string[] = []
@@ -28,17 +27,12 @@ export function ResultsSummary({ state, settings, allEvents }: Props) {
   const missedTitles = state.missedIds
     .map((id) => allEvents.find((e) => e.id === id)?.title ?? id)
 
-  const timeLine = state.timeTaken != null
-    ? `Time: ${Math.round(state.timeTaken / 1000)}s`
-    : null
-
   const summary = [
     `APUSH Timeline — Game Summary`,
     `Score: ${state.score}/${total}`,
     `Accuracy: ${accuracy}%`,
     `Attempts: ${state.attempts}`,
     `Best streak: ${state.bestStreak}`,
-    timeLine,
     modes.length ? `Modes: ${modes.join(', ')}` : null,
     missedTitles.length
       ? `Missed events (${missedTitles.length}):\n${missedTitles.map((t) => `  • ${t}`).join('\n')}`
@@ -62,7 +56,6 @@ export function ResultsSummary({ state, settings, allEvents }: Props) {
         <Kv label="Accuracy" value={`${accuracy}%`} />
         <Kv label="Attempts" value={String(state.attempts)} />
         <Kv label="Best Streak" value={String(state.bestStreak)} />
-        {timeLine && <Kv label="Time" value={timeLine.replace('Time: ', '')} />}
       </div>
       {modes.length > 0 && (
         <p className="text-sm text-om-muted">

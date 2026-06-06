@@ -25,8 +25,6 @@ export default {
           note:           'var(--om-note)',
           'note-border':  'var(--om-note-border)',
           'note-title':   'var(--om-note-title)',
-          'surface-glass': 'var(--om-surface-glass)',
-          'era-glass':     'var(--om-era-glass)',
         },
       },
       fontFamily: {

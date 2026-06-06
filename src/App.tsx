@@ -21,8 +21,6 @@ const DEFAULT_SETTINGS: Settings = {
   hideDates: false,
   showUnderstanding: false,
   hardMode: false,
-  timedMode: false,
-  timerSeconds: 120,
   filterUnits: [],
   filterRegions: [],
 }
@@ -31,7 +29,7 @@ export default function App() {
   const [rawSettings, setSettings] = useLocalStorage<Settings>('apush-settings', DEFAULT_SETTINGS)
   const settings: Settings = { ...DEFAULT_SETTINGS, ...rawSettings }
   const [notes, setNotes] = useLocalStorage<Note[]>('apush-notes', [])
-  const { state, newGame, setTentative, place, timeout } = useGameState(allEvents)
+  const { state, newGame, setTentative, place } = useGameState(allEvents)
   const [journalOpen, setJournalOpen] = useState(false)
 
   // Feedback state
@@ -42,15 +40,7 @@ export default function App() {
   const prevAttempts = useRef(state.attempts)
   const prevScore = useRef(state.score)
 
-  // Timer state
-  const [timerLeft, setTimerLeft] = useState<number | null>(null)
-  const timerStartRef = useRef<number | null>(null)
-  const timerInterval = useRef<ReturnType<typeof setInterval> | null>(null)
-
-  // Derived state
   const gameOver = isGameOver(state)
-  const gameInProgress = !!state.current && !gameOver
-  const timedLocked = settings.timedMode && gameInProgress
   const showHardModeReview = gameOver && state.gameOver && settings.hardMode
 
   const lastPlacedEventRef = useRef<Event | null>(null)
@@ -92,39 +82,6 @@ export default function App() {
     prevAttempts.current = state.attempts
   })
 
-  // Timer management
-  const stopTimer = useCallback(() => {
-    if (timerInterval.current) {
-      clearInterval(timerInterval.current)
-      timerInterval.current = null
-    }
-  }, [])
-
-  const startTimer = useCallback((seconds: number) => {
-    stopTimer()
-    timerStartRef.current = Date.now()
-    setTimerLeft(seconds)
-    timerInterval.current = setInterval(() => {
-      const elapsed = Math.floor((Date.now() - (timerStartRef.current ?? Date.now())) / 1000)
-      const left = seconds - elapsed
-      if (left <= 0) {
-        stopTimer()
-        setTimerLeft(0)
-        timeout(Date.now() - (timerStartRef.current ?? Date.now()))
-      } else {
-        setTimerLeft(left)
-      }
-    }, 500)
-  }, [stopTimer, timeout])
-
-  // Stop timer when game ends
-  useEffect(() => {
-    if (isGameOver(state)) {
-      stopTimer()
-      setTimerLeft(null)
-    }
-  }, [state, stopTimer])
-
   const getFilteredEvents = useCallback(() => {
     return filterPool(allEvents, settings.filterUnits, settings.filterRegions)
   }, [settings.filterUnits, settings.filterRegions])
@@ -139,13 +96,6 @@ export default function App() {
     setLastCorrect(null)
     setWrongFeedback(null)
     setUnderstandingEvent(null)
-    if (settings.timedMode) {
-      const duration = Math.max(60, Math.round((filtered.length - 1) * 12))
-      startTimer(duration)
-    } else {
-      stopTimer()
-      setTimerLeft(null)
-    }
   }
 
   const didInit = useRef(false)
@@ -166,16 +116,7 @@ export default function App() {
       prevAttempts.current = 0
       prevScore.current = 0
       newGame(filtered)
-      if (settings.timedMode) {
-        const duration = Math.max(60, Math.round((filtered.length - 1) * 12))
-        startTimer(duration)
-      }
     }
-  }
-
-  const handleToggleTimedMode = () => {
-    if (timedLocked) return
-    setSettings((s) => ({ ...s, timedMode: !s.timedMode }))
   }
 
   const handleSlotClick = (slot: number) => {
@@ -217,7 +158,7 @@ export default function App() {
 
   return (
     <div className="h-screen flex overflow-hidden bg-om-bg text-om-text">
-      {/* Left panel: title, options, placement card, stats */}
+      {/* Left panel */}
       <div className="w-1/3 min-w-[340px] shrink-0 flex flex-col border-r border-om-border bg-om-surface">
         {/* Title + Options */}
         <div className="px-5 pt-5 pb-4 space-y-4 shrink-0">
@@ -245,12 +186,6 @@ export default function App() {
               onClick={() => setSettings((s) => ({ ...s, hardMode: !s.hardMode }))}
               danger
             />
-            <PillToggle
-              label="Timed"
-              active={settings.timedMode}
-              onClick={handleToggleTimedMode}
-              disabled={timedLocked}
-            />
             <FilterPopover
               allEvents={allEvents}
               selectedUnits={settings.filterUnits}
@@ -267,7 +202,7 @@ export default function App() {
 
         <div className="border-t border-om-border mx-5 shrink-0" />
 
-        {/* Scrollable content area */}
+        {/* Scrollable content */}
         <div className="flex-1 overflow-y-auto">
           {state.current && !gameOver ? (
             <PlacementCard
@@ -294,12 +229,10 @@ export default function App() {
             streak={state.streak}
             done={state.done}
             gameOver={state.gameOver}
-            timedMode={settings.timedMode}
-            timerSecondsLeft={timerLeft}
           />
         </div>
 
-        {/* Fixed bottom actions */}
+        {/* Bottom actions */}
         <div className="shrink-0 border-t border-om-border p-4 space-y-2">
           <button
             onClick={handleNewGame}
@@ -316,7 +249,7 @@ export default function App() {
         </div>
       </div>
 
-      {/* Right: Timeline only */}
+      {/* Right: Timeline */}
       <Timeline
         timeline={state.timeline}
         tentativeSlot={state.tentativeSlot}
@@ -330,7 +263,7 @@ export default function App() {
         onDrop={handleDrop}
       />
 
-      {/* Journal drawer overlay */}
+      {/* Journal drawer */}
       {journalOpen && (
         <div className="fixed inset-0 z-50 flex">
           <div className="drawer-panel w-[80vw] bg-om-surface border-r border-om-border flex flex-col shadow-2xl">
@@ -386,25 +319,21 @@ function PillToggle({
   active,
   onClick,
   danger,
-  disabled,
 }: {
   label: string
   active: boolean
   onClick: () => void
   danger?: boolean
-  disabled?: boolean
 }) {
   return (
     <button
-      onClick={disabled ? undefined : onClick}
-      className={`px-3.5 py-1.5 rounded-full text-sm font-medium transition-all ${
-        disabled
-          ? 'opacity-40 cursor-not-allowed bg-om-bg text-om-muted border border-om-border'
-          : active
-            ? danger
-              ? 'bg-om-error text-white shadow-sm'
-              : 'bg-om-accent text-white shadow-sm'
-            : 'bg-om-bg text-om-muted hover:text-om-text hover:bg-om-slot-hover border border-om-border cursor-pointer'
+      onClick={onClick}
+      className={`px-3.5 py-1.5 rounded-full text-sm font-medium transition-all cursor-pointer ${
+        active
+          ? danger
+            ? 'bg-om-error text-white shadow-sm'
+            : 'bg-om-accent text-white shadow-sm'
+          : 'bg-om-bg text-om-muted hover:text-om-text hover:bg-om-slot-hover border border-om-border'
       }`}
     >
       {label}

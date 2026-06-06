@@ -10,7 +10,7 @@ interface Props {
 
 export function EventCard({ event, index, hideDates, hardMode, note }: Props) {
   return (
-    <div className="bg-om-surface-glass border border-om-border rounded-lg p-5 shadow-sm">
+    <div className="bg-om-surface border border-om-border rounded-lg p-5 shadow-sm">
       <div className="flex items-start justify-between gap-2">
         <div className="flex items-center gap-2">
           <span className="text-xs font-bold text-om-muted w-5 text-right shrink-0">
