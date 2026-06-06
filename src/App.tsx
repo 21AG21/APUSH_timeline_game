@@ -28,7 +28,9 @@ const DEFAULT_SETTINGS: Settings = {
 }
 
 export default function App() {
-  const [settings, setSettings] = useLocalStorage<Settings>('apush-settings', DEFAULT_SETTINGS)
+  const [rawSettings, setSettings] = useLocalStorage<Settings>('apush-settings', DEFAULT_SETTINGS)
+  // Merge with defaults so any newly added keys are always present (guards against stale localStorage)
+  const settings: Settings = { ...DEFAULT_SETTINGS, ...rawSettings }
   const [notes, setNotes] = useLocalStorage<Note[]>('apush-notes', [])
   const { state, newGame, setTentative, place, timeout } = useGameState(allEvents)
 
