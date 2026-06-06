@@ -25,11 +25,20 @@ export function Scoreboard({
 }: Props) {
   const total = score + poolSize + (done || gameOver ? 0 : 1)
   return (
-    <div className="flex items-center gap-4 px-4 py-2 bg-gray-50 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 flex-wrap">
-      <div className="flex gap-4 text-sm flex-wrap">
+    <div className="flex items-center gap-4 px-4 py-2.5 bg-om-bg border-b border-om-border flex-wrap">
+      <div className="flex items-center gap-4 flex-wrap">
         <Stat label="Score" value={`${score} / ${total}`} />
         <Stat label="Attempts" value={String(attempts)} />
-        <Stat label="Streak" value={String(streak)} highlight={streak >= 3} />
+        <div className="flex flex-col items-center">
+          <span className="text-sm text-om-muted">Streak</span>
+          <span
+            className={`text-xl font-bold font-mono ${
+              streak >= 3 ? 'text-om-accent' : 'text-om-text'
+            }`}
+          >
+            {streak}
+          </span>
+        </div>
         <Stat label="Timeline" value={String(timelineSize)} />
         <Stat label="Remaining" value={String(poolSize)} />
         {timedMode && timerSecondsLeft !== null && (
@@ -43,12 +52,12 @@ export function Scoreboard({
       </div>
       <button
         onClick={onNewGame}
-        className="ml-auto px-3 py-1.5 text-sm font-medium rounded bg-indigo-600 hover:bg-indigo-700 text-white transition-colors"
+        className="ml-auto px-4 py-2 text-sm font-medium rounded bg-om-accent hover:bg-om-accent-hover text-white transition-colors"
       >
         New Game
       </button>
       {done && !gameOver && (
-        <span className="text-sm font-semibold text-green-600 dark:text-green-400">
+        <span className="text-sm font-semibold text-om-success">
           Complete! Final: {score}/{total}
         </span>
       )}
@@ -69,14 +78,14 @@ function Stat({
 }) {
   return (
     <div className="flex flex-col items-center">
-      <span className="text-xs text-gray-500 dark:text-gray-400">{label}</span>
+      <span className="text-sm text-om-muted">{label}</span>
       <span
-        className={`font-bold ${
+        className={`text-base font-bold font-mono ${
           danger
-            ? 'text-red-600 dark:text-red-400'
+            ? 'text-om-error'
             : highlight
-            ? 'text-indigo-600 dark:text-indigo-400'
-            : 'text-gray-800 dark:text-gray-100'
+            ? 'text-om-accent'
+            : 'text-om-text'
         }`}
       >
         {value}

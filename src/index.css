@@ -2,6 +2,50 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --om-bg:           #FAF7F2;
+  --om-surface:      #F0ECE3;
+  --om-text:         #1B2A22;
+  --om-muted:        #4A5B4E;
+  --om-accent:       #2D5A3D;
+  --om-accent-hover: #245030;
+  --om-accent-light: #E8F0EB;
+  --om-gold:         #B8963E;
+  --om-success:      #3A7D54;
+  --om-success-bg:   #E8F2EC;
+  --om-error:        #8B3A3A;
+  --om-error-bg:     #F2E8E8;
+  --om-border:       #D4CCBD;
+  --om-slot-hover:   #E6E0D3;
+  --om-era-band:     #EBE2CA;
+  --om-tag:          #E6E0D3;
+  --om-note:         #F5EDD7;
+  --om-note-border:  #DDD0AC;
+  --om-note-title:   #8B6914;
+}
+
+.dark {
+  --om-bg:           #0F1512;
+  --om-surface:      #1A211C;
+  --om-text:         #E8E4DB;
+  --om-muted:        #9DA89F;
+  --om-accent:       #5B9E74;
+  --om-accent-hover: #4D8860;
+  --om-accent-light: #192B1E;
+  --om-gold:         #C9A84C;
+  --om-success:      #6BBF82;
+  --om-success-bg:   #1A2D1E;
+  --om-error:        #C46B6B;
+  --om-error-bg:     #2D1A1A;
+  --om-border:       #2E362F;
+  --om-slot-hover:   #252D27;
+  --om-era-band:     #1D2118;
+  --om-tag:          #252D27;
+  --om-note:         #221E10;
+  --om-note-border:  #3A3215;
+  --om-note-title:   #C9A84C;
+}
+
 *, *::before, *::after {
   box-sizing: border-box;
 }
@@ -10,4 +54,8 @@ html, body, #root {
   height: 100%;
   margin: 0;
   padding: 0;
+}
+
+body {
+  font-family: 'DM Sans', system-ui, sans-serif;
 }
