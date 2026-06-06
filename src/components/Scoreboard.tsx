@@ -34,7 +34,7 @@ export function Scoreboard({
       {/* Streak — centered, polished */}
       <div className="flex flex-col items-center py-3 bg-om-bg rounded-xl border border-om-border">
         <span
-          className={`text-6xl font-black font-mono leading-none tabular-nums ${
+          className={`text-6xl font-black leading-none tabular-nums ${
             streak > 0 ? 'streak-rainbow' : 'text-om-text'
           }`}
         >
@@ -85,7 +85,7 @@ function StatCard({
     <div className="flex flex-col items-center bg-om-bg rounded-xl border border-om-border px-4 py-3">
       <span className="text-xs text-om-muted uppercase tracking-wider font-semibold">{label}</span>
       <span
-        className={`text-3xl font-bold font-mono mt-1 leading-none tabular-nums ${
+        className={`text-3xl font-bold mt-1 leading-none tabular-nums ${
           danger ? 'text-om-error' : 'text-om-text'
         }`}
       >

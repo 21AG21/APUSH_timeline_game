@@ -41,17 +41,17 @@ export function FilterPopover({ allEvents, selectedUnits, selectedRegions, onCha
     <div ref={ref} className="relative">
       <button
         onClick={() => setOpen((v) => !v)}
-        className={`px-3 py-1.5 text-sm rounded border transition-colors ${
+        className={`px-3.5 py-1.5 text-sm rounded-full font-medium transition-all ${
           active
-            ? 'border-om-accent bg-om-accent-light text-om-accent'
-            : 'border-om-border bg-om-surface text-om-text hover:bg-om-slot-hover'
+            ? 'bg-om-accent text-white shadow-sm'
+            : 'bg-om-bg text-om-muted hover:text-om-text hover:bg-om-slot-hover border border-om-border'
         }`}
       >
         Filter{active ? ` (${selectedUnits.length + selectedRegions.length})` : ''}
       </button>
 
       {open && (
-        <div className="absolute right-0 top-full mt-1 z-40 bg-om-surface border border-om-border rounded-lg shadow-xl p-4 w-72">
+        <div className="absolute left-0 top-full mt-1 z-40 bg-om-surface border border-om-border rounded-lg shadow-xl p-4 w-72">
           <div className="flex items-center justify-between mb-3">
             <span className="text-sm font-semibold text-om-text uppercase tracking-wide">
               Filter Pool

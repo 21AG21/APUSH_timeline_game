@@ -11,9 +11,12 @@ export function ResultsSummary({ state, settings, allEvents }: Props) {
   const [copied, setCopied] = useState(false)
 
   const total = state.score + (state.done ? 0 : state.pool.length + 1)
+  const correctPlacements = state.timeline.length > 0 ? state.timeline.length - 1 : 0
+  const accuracy = state.attempts > 0 ? Math.round((correctPlacements / state.attempts) * 100) : 0
+
   const modes: string[] = []
   if (settings.hardMode) modes.push('Hard mode')
-  if (settings.timedMode) modes.push(`Timed (${settings.timerSeconds}s)`)
+  if (settings.timedMode) modes.push('Timed')
   if (settings.hideDates) modes.push('Dates hidden')
   if (settings.filterUnits.length || settings.filterRegions.length) {
     const parts: string[] = []
@@ -32,6 +35,7 @@ export function ResultsSummary({ state, settings, allEvents }: Props) {
   const summary = [
     `APUSH Timeline — Game Summary`,
     `Score: ${state.score}/${total}`,
+    `Accuracy: ${accuracy}%`,
     `Attempts: ${state.attempts}`,
     `Best streak: ${state.bestStreak}`,
     timeLine,
@@ -55,6 +59,7 @@ export function ResultsSummary({ state, settings, allEvents }: Props) {
       <h3 className="font-semibold text-om-text text-base">Game Summary</h3>
       <div className="grid grid-cols-2 gap-2 text-sm">
         <Kv label="Score" value={`${state.score} / ${total}`} />
+        <Kv label="Accuracy" value={`${accuracy}%`} />
         <Kv label="Attempts" value={String(state.attempts)} />
         <Kv label="Best Streak" value={String(state.bestStreak)} />
         {timeLine && <Kv label="Time" value={timeLine.replace('Time: ', '')} />}
@@ -90,7 +95,7 @@ function Kv({ label, value }: { label: string; value: string }) {
   return (
     <div className="bg-om-bg rounded px-2 py-1.5">
       <p className="text-om-muted text-sm">{label}</p>
-      <p className="font-bold font-mono text-om-text">{value}</p>
+      <p className="font-bold text-om-text">{value}</p>
     </div>
   )
 }
