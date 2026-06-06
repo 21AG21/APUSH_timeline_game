@@ -2,7 +2,6 @@ import { useEffect, useRef, useState, useCallback } from 'react'
 import type { Note, Settings } from './data/types'
 import apushEvents from './data/apush.json'
 import type { Event } from './data/types'
-import { Header } from './components/Header'
 import { Scoreboard } from './components/Scoreboard'
 import { PlacementCard } from './components/PlacementCard'
 import { Timeline } from './components/Timeline'
@@ -10,6 +9,7 @@ import { StudyJournal } from './components/StudyJournal'
 import { UnderstandingModal } from './components/UnderstandingModal'
 import { GameOverReview } from './components/GameOverReview'
 import { ResultsSummary } from './components/ResultsSummary'
+import { FilterPopover } from './components/FilterPopover'
 import { useGameState } from './hooks/useGameState'
 import { useLocalStorage } from './hooks/useLocalStorage'
 import { filterPool, isGameOver } from './lib/game'
@@ -47,6 +47,15 @@ export default function App() {
   const timerStartRef = useRef<number | null>(null)
   const timerInterval = useRef<ReturnType<typeof setInterval> | null>(null)
 
+  // Derived state
+  const gameOver = isGameOver(state)
+  const gameInProgress = !!state.current && !gameOver
+  const timedLocked = settings.timedMode && gameInProgress
+  const showHardModeReview = gameOver && state.gameOver && settings.hardMode
+
+  const lastPlacedEventRef = useRef<Event | null>(null)
+  const lastAttemptedSlotRef = useRef<number | null>(null)
+
   // Apply dark mode
   useEffect(() => {
     document.documentElement.classList.toggle('dark', settings.darkMode)
@@ -82,9 +91,6 @@ export default function App() {
     prevScore.current = state.score
     prevAttempts.current = state.attempts
   })
-
-  const lastPlacedEventRef = useRef<Event | null>(null)
-  const lastAttemptedSlotRef = useRef<number | null>(null)
 
   // Timer management
   const stopTimer = useCallback(() => {
@@ -126,7 +132,6 @@ export default function App() {
   const handleNewGame = () => {
     const filtered = getFilteredEvents()
     if (filtered.length < 2) return
-    // Reset stale refs so feedback detection starts clean for the new game
     if (feedbackTimer.current) clearTimeout(feedbackTimer.current)
     prevAttempts.current = 0
     prevScore.current = 0
@@ -135,7 +140,8 @@ export default function App() {
     setWrongFeedback(null)
     setUnderstandingEvent(null)
     if (settings.timedMode) {
-      startTimer(settings.timerSeconds)
+      const duration = Math.max(60, Math.round((filtered.length - 1) * 12))
+      startTimer(duration)
     } else {
       stopTimer()
       setTimerLeft(null)
@@ -160,8 +166,16 @@ export default function App() {
       prevAttempts.current = 0
       prevScore.current = 0
       newGame(filtered)
-      if (settings.timedMode) startTimer(settings.timerSeconds)
+      if (settings.timedMode) {
+        const duration = Math.max(60, Math.round((filtered.length - 1) * 12))
+        startTimer(duration)
+      }
     }
+  }
+
+  const handleToggleTimedMode = () => {
+    if (timedLocked) return
+    setSettings((s) => ({ ...s, timedMode: !s.timedMode }))
   }
 
   const handleSlotClick = (slot: number) => {
@@ -201,93 +215,122 @@ export default function App() {
     e.dataTransfer.setData('text/plain', 'card')
   }
 
-  const gameOver = isGameOver(state)
-  const showHardModeReview = gameOver && state.gameOver && settings.hardMode
-
   return (
-    <div className="h-screen flex flex-col bg-om-bg text-om-text">
-      <Header
-        settings={settings}
-        allEvents={allEvents}
-        onToggleDark={() => setSettings((s) => ({ ...s, darkMode: !s.darkMode }))}
-        onToggleHideDates={() => setSettings((s) => ({ ...s, hideDates: !s.hideDates }))}
-        onToggleUnderstanding={() => setSettings((s) => ({ ...s, showUnderstanding: !s.showUnderstanding }))}
-        onToggleHardMode={() => setSettings((s) => ({ ...s, hardMode: !s.hardMode }))}
-        onToggleTimedMode={() => setSettings((s) => ({ ...s, timedMode: !s.timedMode }))}
-        onFilterChange={handleFilterChange}
-      />
-
-      <div className="flex flex-1 overflow-hidden">
-        {/* Left panel: placement card + stats + actions */}
-        <div className="w-[440px] shrink-0 flex flex-col border-r border-om-border bg-om-surface">
-          {/* Scrollable content area */}
-          <div className="flex-1 overflow-y-auto">
-            {/* Placement card or end state */}
-            {state.current && !gameOver ? (
-              <PlacementCard
-                event={state.current}
-                hideDates={settings.hideDates}
-                hardMode={settings.hardMode}
-                onDragStart={dragStartHandler}
-              />
-            ) : (
-              <div className="p-4 space-y-4">
-                {(state.done || state.gameOver) && (
-                  <ResultsSummary state={state} settings={settings} allEvents={allEvents} />
-                )}
-              </div>
-            )}
-
-            {/* Divider */}
-            <div className="border-t border-om-border mx-4" />
-
-            {/* Stats */}
-            <Scoreboard
-              score={state.score}
-              attempts={state.attempts}
-              poolSize={state.pool.length}
-              timelineSize={state.timeline.length}
-              streak={state.streak}
-              done={state.done}
-              gameOver={state.gameOver}
-              timedMode={settings.timedMode}
-              timerSecondsLeft={timerLeft}
-            />
+    <div className="h-screen flex overflow-hidden bg-om-bg text-om-text">
+      {/* Left panel: title, options, placement card, stats */}
+      <div className="w-1/3 min-w-[340px] shrink-0 flex flex-col border-r border-om-border bg-om-surface">
+        {/* Title + Options */}
+        <div className="px-5 pt-5 pb-4 space-y-4 shrink-0">
+          <div className="inline-block">
+            <h1 className="text-3xl font-serif font-bold text-om-text tracking-tight leading-none">
+              APUSH Timeline
+            </h1>
+            <div className="mt-1.5 h-[3px] bg-om-gold rounded-full w-full" />
           </div>
 
-          {/* Fixed bottom actions */}
-          <div className="shrink-0 border-t border-om-border p-4 space-y-2">
-            <button
-              onClick={handleNewGame}
-              className="w-full py-3 text-base font-semibold rounded bg-om-accent hover:bg-om-accent-hover text-white transition-colors"
-            >
-              New Game
-            </button>
-            <button
-              onClick={() => setJournalOpen(true)}
-              className="w-full py-2 text-sm text-om-muted hover:text-om-text border border-om-border rounded transition-colors"
-            >
-              Study Journal
-            </button>
+          <div className="flex flex-wrap gap-2">
+            <PillToggle
+              label="Hide Dates"
+              active={settings.hideDates}
+              onClick={() => setSettings((s) => ({ ...s, hideDates: !s.hideDates }))}
+            />
+            <PillToggle
+              label="Understanding"
+              active={settings.showUnderstanding}
+              onClick={() => setSettings((s) => ({ ...s, showUnderstanding: !s.showUnderstanding }))}
+            />
+            <PillToggle
+              label="Hard Mode"
+              active={settings.hardMode}
+              onClick={() => setSettings((s) => ({ ...s, hardMode: !s.hardMode }))}
+              danger
+            />
+            <PillToggle
+              label="Timed"
+              active={settings.timedMode}
+              onClick={handleToggleTimedMode}
+              disabled={timedLocked}
+            />
+            <FilterPopover
+              allEvents={allEvents}
+              selectedUnits={settings.filterUnits}
+              selectedRegions={settings.filterRegions}
+              onChange={handleFilterChange}
+            />
+            <PillToggle
+              label={settings.darkMode ? 'Light' : 'Dark'}
+              active={false}
+              onClick={() => setSettings((s) => ({ ...s, darkMode: !s.darkMode }))}
+            />
           </div>
         </div>
 
-        {/* Main: timeline */}
-        <Timeline
-          timeline={state.timeline}
-          tentativeSlot={state.tentativeSlot}
-          hasCurrentEvent={!!state.current && !gameOver}
-          hideDates={settings.hideDates}
-          hardMode={settings.hardMode}
-          notes={notes}
-          lastPlacementCorrect={lastCorrect}
-          onSlotClick={handleSlotClick}
-          onSlotConfirm={handleSlotConfirm}
-          onDrop={handleDrop}
-        />
+        <div className="border-t border-om-border mx-5 shrink-0" />
+
+        {/* Scrollable content area */}
+        <div className="flex-1 overflow-y-auto">
+          {state.current && !gameOver ? (
+            <PlacementCard
+              event={state.current}
+              hideDates={settings.hideDates}
+              hardMode={settings.hardMode}
+              onDragStart={dragStartHandler}
+            />
+          ) : (
+            <div className="p-4 space-y-4">
+              {(state.done || state.gameOver) && (
+                <ResultsSummary state={state} settings={settings} allEvents={allEvents} />
+              )}
+            </div>
+          )}
+
+          <div className="border-t border-om-border mx-4" />
+
+          <Scoreboard
+            score={state.score}
+            attempts={state.attempts}
+            poolSize={state.pool.length}
+            timelineSize={state.timeline.length}
+            streak={state.streak}
+            done={state.done}
+            gameOver={state.gameOver}
+            timedMode={settings.timedMode}
+            timerSecondsLeft={timerLeft}
+          />
+        </div>
+
+        {/* Fixed bottom actions */}
+        <div className="shrink-0 border-t border-om-border p-4 space-y-2">
+          <button
+            onClick={handleNewGame}
+            className="w-full py-3 text-base font-semibold rounded-lg bg-om-accent hover:bg-om-accent-hover text-white transition-colors"
+          >
+            New Game
+          </button>
+          <button
+            onClick={() => setJournalOpen(true)}
+            className="w-full py-2 text-sm text-om-muted hover:text-om-text border border-om-border rounded-lg transition-colors"
+          >
+            Study Journal
+          </button>
+        </div>
       </div>
 
-      {/* Journal drawer overlay — slides in from left */}
+      {/* Right: Timeline only */}
+      <Timeline
+        timeline={state.timeline}
+        tentativeSlot={state.tentativeSlot}
+        hasCurrentEvent={!!state.current && !gameOver}
+        hideDates={settings.hideDates}
+        hardMode={settings.hardMode}
+        notes={notes}
+        lastPlacementCorrect={lastCorrect}
+        onSlotClick={handleSlotClick}
+        onSlotConfirm={handleSlotConfirm}
+        onDrop={handleDrop}
+      />
+
+      {/* Journal drawer overlay */}
       {journalOpen && (
         <div className="fixed inset-0 z-50 flex">
           <div className="drawer-panel w-[80vw] bg-om-surface border-r border-om-border flex flex-col shadow-2xl">
@@ -315,7 +358,6 @@ export default function App() {
         </div>
       )}
 
-      {/* Modals */}
       {showHardModeReview && (
         <GameOverReview
           state={state}
@@ -336,5 +378,36 @@ export default function App() {
         />
       )}
     </div>
+  )
+}
+
+function PillToggle({
+  label,
+  active,
+  onClick,
+  danger,
+  disabled,
+}: {
+  label: string
+  active: boolean
+  onClick: () => void
+  danger?: boolean
+  disabled?: boolean
+}) {
+  return (
+    <button
+      onClick={disabled ? undefined : onClick}
+      className={`px-3.5 py-1.5 rounded-full text-sm font-medium transition-all ${
+        disabled
+          ? 'opacity-40 cursor-not-allowed bg-om-bg text-om-muted border border-om-border'
+          : active
+            ? danger
+              ? 'bg-om-error text-white shadow-sm'
+              : 'bg-om-accent text-white shadow-sm'
+            : 'bg-om-bg text-om-muted hover:text-om-text hover:bg-om-slot-hover border border-om-border cursor-pointer'
+      }`}
+    >
+      {label}
+    </button>
   )
 }

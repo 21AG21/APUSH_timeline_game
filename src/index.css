@@ -22,6 +22,8 @@
   --om-note:         #F5EDD7;
   --om-note-border:  #DDD0AC;
   --om-note-title:   #7A5A0A;
+  --om-surface-glass: rgba(240, 236, 227, 0.92);
+  --om-era-glass:     rgba(235, 226, 202, 0.88);
 }
 
 .dark {
@@ -44,6 +46,8 @@
   --om-note:         #221E10;
   --om-note-border:  #3A3215;
   --om-note-title:   #D4B85A;
+  --om-surface-glass: rgba(26, 33, 28, 0.92);
+  --om-era-glass:     rgba(29, 33, 24, 0.88);
 }
 
 *, *::before, *::after {
@@ -57,7 +61,7 @@ html, body, #root {
 }
 
 html {
-  font-size: 20px;
+  font-size: 22px;
 }
 
 body {
@@ -109,11 +113,11 @@ body {
   position: absolute;
   inset: 0;
   background-image:
-    radial-gradient(ellipse 120px 200px at 15% 20%, #2D5A3D18 0%, transparent 100%),
-    radial-gradient(ellipse 80px 300px at 85% 40%, #2D5A3D12 0%, transparent 100%),
-    radial-gradient(ellipse 100px 250px at 45% 70%, #2D5A3D10 0%, transparent 100%),
-    radial-gradient(ellipse 60px 180px at 70% 15%, #B8963E08 0%, transparent 100%),
-    radial-gradient(ellipse 90px 220px at 25% 85%, #2D5A3D0E 0%, transparent 100%);
+    radial-gradient(ellipse 120px 200px at 15% 20%, #2D5A3D30 0%, transparent 100%),
+    radial-gradient(ellipse 80px 300px at 85% 40%, #2D5A3D25 0%, transparent 100%),
+    radial-gradient(ellipse 100px 250px at 45% 70%, #2D5A3D22 0%, transparent 100%),
+    radial-gradient(ellipse 60px 180px at 70% 15%, #B8963E18 0%, transparent 100%),
+    radial-gradient(ellipse 90px 220px at 25% 85%, #2D5A3D22 0%, transparent 100%);
   filter: blur(30px);
   pointer-events: none;
   z-index: 0;
@@ -121,11 +125,11 @@ body {
 
 .dark .timeline-bg::before {
   background-image:
-    radial-gradient(ellipse 120px 200px at 15% 20%, #5B9E7418 0%, transparent 100%),
-    radial-gradient(ellipse 80px 300px at 85% 40%, #5B9E7412 0%, transparent 100%),
-    radial-gradient(ellipse 100px 250px at 45% 70%, #5B9E7410 0%, transparent 100%),
-    radial-gradient(ellipse 60px 180px at 70% 15%, #C9A84C08 0%, transparent 100%),
-    radial-gradient(ellipse 90px 220px at 25% 85%, #5B9E740E 0%, transparent 100%);
+    radial-gradient(ellipse 120px 200px at 15% 20%, #5B9E7430 0%, transparent 100%),
+    radial-gradient(ellipse 80px 300px at 85% 40%, #5B9E7425 0%, transparent 100%),
+    radial-gradient(ellipse 100px 250px at 45% 70%, #5B9E7422 0%, transparent 100%),
+    radial-gradient(ellipse 60px 180px at 70% 15%, #C9A84C18 0%, transparent 100%),
+    radial-gradient(ellipse 90px 220px at 25% 85%, #5B9E7422 0%, transparent 100%);
 }
 
 .timeline-bg > * {
