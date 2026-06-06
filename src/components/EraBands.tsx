@@ -28,7 +28,7 @@ export function EraBandHeader({ year, prevYear }: EraHeaderProps) {
   if (prev && prev.name === current.name) return null
 
   return (
-    <div className="flex items-center gap-2 px-3 py-1 rounded-md border border-om-border bg-om-era-glass text-sm font-medium my-1">
+    <div className="flex items-center gap-2 px-3 py-1 rounded-md border border-om-border bg-om-era-band text-sm font-medium my-1">
       <span className="text-om-gold font-semibold">{current.name}</span>
       <span className="text-om-muted">
         {current.start}–{current.end === 2099 ? 'present' : current.end}

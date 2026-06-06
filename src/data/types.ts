@@ -42,8 +42,6 @@ export interface Settings {
   hideDates: boolean
   showUnderstanding: boolean
   hardMode: boolean
-  timedMode: boolean
-  timerSeconds: number
   filterUnits: number[]
   filterRegions: string[]
 }

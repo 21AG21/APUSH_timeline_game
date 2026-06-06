@@ -6,8 +6,6 @@ interface Props {
   streak: number
   done: boolean
   gameOver: boolean
-  timedMode: boolean
-  timerSecondsLeft: number | null
 }
 
 export function Scoreboard({
@@ -18,20 +16,16 @@ export function Scoreboard({
   streak,
   done,
   gameOver,
-  timedMode,
-  timerSecondsLeft,
 }: Props) {
   const total = score + poolSize + (done || gameOver ? 0 : 1)
 
   return (
     <div className="px-5 py-5 space-y-5">
-      {/* Top row: Score + Attempts */}
       <div className="grid grid-cols-2 gap-3">
         <StatCard label="Score" value={`${score}/${total}`} />
         <StatCard label="Attempts" value={String(attempts)} />
       </div>
 
-      {/* Streak — centered, polished */}
       <div className="flex flex-col items-center py-3 bg-om-bg rounded-xl border border-om-border">
         <span
           className={`text-6xl font-black leading-none tabular-nums ${
@@ -45,22 +39,11 @@ export function Scoreboard({
         </span>
       </div>
 
-      {/* Bottom row: Timeline + Remaining */}
       <div className="grid grid-cols-2 gap-3">
         <StatCard label="Timeline" value={String(timelineSize)} />
         <StatCard label="Remaining" value={String(poolSize)} />
       </div>
 
-      {/* Timer (timed mode) */}
-      {timedMode && timerSecondsLeft !== null && (
-        <StatCard
-          label="Time"
-          value={`${timerSecondsLeft}s`}
-          danger={timerSecondsLeft <= 10}
-        />
-      )}
-
-      {/* Completion message */}
       {done && !gameOver && (
         <div className="text-center py-2 bg-om-success-bg rounded-lg border border-om-border">
           <p className="text-base font-bold text-om-success">
