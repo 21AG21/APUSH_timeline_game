@@ -34,7 +34,6 @@ export default function App() {
 
   // Feedback state
   const [lastCorrect, setLastCorrect] = useState<boolean | null>(null)
-  const [wrongFeedback, setWrongFeedback] = useState<{ prevYear: number | null; nextYear: number | null } | null>(null)
   const [understandingEvent, setUnderstandingEvent] = useState<Event | null>(null)
   const feedbackTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
   const prevAttempts = useRef(state.attempts)
@@ -59,7 +58,6 @@ export default function App() {
       if (feedbackTimer.current) clearTimeout(feedbackTimer.current)
 
       if (correct) {
-        setWrongFeedback(null)
         if (settings.showUnderstanding && !settings.hardMode) {
           if (lastPlacedEventRef.current) {
             setUnderstandingEvent(lastPlacedEventRef.current)
@@ -67,15 +65,7 @@ export default function App() {
         }
         feedbackTimer.current = setTimeout(() => setLastCorrect(null), 2000)
       } else {
-        if (!settings.hardMode && lastAttemptedSlotRef.current !== null) {
-          const slot = lastAttemptedSlotRef.current
-          const prevYear = slot > 0 ? state.timeline[slot - 1]?.year ?? null : null
-          const nextYear = slot < state.timeline.length ? state.timeline[slot]?.year ?? null : null
-          setWrongFeedback({ prevYear, nextYear })
-        } else {
-          setWrongFeedback(null)
-        }
-        feedbackTimer.current = setTimeout(() => { setLastCorrect(null); setWrongFeedback(null) }, 4000)
+        feedbackTimer.current = setTimeout(() => setLastCorrect(null), 4000)
       }
     }
     prevScore.current = state.score
@@ -94,7 +84,6 @@ export default function App() {
     prevScore.current = 0
     newGame(filtered)
     setLastCorrect(null)
-    setWrongFeedback(null)
     setUnderstandingEvent(null)
   }
 

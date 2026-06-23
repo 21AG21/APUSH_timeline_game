@@ -8,7 +8,6 @@ interface Props {
   onToggleHideDates: () => void
   onToggleUnderstanding: () => void
   onToggleHardMode: () => void
-  onToggleTimedMode: () => void
   onFilterChange: (units: number[], regions: string[]) => void
 }
 
@@ -19,7 +18,6 @@ export function Header({
   onToggleHideDates,
   onToggleUnderstanding,
   onToggleHardMode,
-  onToggleTimedMode,
   onFilterChange,
 }: Props) {
   return (
@@ -39,7 +37,6 @@ export function Header({
           onChange={onToggleHardMode}
           danger
         />
-        <Toggle label="Timed" checked={settings.timedMode} onChange={onToggleTimedMode} />
         <FilterPopover
           allEvents={allEvents}
           selectedUnits={settings.filterUnits}
