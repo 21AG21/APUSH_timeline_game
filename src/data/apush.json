@@ -30,7 +30,7 @@
     "id": "treaty-of-tordesillas",
     "year": 1494,
     "title": "Treaty of Tordesillas",
-    "description": "Pope Alexander VI divided the non-Christian world between Spain and Portugal along a line in the Atlantic.",
+    "description": "Spain and Portugal agreed by treaty to divide newly discovered lands along a line 370 leagues west of the Cape Verde Islands, moving westward the line Pope Alexander VI had drawn in 1493.",
     "cause": "Catholic desire to prevent war between two major Iberian naval empires competing for new territories.",
     "effect": "Spain dominated the Americas while Portugal secured Brazil and African trade routes.",
     "causes": [
@@ -89,7 +89,7 @@
     "significance": [
       "The first moral debate in European history regarding the treatment and humanity of colonized peoples"
     ],
-    "region": "West",
+    "region": "Atlantic",
     "units": [
       1
     ],
@@ -101,13 +101,14 @@
     "title": "Roanoke Colony Founded",
     "description": "Sir Walter Raleigh attempted to establish the first permanent English settlement in the Americas.",
     "cause": "English ambition to counter Spanish wealth and establish a naval base in the New World.",
-    "effect": "All colonists mysteriously disappeared, creating 'The Lost Colony' and forcing England to rethink settlement strategies.",
+    "effect": "The 1585 colonists abandoned Roanoke and sailed home with Francis Drake in 1586; a second colony planted in 1587 vanished, becoming 'The Lost Colony'.",
     "causes": [
       "English ambition to counter Spanish wealth and establish a naval base in the New World"
     ],
     "effects": [
-      "Complete disappearance of the colonists ('The Lost Colony')",
-      "Financial loss for investors"
+      "First colony abandoned in 1586, the later 1587 colony lost",
+      "Financial loss for investors",
+      "Pushed England toward joint-stock funding for later colonies"
     ],
     "significance": [
       "Illustrated the vulnerability of early, underfunded colonization attempts",
@@ -121,7 +122,7 @@
   },
   {
     "id": "acoma-pueblo-massacre",
-    "year": 1598,
+    "year": 1599,
     "title": "Acoma Pueblo Massacre",
     "description": "Juan de Oñate brutally crushed Pueblo resistance at Acoma in modern-day New Mexico.",
     "cause": "The Pueblo at Acoma refused to hand over seasonal food supplies to Spanish conquistadors.",
@@ -550,16 +551,19 @@
     "title": "Albany Congress",
     "description": "Seven colonies met to coordinate defense against France and secure Iroquois loyalty ahead of the French and Indian War.",
     "cause": "Looming threat of French military expansion in the Ohio River Valley.",
-    "effect": "Benjamin Franklin's 'Join, or Die' cartoon was published, but colonies rejected his Albany Plan of Union.",
+    "effect": "Colonies rejected Franklin's Albany Plan of Union, unwilling to surrender control of taxation.",
     "causes": [
-      "Looming threat of French military expansion in the Ohio River Valley"
+      "Looming threat of French military expansion in the Ohio River Valley",
+      "British demand for a united colonial response",
+      "Franklin's May 1754 'Join, or Die' cartoon had already primed colonists for union"
     ],
     "effects": [
-      "Benjamin Franklin's 'Join, or Die' cartoon",
-      "Rejection of the Albany Plan of Union by colonies fearing loss of taxation power"
+      "Rejection of the Albany Plan of Union by colonies fearing loss of taxation power",
+      "Failure to secure a lasting alliance with the Iroquois Confederacy"
     ],
     "significance": [
-      "The very first structural attempt at intercolonial unity and centralized organization"
+      "The most ambitious early attempt at intercolonial unity",
+      "First plan to unite nearly all the mainland colonies under a central government"
     ],
     "region": "North America",
     "units": [
@@ -631,7 +635,7 @@
     ],
     "effects": [
       "Sparked colonial boycotts of British goods",
-      "Led to the first intercolonial political body, the Stamp Act Congress"
+      "Led to the Stamp Act Congress, the first intercolonial body the colonies convened on their own initiative"
     ],
     "significance": [
       "First direct internal tax on colonists, violating their tradition of self-taxation",
@@ -722,7 +726,7 @@
     "year": 1775,
     "title": "Battles of Lexington and Concord",
     "description": "The first military engagements of the Revolutionary War between British troops and colonial militias.",
-    "cause": "British troops were ordered to seize colonial weapons stockpiles and arrest rebel leaders in Concord.",
+    "cause": "British troops were ordered to seize the colonial military stores at Concord; colonists also believed the column meant to arrest Samuel Adams and John Hancock.",
     "effect": "The 'Shot heard round the world' triggered the mobilization of colonial militias across the region.",
     "causes": [
       "British troops ordered to seize colonial weapons stockpiles and arrest rebel leaders in Concord"
@@ -1526,7 +1530,7 @@
     "year": 1846,
     "title": "Wilmot Proviso",
     "description": "A proposed legislative amendment sought to ban slavery in any territory acquired from Mexico.",
-    "cause": "Northern Democratic concerns over Southern political dominance after the Mexican-American War.",
+    "cause": "Northern Democratic resentment of Southern political dominance, aimed at territory the U.S. expected to win from the then-ongoing Mexican-American War.",
     "effect": "Passed the House repeatedly but failed in the Senate, with voting splitting strictly along sectional rather than party lines.",
     "causes": [
       "Northern Democratic concerns over southern political dominance after the Mexican-American War"
@@ -1583,8 +1587,9 @@
       "Reformers like Stanton applied the ideals of democracy to women's legal and political exclusion"
     ],
     "effects": [
-      "Created the first formal organization for women's rights in America",
-      "Launched a 72-year campaign for women's suffrage culminating in the 19th Amendment"
+      "Adopted the Declaration of Sentiments, including the contested demand for the vote",
+      "Set off a wave of state and national women's rights conventions in the 1850s",
+      "Launched a 72-year campaign culminating in the 19th Amendment"
     ],
     "significance": [
       "Marked the beginning of the organized women's rights movement in the United States",
@@ -1680,7 +1685,7 @@
     "effect": "Outraged Northerners, emboldened Southerners, and pushed the nation closer to civil war.",
     "causes": [
       "Scott argued that residing in free territories made him legally free",
-      "Abolitionists backed the case to challenge the constitutionality of slavery"
+      "Scott's freedom suit, funded first by the Blow family and later taken up by antislavery attorneys"
     ],
     "effects": [
       "Declared the Missouri Compromise unconstitutional, inflaming Northern opinion",
@@ -2198,10 +2203,10 @@
       "Gave future presidents a tool to challenge corporate power"
     ],
     "significance": [
-      "First federal recognition that unregulated capitalism could harm the public interest",
+      "Extended federal regulation beyond railroads to the economy as a whole, asserting national authority over corporate consolidation",
       "Laid the groundwork for the Progressive Era's trust-busting reforms"
     ],
-    "region": "Northeast",
+    "region": "North America",
     "units": [
       6
     ],
@@ -2302,7 +2307,7 @@
       "The most successful agrarian third-party challenge in U.S. history",
       "Its ideas were later adopted during the Progressive Era"
     ],
-    "region": "South",
+    "region": "West",
     "units": [
       6
     ],
@@ -2421,7 +2426,8 @@
       "American business interests in Cuba and strategic interest in Pacific trade routes"
     ],
     "effects": [
-      "U.S. acquired its first overseas empire: Cuba, Puerto Rico, Guam, and the Philippines",
+      "U.S. acquired its first overseas empire: Puerto Rico, Guam, and the Philippines",
+      "Teller Amendment kept Cuba out of U.S. hands, leaving it a protectorate under the Platt Amendment",
       "Sparked the Philippine-American War as Filipinos resisted American colonialism"
     ],
     "significance": [
@@ -2438,7 +2444,7 @@
     "id": "open-door-policy",
     "year": 1899,
     "title": "Open Door Policy",
-    "description": "The U.S. issued diplomatic notes demanding equal trading access to China for all Western powers.",
+    "description": "The U.S. issued diplomatic notes demanding equal trading access to China for all the major powers, including Japan alongside Britain, Germany, Russia, France, and Italy.",
     "cause": "American fear of being locked out of Chinese markets by European spheres of influence.",
     "effect": "Major powers accepted the policy on paper, protecting U.S. commercial access to East Asia.",
     "causes": [
@@ -2497,7 +2503,8 @@
     ],
     "effects": [
       "Creation of consumer protection agencies",
-      "Mandatory ingredient labeling",
+      "Truthful labeling, including disclosure of specified dangerous or habit-forming ingredients",
+      "Ban on adulterated or misbranded food and drugs",
       "Inspection of meatpacking plants"
     ],
     "significance": [
@@ -2598,7 +2605,8 @@
     "effect": "Imprisoned anti-war dissidents like Eugene Debs and suppressed radical labor unions.",
     "causes": [
       "Wartime need for national unity",
-      "Anti-draft protests led by socialists like Charles Schenck"
+      "Fear of socialist, IWW, and anti-draft agitation",
+      "Hysteria over suspected German sympathizers"
     ],
     "effects": [
       "Imprisonment of anti-war dissidents (e.g., Eugene Debs)",
@@ -2631,7 +2639,7 @@
       "Creation of a wartime command economy"
     ],
     "significance": [
-      "Marked the definitive end of traditional American non-interventionism in European military conflicts"
+      "Marked the first large-scale U.S. military intervention in a European war, though non-interventionism revived until 1941"
     ],
     "region": "Global",
     "units": [
@@ -2734,7 +2742,7 @@
       "Near-total exclusion of Asian immigrants"
     ],
     "significance": [
-      "Ended the era of unrestricted open immigration into the United States",
+      "Made permanent and far harsher the quota system created by the Emergency Quota Act of 1921, shifting the base to the 1890 census to curtail Southern and Eastern European immigration",
       "Created a closed legal system"
     ],
     "region": "North America",
@@ -3289,11 +3297,11 @@
     "id": "tet-offensive",
     "year": 1968,
     "title": "Tet Offensive",
-    "description": "A massive coordinated surprise assault by Vietcong forces across South Vietnam shattered public support for the war.",
+    "description": "A massive coordinated surprise assault by North Vietnamese and Vietcong forces across South Vietnam shattered public support for the war.",
     "cause": "Vietcong desire to shatter South Vietnamese stability and break U.S. political resolve.",
     "effect": "Military defeat for the Vietcong but a massive psychological victory that widened the domestic 'credibility gap'.",
     "causes": [
-      "Vietcong desire to shatter South Vietnamese stability",
+      "Hanoi's aim to shatter South Vietnamese stability and spark a general uprising",
       "Intent to break U.S. political resolve"
     ],
     "effects": [
@@ -3539,7 +3547,7 @@
     ],
     "significance": [
       "Symbolized the collapse of Soviet communism",
-      "Marked the ultimate end of the 45-year-long Cold War"
+      "Marked the beginning of the end of the Cold War, which formally concluded with the dissolution of the Soviet Union in 1991"
     ],
     "region": "Global",
     "units": [
