@@ -168,22 +168,52 @@
     "course": "apush"
   },
   {
-    "id": "house-of-burgesses-africans",
+    "id": "first-africans-point-comfort",
     "year": 1619,
-    "title": "House of Burgesses & First Enslaved Africans Arrive",
-    "description": "Virginia established a representative assembly while a Dutch ship traded 20 captive Africans for supplies.",
-    "cause": "The need for local governance to attract settlers and a severe labor shortage in booming tobacco fields.",
-    "effect": "Simultaneously established precedents for self-rule and for race-based chattel slavery.",
+    "title": "First Enslaved Africans Arrive in Virginia",
+    "description": "The privateer White Lion landed roughly twenty African captives at Point Comfort in late August, trading them to Virginia officials in exchange for badly needed provisions.",
+    "cause": "English privateers sailing under a Dutch letter of marque seized the captives from a Portuguese slaver carrying Ndongo people from Angola toward Spanish America.",
+    "effect": "The governor and cape merchant exchanged food for the captives, beginning African bondage in England's mainland colonies.",
     "causes": [
-      "Need for local governance to attract settlers",
-      "Severe labor shortage in booming tobacco fields"
+      "Portuguese shipment of Ndongo captives from Angola to Spanish America",
+      "Privateer raiding licensed by a Dutch letter of marque",
+      "Chronic labor shortage in Virginia's expanding tobacco fields"
     ],
     "effects": [
-      "Precedent for self-rule",
-      "Initial steps toward legal, lifelong, race-based chattel slavery"
+      "Africans set to work alongside English indentured servants",
+      "Unsettled early status let a few gain freedom, land, and court standing",
+      "Virginia statutes later made bondage lifelong, hereditary, and racial"
     ],
     "significance": [
-      "Simultaneously planted the roots of American representative democracy and institutional systemic racism"
+      "Documented beginning of African labor in English North America",
+      "Origin point of a system Virginia law codified as chattel slavery by 1705"
+    ],
+    "region": "Chesapeake",
+    "units": [
+      2
+    ],
+    "course": "apush"
+  },
+  {
+    "id": "house-of-burgesses-founded",
+    "year": 1619,
+    "title": "House of Burgesses Convenes",
+    "description": "Virginia's first elected assembly, later called the House of Burgesses, met in the Jamestown church with two burgesses chosen from each of the colony's settlements.",
+    "cause": "The Virginia Company's 1618 instructions ended martial rule and ordered a civil government to make the struggling colony attractive to settlers and investors.",
+    "effect": "Colonists gained a lawmaking body of their own choosing, planting an expectation of self-rule that later hardened into resistance to imperial authority.",
+    "causes": [
+      "Virginia Company instructions of 1618 replacing martial law",
+      "Need to attract settlers and investors to a faltering colony",
+      "English tradition of taxation by consent of property holders"
+    ],
+    "effects": [
+      "Legislation on tobacco prices, servant contracts, and colonial defense",
+      "Governor and appointed council kept veto power over assembly acts",
+      "Elected assemblies copied by later English colonies"
+    ],
+    "significance": [
+      "Oldest elected lawmaking body in English America",
+      "Set the precedent for colonial self-government under royal oversight"
     ],
     "region": "Chesapeake",
     "units": [
@@ -3116,24 +3146,52 @@
     "course": "apush"
   },
   {
-    "id": "little-rock-nine-sputnik",
+    "id": "sputnik-launch",
     "year": 1957,
-    "title": "Little Rock Nine / Sputnik Launched",
-    "description": "Federal troops protected Black students integrating a high school while the USSR launched the first artificial satellite.",
-    "cause": "The Arkansas Governor used the National Guard to block school integration while the Soviets advanced in space technology.",
-    "effect": "Eisenhower federalized the National Guard to enforce integration while creating NASA with funding for science education.",
+    "title": "Launch of Sputnik",
+    "description": "The Soviet Union placed the first artificial satellite in orbit, and its steady radio beeps convinced Americans that Moscow had seized the technological lead.",
+    "cause": "Soviet engineers adapted an intercontinental ballistic missile to lift a small satellite into orbit before any American attempt succeeded.",
+    "effect": "Alarmed Americans poured federal money into rockets, space research, and the training of scientists and engineers.",
     "causes": [
-      "Arkansas Governor uses the National Guard to block school integration",
-      "Soviet strides in space technology"
+      "Cold War contest for prestige and military advantage",
+      "Soviet R-7 missile powerful enough to reach orbit",
+      "Underfunded and slow-moving American satellite program"
     ],
     "effects": [
-      "Eisenhower federalizes the National Guard to enforce integration",
-      "Creation of NASA",
-      "Funding for science education"
+      "Creation of NASA to direct civilian space efforts",
+      "National Defense Education Act funds science, math, and language study",
+      "Fear of a missile gap drives defense spending upward"
     ],
     "significance": [
-      "Showcased federal supremacy over states' rights",
-      "Intensified the global Cold War space and education race"
+      "Opened the space race as a central front of the Cold War",
+      "Recast American schooling as a matter of national security"
+    ],
+    "region": "Global",
+    "units": [
+      8
+    ],
+    "course": "apush"
+  },
+  {
+    "id": "little-rock-nine",
+    "year": 1957,
+    "title": "Little Rock Nine",
+    "description": "Nine Black teenagers enrolled at all-white Central High School in Arkansas, and army paratroopers escorted them to class past a hostile white mob.",
+    "cause": "Governor Orval Faubus ordered the Arkansas National Guard to bar the students from a court-ordered desegregation plan.",
+    "effect": "Eisenhower federalized the Arkansas Guard and sent the 101st Airborne to force the state to obey the federal courts.",
+    "causes": [
+      "Court orders requiring school desegregation after Brown v. Board",
+      "Governor Faubus uses the National Guard to block the students",
+      "White mobs gather outside Central High School"
+    ],
+    "effects": [
+      "Eisenhower federalizes the Arkansas National Guard",
+      "101st Airborne paratroopers escort the students into the school",
+      "Faubus shuts Little Rock's high schools the following year"
+    ],
+    "significance": [
+      "Committed federal power to enforcing desegregation against open state defiance",
+      "Broadcast images of mob hatred pushed civil rights onto the national stage"
     ],
     "region": "South",
     "units": [
@@ -3241,6 +3299,33 @@
     "course": "apush"
   },
   {
+    "id": "hart-celler-immigration-act",
+    "year": 1965,
+    "title": "Immigration and Nationality Act (Hart-Celler)",
+    "description": "Signed at the foot of the Statue of Liberty in October 1965, Hart-Celler scrapped the national origins quotas and replaced them with hemispheric caps and family preferences.",
+    "cause": "Civil rights era arguments against sorting people by ancestry made the 1924 quota system, which favored northern and western Europe, politically indefensible.",
+    "effect": "Visas were redirected toward relatives of residents and needed workers, opening large-scale legal migration from Asia and Latin America.",
+    "causes": [
+      "Racial quota system inherited from the 1924 National Origins Act",
+      "Civil rights era attack on racial categories written into federal law",
+      "Cold War embarrassment at insulting allied and nonaligned nations"
+    ],
+    "effects": [
+      "Annual ceilings of 170,000 for the Eastern Hemisphere and 120,000 for the Western",
+      "A 20,000 visa per country limit for Eastern Hemisphere nations",
+      "A preference system built mainly on family reunification, fully effective July 1, 1968"
+    ],
+    "significance": [
+      "Ended four decades of explicitly racial immigration quotas",
+      "Set in motion the demographic diversification of late twentieth century America"
+    ],
+    "region": "North America",
+    "units": [
+      8
+    ],
+    "course": "apush"
+  },
+  {
     "id": "great-society",
     "year": 1965,
     "title": "The Great Society",
@@ -3268,26 +3353,27 @@
     "course": "apush"
   },
   {
-    "id": "voting-rights-act-1965",
+    "id": "voting-rights-act",
     "year": 1965,
-    "title": "Voting Rights Act & Immigration Act of 1965",
-    "description": "Laws banned literacy tests and placed voting under federal oversight while abolishing the 1924 national origins quotas.",
-    "cause": "Selma-to-Montgomery marches, civil rights pressures, and desire to remove discriminatory immigration structures.",
-    "effect": "Dramatic increase in Black voter registration and a massive demographic shift as Asian and Latin American immigration surged.",
+    "title": "Voting Rights Act of 1965",
+    "description": "Johnson signed the Voting Rights Act on August 6, 1965, suspending literacy tests and sending federal examiners into Southern counties that had long blocked Black registration.",
+    "cause": "Televised state trooper violence against marchers at Selma's Edmund Pettus Bridge in March 1965 broke congressional resistance to a strong federal voting law.",
+    "effect": "Federal examiners registered Black Southerners by the hundreds of thousands, and covered states had to clear any new election rule with Washington first.",
     "causes": [
-      "Selma-to-Montgomery marches",
-      "Civil rights pressures",
-      "Desire to remove discriminatory immigration structures"
+      "The Bloody Sunday attack on Selma marchers in March 1965",
+      "Decades of literacy tests and registrar obstruction across the South",
+      "Weak enforcement provisions in the earlier civil rights acts"
     ],
     "effects": [
-      "Dramatic increase in Black voter registration",
-      "Massive demographic shift as Asian and Latin American immigration surges"
+      "Literacy tests suspended throughout the covered jurisdictions",
+      "Federal examiners registered voters where local officials refused",
+      "Mississippi Black registration rose from under 7 percent to nearly 60 percent by 1967"
     ],
     "significance": [
-      "Permanently transformed the electorate",
-      "Democratized both the polling booth and the nation's demographic makeup"
+      "Finally gave the Fifteenth Amendment real enforcement machinery",
+      "Remade Southern politics as Black voters entered the electorate"
     ],
-    "region": "North America",
+    "region": "South",
     "units": [
       8
     ],
