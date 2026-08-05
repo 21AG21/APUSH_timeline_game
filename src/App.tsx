@@ -1,4 +1,6 @@
 import { useEffect, useRef, useState, useCallback } from 'react'
+import { Analytics } from '@vercel/analytics/react'
+import { SpeedInsights } from '@vercel/speed-insights/react'
 import type { Note, Settings } from './data/types'
 import apushEvents from './data/apush.json'
 import type { Event } from './data/types'
@@ -10,6 +12,7 @@ import { UnderstandingModal } from './components/UnderstandingModal'
 import { GameOverReview } from './components/GameOverReview'
 import { ResultsSummary } from './components/ResultsSummary'
 import { FilterPopover } from './components/FilterPopover'
+import { AboutModal } from './components/AboutModal'
 import { useGameState } from './hooks/useGameState'
 import { useLocalStorage } from './hooks/useLocalStorage'
 import { usePointerDrag } from './hooks/usePointerDrag'
@@ -23,6 +26,7 @@ const DEFAULT_SETTINGS: Settings = {
   hideDates: false,
   showUnderstanding: false,
   hardMode: false,
+  analyticsOptOut: false,
   filterUnits: [],
   filterRegions: [],
 }
@@ -34,6 +38,7 @@ export default function App() {
   const { state, newGame, setTentative, place } = useGameState(allEvents)
   const [journalOpen, setJournalOpen] = useState(false)
   const [settingsOpen, setSettingsOpen] = useState(false)
+  const [aboutOpen, setAboutOpen] = useState(false)
 
   const { split, compact } = useLayout()
 
@@ -169,6 +174,19 @@ export default function App() {
     </>
   )
 
+  /* College Board's guidelines require this attribution on the page itself,
+     not only inside a legal page. */
+  const trademarkFooter = (
+    <button
+      onClick={() => setAboutOpen(true)}
+      className="w-full px-3 py-2 text-left text-[0.65rem] leading-snug text-om-muted hover:text-om-text border-t border-om-border bg-om-surface"
+    >
+      AP<sup>&reg;</sup> and Advanced Placement<sup>&reg;</sup> are trademarks registered by the
+      College Board, which is not affiliated with, and does not endorse, this website.{' '}
+      <span className="underline whitespace-nowrap">About &amp; privacy</span>
+    </button>
+  )
+
   const timelineEl = (
     <Timeline
       timeline={state.timeline}
@@ -258,6 +276,8 @@ export default function App() {
               Journal
             </button>
           </div>
+
+          {trademarkFooter}
         </>
       ) : (
         /* ---------------- Split: desktop and landscape phones ---------------- */
@@ -329,6 +349,8 @@ export default function App() {
                 {compact ? 'Journal' : 'Study Journal'}
               </button>
             </div>
+
+            {trademarkFooter}
           </div>
 
           {timelineEl}
@@ -417,6 +439,24 @@ export default function App() {
           }}
           onSkip={() => setUnderstandingEvent(null)}
         />
+      )}
+
+      {aboutOpen && (
+        <AboutModal
+          analyticsOptOut={settings.analyticsOptOut}
+          onToggleAnalytics={() =>
+            setSettings((s) => ({ ...s, analyticsOptOut: !s.analyticsOptOut }))
+          }
+          onClose={() => setAboutOpen(false)}
+        />
+      )}
+
+      {/* Cookieless and first-party, but still user-refusable — see AboutModal. */}
+      {!settings.analyticsOptOut && (
+        <>
+          <Analytics />
+          <SpeedInsights />
+        </>
       )}
     </div>
   )

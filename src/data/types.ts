@@ -42,6 +42,8 @@ export interface Settings {
   hideDates: boolean
   showUnderstanding: boolean
   hardMode: boolean
+  /** Opt out of anonymous, cookieless usage analytics. */
+  analyticsOptOut: boolean
   filterUnits: number[]
   filterRegions: string[]
 }
