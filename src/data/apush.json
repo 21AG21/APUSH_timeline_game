@@ -51,10 +51,10 @@
   },
   {
     "id": "encomienda-system",
-    "year": 1512,
+    "year": 1503,
     "title": "Encomienda System Established",
-    "description": "Royal grants gave Spanish conquistadors the right to indigenous labor in exchange for Christianization.",
-    "cause": "The Spanish crown needed to extract mineral wealth and agricultural products without paying labor wages.",
+    "description": "A royal order authorized the governor of Hispaniola to grant Spanish colonists the labor of indigenous people in exchange for their Christianization.",
+    "cause": "The Spanish crown needed a labor system for its Caribbean colonies without formally enslaving subjects of the crown.",
     "effect": "Brutal enslavement and massive population decline of Native Americans followed.",
     "causes": [
       "Spanish crown's need to extract mineral wealth and agricultural products without paying labor wages"
@@ -66,7 +66,7 @@
       "Established a rigid, race-based social hierarchy",
       "Set a precedent for coercive labor systems in the Americas"
     ],
-    "region": "West",
+    "region": "Atlantic",
     "units": [
       1
     ],
@@ -114,7 +114,7 @@
       "Illustrated the vulnerability of early, underfunded colonization attempts",
       "Forced England to rethink settlement strategies"
     ],
-    "region": "Atlantic",
+    "region": "South",
     "units": [
       1
     ],
@@ -274,7 +274,7 @@
     "id": "roger-williams-rhode-island",
     "year": 1636,
     "title": "Roger Williams Banned / Rhode Island Founded",
-    "description": "Dissident minister Roger Williams was banished from Massachusetts for advocating separation of church and state.",
+    "description": "Dissident minister Roger Williams, sentenced to banishment from Massachusetts in October 1635 for advocating separation of church and state, fled south and founded Providence in 1636.",
     "cause": "Puritan intolerance of religious dissent and Williams's defense of Native American land rights.",
     "effect": "Williams founded Providence and established complete religious freedom and separation of church and state.",
     "causes": [
@@ -818,7 +818,7 @@
       "The definitive military turning point of the war",
       "Transformed a colonial rebellion into a global conflict"
     ],
-    "region": "North America",
+    "region": "Northeast",
     "units": [
       3
     ],
@@ -901,23 +901,51 @@
     "course": "apush"
   },
   {
-    "id": "constitutional-convention-northwest-ordinance",
+    "id": "constitutional-convention",
     "year": 1787,
-    "title": "Constitutional Convention & Northwest Ordinance",
-    "description": "Delegates wrote a new governing charter while Congress created a system for admitting new western states and banned slavery north of the Ohio River.",
-    "cause": "Total failure of the Articles of Confederation and disputes over western land claims and congressional representation.",
-    "effect": "Produced the Great Compromise, the Three-Fifths Compromise, and a clear pathway for westward statehood.",
+    "title": "Constitutional Convention",
+    "description": "Delegates meeting in Philadelphia discarded the Articles of Confederation and wrote a new federal constitution.",
+    "cause": "The Articles of Confederation could not tax or regulate commerce, and Shays’ Rebellion convinced many elites the national government was too weak.",
+    "effect": "The delegates produced a bicameral Congress through the Great Compromise and sent the document to the states for ratification.",
     "causes": [
-      "Total failure of the Articles of Confederation",
-      "Disputes over western land claims and congressional representation"
+      "Failure of the Articles of Confederation to tax or regulate commerce",
+      "Shays' Rebellion convinced elites the national government was too weak",
+      "Disputes over how states would be represented in Congress"
     ],
     "effects": [
-      "Great Compromise (bicameralism)",
-      "Three-Fifths Compromise",
-      "Establishment of a clear path for statehood"
+      "Great Compromise created a bicameral Congress",
+      "Three-Fifths Compromise counted enslaved people for representation and taxation",
+      "Signed on September 17, 1787 and sent to the states for ratification"
     ],
     "significance": [
-      "Replaced a weak league of friendship with a strong, flexible, federal constitutional government"
+      "Replaced a weak league of friendship with a federal constitutional government"
+    ],
+    "region": "North America",
+    "units": [
+      3
+    ],
+    "course": "apush"
+  },
+  {
+    "id": "northwest-ordinance",
+    "year": 1787,
+    "title": "Northwest Ordinance",
+    "description": "The Confederation Congress created an orderly process for admitting new states from the territory north of the Ohio River, and banned slavery there.",
+    "cause": "Congress needed revenue from western land sales and a way to settle competing state claims to the Ohio country.",
+    "effect": "New territories gained a defined path to statehood on equal footing with the original states.",
+    "causes": [
+      "Confederation Congress needed revenue from western land sales",
+      "Competing state claims to territory north of the Ohio River",
+      "Need for an orderly process to admit new states"
+    ],
+    "effects": [
+      "Set a three-stage path from territory to statehood",
+      "Banned slavery north of the Ohio River",
+      "Set aside land in each township to fund public schools"
+    ],
+    "significance": [
+      "Established that new states would enter as equals rather than as colonies",
+      "Drew an early free-soil line that foreshadowed sectional conflict"
     ],
     "region": "North America",
     "units": [
@@ -1313,7 +1341,7 @@
     ],
     "effects": [
       "Intense public anger",
-      "Splitting of the Democratic-Republicans into the Democrats and National Republicans (Whigs)"
+      "Splitting of the Democratic-Republicans into the Democrats and National Republicans (later absorbed into the Whigs)"
     ],
     "significance": [
       "Ended the 'Era of Good Feelings'",
@@ -1563,7 +1591,7 @@
     "cause": "Northern Democratic resentment of Southern political dominance, aimed at territory the U.S. expected to win from the then-ongoing Mexican-American War.",
     "effect": "Passed the House repeatedly but failed in the Senate, with voting splitting strictly along sectional rather than party lines.",
     "causes": [
-      "Northern Democratic concerns over southern political dominance after the Mexican-American War"
+      "Northern Democratic concerns over southern political dominance in the territory expected from the ongoing Mexican-American War"
     ],
     "effects": [
       "Passes House repeatedly (northern majority) but fails in the Senate (sectional balance)",
@@ -1834,33 +1862,6 @@
     "course": "apush"
   },
   {
-    "id": "gettysburg-battle-address",
-    "year": 1863,
-    "title": "Battle of Gettysburg & the Gettysburg Address",
-    "description": "Union forces repulsed Lee's invasion of Pennsylvania in a three-day July battle, and that November Lincoln spoke at the dedication of the soldiers' cemetery there.",
-    "cause": "Lee gambled on a second invasion of the North, hoping a victory on Union soil would break Northern morale and win European recognition.",
-    "effect": "Lee withdrew to Virginia with a crippled army while Lincoln's address recast the war as a test of government by the people.",
-    "causes": [
-      "Lee's decision to carry the war onto Northern soil",
-      "Confederate hope that a defeat above the Potomac would force negotiations",
-      "Chance collision of the two armies at a Pennsylvania road junction"
-    ],
-    "effects": [
-      "Roughly 50,000 combined casualties over three days",
-      "Lee's army retreated and never again mounted a major invasion of the North",
-      "Lincoln's November 19 dedication speech redefined the war's purpose"
-    ],
-    "significance": [
-      "Paired with Vicksburg as the military turning point of the war",
-      "Bound Union victory to the Declaration's promise of equality"
-    ],
-    "region": "Northeast",
-    "units": [
-      5
-    ],
-    "course": "apush"
-  },
-  {
     "id": "emancipation-proclamation",
     "year": 1863,
     "title": "Emancipation Proclamation",
@@ -1886,27 +1887,27 @@
     "course": "apush"
   },
   {
-    "id": "thirteenth-amendment",
-    "year": 1865,
-    "title": "13th Amendment Ratified",
-    "description": "The amendment abolished slavery and involuntary servitude throughout the United States, except as punishment for a crime.",
-    "cause": "Union victory and Republican determination to make emancipation permanent and constitutional rather than a wartime measure.",
-    "effect": "Permanently ended legal slavery nationwide, freeing roughly four million people.",
+    "id": "gettysburg-battle-address",
+    "year": 1863,
+    "title": "Battle of Gettysburg & the Gettysburg Address",
+    "description": "Union forces repulsed Lee's invasion of Pennsylvania in a three-day July battle, and that November Lincoln spoke at the dedication of the soldiers' cemetery there.",
+    "cause": "Lee gambled on a second invasion of the North, hoping a victory on Union soil would break Northern morale and win European recognition.",
+    "effect": "Lee withdrew to Virginia with a crippled army while Lincoln's address recast the war as a test of government by the people.",
     "causes": [
-      "Union victory in the Civil War",
-      "Emancipation Proclamation applied only to Confederate territory",
-      "Republican determination to make abolition permanent"
+      "Lee's decision to carry the war onto Northern soil",
+      "Confederate hope that a defeat above the Potomac would force negotiations",
+      "Chance collision of the two armies at a Pennsylvania road junction"
     ],
     "effects": [
-      "Slavery abolished nationwide",
-      "Roughly four million people freed",
-      "Southern states passed Black Codes to restrict the freed population"
+      "Roughly 50,000 combined casualties over three days",
+      "Lee's army retreated and never again mounted a major invasion of the North",
+      "Lincoln's November 19 dedication speech redefined the war's purpose"
     ],
     "significance": [
-      "Wrote abolition permanently into the Constitution",
-      "Set up the citizenship and voting fights of the 14th and 15th Amendments"
+      "Paired with Vicksburg as the military turning point of the war",
+      "Bound Union victory to the Declaration's promise of equality"
     ],
-    "region": "South",
+    "region": "Northeast",
     "units": [
       5
     ],
@@ -1958,6 +1959,33 @@
     "significance": [
       "Preserved the constitutional union of states",
       "Set the stage for the Reconstruction era"
+    ],
+    "region": "South",
+    "units": [
+      5
+    ],
+    "course": "apush"
+  },
+  {
+    "id": "thirteenth-amendment",
+    "year": 1865,
+    "title": "13th Amendment Ratified",
+    "description": "The amendment abolished slavery and involuntary servitude throughout the United States, except as punishment for a crime.",
+    "cause": "Union victory and Republican determination to make emancipation permanent and constitutional rather than a wartime measure.",
+    "effect": "Permanently ended legal slavery nationwide, freeing roughly four million people.",
+    "causes": [
+      "Union victory in the Civil War",
+      "Emancipation Proclamation applied only to Confederate territory",
+      "Republican determination to make abolition permanent"
+    ],
+    "effects": [
+      "Slavery abolished nationwide",
+      "Roughly four million people freed",
+      "Southern states passed Black Codes to restrict the freed population"
+    ],
+    "significance": [
+      "Wrote abolition permanently into the Constitution",
+      "Set up the citizenship and voting fights of the 14th and 15th Amendments"
     ],
     "region": "South",
     "units": [
@@ -2464,7 +2492,7 @@
       "Marked the United States' emergence as a global imperial power",
       "Created ongoing moral debates about American colonialism that echo today"
     ],
-    "region": "Caribbean",
+    "region": "Global",
     "units": [
       7
     ],
@@ -2630,7 +2658,7 @@
     "id": "espionage-sedition-acts",
     "year": 1917,
     "title": "Espionage and Sedition Acts & Schenck v. United States",
-    "description": "Laws criminalized anti-war speech; the Supreme Court ruled speech posing a 'clear and present danger' could be restricted.",
+    "description": "The 1917 Espionage Act and its 1918 Sedition Act amendments criminalized anti-war speech, and in 1919 the Supreme Court ruled in Schenck v. United States that speech posing a 'clear and present danger' could be restricted.",
     "cause": "Wartime need for national unity and anti-draft protests led by socialists like Charles Schenck.",
     "effect": "Imprisoned anti-war dissidents like Eugene Debs and suppressed radical labor unions.",
     "causes": [
@@ -2848,7 +2876,7 @@
       "Hoover's laissez-faire approach failed to stop the economic collapse"
     ],
     "effects": [
-      "Created Social Security, the FDIC, the SEC, and other lasting federal institutions",
+      "Created the FDIC, the CCC, the TVA, and the AAA during the Hundred Days",
       "Established the Democratic coalition of labor, minorities, and liberals that dominated politics for decades"
     ],
     "significance": [
@@ -2905,9 +2933,9 @@
     ],
     "significance": [
       "Ended U.S. isolationism and transformed America into the world's dominant military power",
-      "The internment of Japanese Americans remains one of the most significant civil liberties violations in U.S. history"
+      "Destroyed much of the Pacific Fleet's battleship force and pulled the United States into a two-front global war"
     ],
-    "region": "Pacific",
+    "region": "Global",
     "units": [
       7
     ],
@@ -3146,33 +3174,6 @@
     "course": "apush"
   },
   {
-    "id": "sputnik-launch",
-    "year": 1957,
-    "title": "Launch of Sputnik",
-    "description": "The Soviet Union placed the first artificial satellite in orbit, and its steady radio beeps convinced Americans that Moscow had seized the technological lead.",
-    "cause": "Soviet engineers adapted an intercontinental ballistic missile to lift a small satellite into orbit before any American attempt succeeded.",
-    "effect": "Alarmed Americans poured federal money into rockets, space research, and the training of scientists and engineers.",
-    "causes": [
-      "Cold War contest for prestige and military advantage",
-      "Soviet R-7 missile powerful enough to reach orbit",
-      "Underfunded and slow-moving American satellite program"
-    ],
-    "effects": [
-      "Creation of NASA to direct civilian space efforts",
-      "National Defense Education Act funds science, math, and language study",
-      "Fear of a missile gap drives defense spending upward"
-    ],
-    "significance": [
-      "Opened the space race as a central front of the Cold War",
-      "Recast American schooling as a matter of national security"
-    ],
-    "region": "Global",
-    "units": [
-      8
-    ],
-    "course": "apush"
-  },
-  {
     "id": "little-rock-nine",
     "year": 1957,
     "title": "Little Rock Nine",
@@ -3194,6 +3195,33 @@
       "Broadcast images of mob hatred pushed civil rights onto the national stage"
     ],
     "region": "South",
+    "units": [
+      8
+    ],
+    "course": "apush"
+  },
+  {
+    "id": "sputnik-launch",
+    "year": 1957,
+    "title": "Launch of Sputnik",
+    "description": "The Soviet Union placed the first artificial satellite in orbit, and its steady radio beeps convinced Americans that Moscow had seized the technological lead.",
+    "cause": "Soviet engineers adapted an intercontinental ballistic missile to lift a small satellite into orbit before any American attempt succeeded.",
+    "effect": "Alarmed Americans poured federal money into rockets, space research, and the training of scientists and engineers.",
+    "causes": [
+      "Cold War contest for prestige and military advantage",
+      "Soviet R-7 missile powerful enough to reach orbit",
+      "Underfunded and slow-moving American satellite program"
+    ],
+    "effects": [
+      "Creation of NASA to direct civilian space efforts",
+      "National Defense Education Act funds science, math, and language study",
+      "Fear of a missile gap drives defense spending upward"
+    ],
+    "significance": [
+      "Opened the space race as a central front of the Cold War",
+      "Recast American schooling as a matter of national security"
+    ],
+    "region": "Global",
     "units": [
       8
     ],
@@ -3299,33 +3327,6 @@
     "course": "apush"
   },
   {
-    "id": "hart-celler-immigration-act",
-    "year": 1965,
-    "title": "Immigration and Nationality Act (Hart-Celler)",
-    "description": "Signed at the foot of the Statue of Liberty in October 1965, Hart-Celler scrapped the national origins quotas and replaced them with hemispheric caps and family preferences.",
-    "cause": "Civil rights era arguments against sorting people by ancestry made the 1924 quota system, which favored northern and western Europe, politically indefensible.",
-    "effect": "Visas were redirected toward relatives of residents and needed workers, opening large-scale legal migration from Asia and Latin America.",
-    "causes": [
-      "Racial quota system inherited from the 1924 National Origins Act",
-      "Civil rights era attack on racial categories written into federal law",
-      "Cold War embarrassment at insulting allied and nonaligned nations"
-    ],
-    "effects": [
-      "Annual ceilings of 170,000 for the Eastern Hemisphere and 120,000 for the Western",
-      "A 20,000 visa per country limit for Eastern Hemisphere nations",
-      "A preference system built mainly on family reunification, fully effective July 1, 1968"
-    ],
-    "significance": [
-      "Ended four decades of explicitly racial immigration quotas",
-      "Set in motion the demographic diversification of late twentieth century America"
-    ],
-    "region": "North America",
-    "units": [
-      8
-    ],
-    "course": "apush"
-  },
-  {
     "id": "great-society",
     "year": 1965,
     "title": "The Great Society",
@@ -3345,6 +3346,33 @@
     "significance": [
       "Largest expansion of federal social programs since the New Deal",
       "Provoked a conservative backlash against federal spending and regulation"
+    ],
+    "region": "North America",
+    "units": [
+      8
+    ],
+    "course": "apush"
+  },
+  {
+    "id": "hart-celler-immigration-act",
+    "year": 1965,
+    "title": "Immigration and Nationality Act (Hart-Celler)",
+    "description": "Signed at the foot of the Statue of Liberty in October 1965, Hart-Celler scrapped the national origins quotas and replaced them with hemispheric caps and family preferences.",
+    "cause": "Civil rights era arguments against sorting people by ancestry made the 1924 quota system, which favored northern and western Europe, politically indefensible.",
+    "effect": "Visas were redirected toward relatives of residents and needed workers, opening large-scale legal migration from Asia and Latin America.",
+    "causes": [
+      "Racial quota system inherited from the 1924 National Origins Act",
+      "Civil rights era attack on racial categories written into federal law",
+      "Cold War embarrassment at insulting allied and nonaligned nations"
+    ],
+    "effects": [
+      "Annual ceilings of 170,000 for the Eastern Hemisphere and 120,000 for the Western",
+      "A 20,000 visa per country limit for Eastern Hemisphere nations",
+      "A preference system built mainly on family reunification, fully effective July 1, 1968"
+    ],
+    "significance": [
+      "Ended four decades of explicitly racial immigration quotas",
+      "Set in motion the demographic diversification of late twentieth century America"
     ],
     "region": "North America",
     "units": [
@@ -3642,25 +3670,52 @@
     "course": "apush"
   },
   {
-    "id": "soviet-collapse-gulf-war",
+    "id": "persian-gulf-war",
     "year": 1991,
-    "title": "Collapse of the Soviet Union & the Persian Gulf War",
-    "description": "A U.S.-led coalition drove Iraq out of Kuwait early in 1991, and by December the Soviet Union had dissolved into fifteen independent republics.",
-    "cause": "Iraq's seizure of Kuwait in August 1990 triggered a coalition response, while a failed hardline coup in August 1991 shattered Soviet central authority.",
-    "effect": "Kuwait was liberated by late February 1991, and Gorbachev resigned that December as the Soviet state ceased to exist.",
+    "title": "Persian Gulf War",
+    "description": "A U.S.-led coalition drove Iraqi forces out of Kuwait in a six-week air campaign followed by a brief ground war.",
+    "cause": "Iraq invaded and annexed Kuwait in August 1990, and the UN Security Council authorized force to reverse it.",
+    "effect": "Kuwait was liberated by the end of February 1991 and American forces remained in the region afterward.",
     "causes": [
       "Iraq's invasion of Kuwait in August 1990",
-      "Failed hardline coup against Gorbachev in August 1991",
-      "Soviet economic decline and nationalist movements in the republics"
+      "Saddam Hussein's dispute with Kuwait over oil production and war debt",
+      "UN Security Council authorization backed by a U.S.-led coalition"
     ],
     "effects": [
       "Coalition air campaign opened on January 17, 1991",
       "Kuwait retaken after a ground war of roughly 100 hours",
-      "Gorbachev resigned and fifteen republics became independent states"
+      "U.S. forces remained stationed in Saudi Arabia after the war"
     ],
     "significance": [
-      "Left the United States as the world's sole superpower",
-      "Set the stage for sustained American military involvement in the Middle East"
+      "First major American war of the post-Cold War era",
+      "Began sustained American military involvement in the Middle East"
+    ],
+    "region": "Global",
+    "units": [
+      9
+    ],
+    "course": "apush"
+  },
+  {
+    "id": "soviet-union-collapse",
+    "year": 1991,
+    "title": "Collapse of the Soviet Union",
+    "description": "The Soviet Union dissolved into fifteen independent republics, ending the Cold War.",
+    "cause": "Economic stagnation, nationalist movements in the republics, and a failed hardline coup in August 1991 destroyed Soviet central authority.",
+    "effect": "Gorbachev resigned on December 25, 1991 and the Soviet state ceased to exist.",
+    "causes": [
+      "Soviet economic decline and nationalist movements in the republics",
+      "Gorbachev's glasnost and perestroika reforms",
+      "Failed hardline coup against Gorbachev in August 1991"
+    ],
+    "effects": [
+      "Gorbachev resigned on December 25, 1991",
+      "Fifteen republics became independent states",
+      "Russia assumed the Soviet Union's seat on the UN Security Council"
+    ],
+    "significance": [
+      "Ended the Cold War",
+      "Left the United States as the world's sole superpower"
     ],
     "region": "Global",
     "units": [

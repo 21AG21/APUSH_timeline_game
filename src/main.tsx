@@ -7,7 +7,7 @@ import App from './App.tsx'
 // event set changes so every browser clears its stale saved game and filters
 // exactly once. Using a dedicated version key (not the event count) guarantees
 // the migration fires even if an earlier build already wrote an event count.
-const DATA_VERSION = '3'
+const DATA_VERSION = '4'
 const VERSION_KEY = 'apush-data-version'
 if (localStorage.getItem(VERSION_KEY) !== DATA_VERSION) {
   localStorage.removeItem('apush-game-state')
@@ -17,7 +17,9 @@ if (localStorage.getItem(VERSION_KEY) !== DATA_VERSION) {
       'apush-settings',
       JSON.stringify({ ...saved, filterUnits: [], filterRegions: [] })
     )
-  } catch {}
+  } catch {
+    // Corrupt settings JSON: nothing to migrate, the app falls back to defaults.
+  }
   localStorage.setItem(VERSION_KEY, DATA_VERSION)
 }
 
