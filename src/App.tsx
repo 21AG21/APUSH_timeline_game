@@ -12,6 +12,8 @@ import { ResultsSummary } from './components/ResultsSummary'
 import { FilterPopover } from './components/FilterPopover'
 import { useGameState } from './hooks/useGameState'
 import { useLocalStorage } from './hooks/useLocalStorage'
+import { usePointerDrag } from './hooks/usePointerDrag'
+import { useLayout } from './hooks/useMediaQuery'
 import { filterPool, isGameOver } from './lib/game'
 
 const allEvents = apushEvents as Event[]
@@ -31,6 +33,9 @@ export default function App() {
   const [notes, setNotes] = useLocalStorage<Note[]>('apush-notes', [])
   const { state, newGame, setTentative, place } = useGameState(allEvents)
   const [journalOpen, setJournalOpen] = useState(false)
+  const [settingsOpen, setSettingsOpen] = useState(false)
+
+  const { split, compact } = useLayout()
 
   // Feedback state
   const [lastCorrect, setLastCorrect] = useState<boolean | null>(null)
@@ -40,10 +45,10 @@ export default function App() {
   const prevScore = useRef(state.score)
 
   const gameOver = isGameOver(state)
+  const hasCurrentEvent = !!state.current && !gameOver
   const showHardModeReview = gameOver && state.gameOver && settings.hardMode
 
   const lastPlacedEventRef = useRef<Event | null>(null)
-  const lastAttemptedSlotRef = useRef<number | null>(null)
 
   // Apply dark mode
   useEffect(() => {
@@ -71,6 +76,17 @@ export default function App() {
     prevScore.current = state.score
     prevAttempts.current = state.attempts
   })
+
+  const handlePlace = useCallback(
+    (slot: number) => {
+      lastPlacedEventRef.current = state.current
+      place(slot, settings.hardMode)
+      setTentative(null)
+    },
+    [state.current, place, settings.hardMode, setTentative]
+  )
+
+  const drag = usePointerDrag({ onDrop: handlePlace, enabled: hasCurrentEvent })
 
   const getFilteredEvents = useCallback(() => {
     return filterPool(allEvents, settings.filterUnits, settings.filterRegions)
@@ -108,27 +124,7 @@ export default function App() {
     }
   }
 
-  const handleSlotClick = (slot: number) => {
-    if (slot < 0) {
-      setTentative(null)
-    } else {
-      setTentative(slot)
-    }
-  }
-
-  const handleSlotConfirm = (slot: number) => {
-    lastPlacedEventRef.current = state.current
-    lastAttemptedSlotRef.current = slot
-    place(slot, settings.hardMode)
-    setTentative(null)
-  }
-
-  const handleDrop = (slot: number) => {
-    lastPlacedEventRef.current = state.current
-    lastAttemptedSlotRef.current = slot
-    place(slot, settings.hardMode)
-    setTentative(null)
-  }
+  const handleSlotClick = (slot: number) => setTentative(slot < 0 ? null : slot)
 
   const saveNote = (note: Note) => {
     setNotes((ns) => {
@@ -141,76 +137,100 @@ export default function App() {
     setNotes((ns) => ns.filter((n) => n.eventId !== eventId))
   }
 
-  const dragStartHandler = (e: React.DragEvent) => {
-    e.dataTransfer.setData('text/plain', 'card')
-  }
+  const optionPills = (
+    <>
+      <PillToggle
+        label="Hide Dates"
+        active={settings.hideDates}
+        onClick={() => setSettings((s) => ({ ...s, hideDates: !s.hideDates }))}
+      />
+      <PillToggle
+        label="Understanding"
+        active={settings.showUnderstanding}
+        onClick={() => setSettings((s) => ({ ...s, showUnderstanding: !s.showUnderstanding }))}
+      />
+      <PillToggle
+        label="Hard Mode"
+        active={settings.hardMode}
+        onClick={() => setSettings((s) => ({ ...s, hardMode: !s.hardMode }))}
+        danger
+      />
+      <FilterPopover
+        allEvents={allEvents}
+        selectedUnits={settings.filterUnits}
+        selectedRegions={settings.filterRegions}
+        onChange={handleFilterChange}
+      />
+      <PillToggle
+        label={settings.darkMode ? 'Light' : 'Dark'}
+        active={false}
+        onClick={() => setSettings((s) => ({ ...s, darkMode: !s.darkMode }))}
+      />
+    </>
+  )
+
+  const timelineEl = (
+    <Timeline
+      timeline={state.timeline}
+      tentativeSlot={state.tentativeSlot}
+      hasCurrentEvent={hasCurrentEvent}
+      hideDates={settings.hideDates}
+      hardMode={settings.hardMode}
+      notes={notes}
+      lastPlacementCorrect={lastCorrect}
+      compact={compact}
+      dragOverSlot={drag.isDragging ? drag.activeSlot : null}
+      registerSlot={drag.registerSlot}
+      registerScrollContainer={drag.registerScrollContainer}
+      onSlotClick={handleSlotClick}
+      onSlotConfirm={handlePlace}
+    />
+  )
+
+  const placementEl = hasCurrentEvent ? (
+    <PlacementCard
+      event={state.current!}
+      hideDates={settings.hideDates}
+      hardMode={settings.hardMode}
+      compact={compact}
+      isDragging={drag.isDragging}
+      onPointerDown={drag.start}
+    />
+  ) : (
+    <div className="p-3 sm:p-4">
+      {(state.done || state.gameOver) && (
+        <ResultsSummary state={state} settings={settings} allEvents={allEvents} />
+      )}
+    </div>
+  )
 
   return (
-    <div className="h-screen flex overflow-hidden bg-om-bg text-om-text">
-      {/* Left panel */}
-      <div className="w-1/3 min-w-[340px] shrink-0 flex flex-col border-r border-om-border bg-om-surface">
-        {/* Title + Options */}
-        <div className="px-5 pt-5 pb-4 space-y-4 shrink-0">
-          <div className="inline-block">
-            <h1 className="text-3xl font-serif font-bold text-om-text tracking-tight leading-none">
-              APUSH Timeline
-            </h1>
-            <div className="mt-1.5 h-[3px] bg-om-gold rounded-full w-full" />
-          </div>
-
-          <div className="flex flex-wrap gap-2">
-            <PillToggle
-              label="Hide Dates"
-              active={settings.hideDates}
-              onClick={() => setSettings((s) => ({ ...s, hideDates: !s.hideDates }))}
-            />
-            <PillToggle
-              label="Understanding"
-              active={settings.showUnderstanding}
-              onClick={() => setSettings((s) => ({ ...s, showUnderstanding: !s.showUnderstanding }))}
-            />
-            <PillToggle
-              label="Hard Mode"
-              active={settings.hardMode}
-              onClick={() => setSettings((s) => ({ ...s, hardMode: !s.hardMode }))}
-              danger
-            />
-            <FilterPopover
-              allEvents={allEvents}
-              selectedUnits={settings.filterUnits}
-              selectedRegions={settings.filterRegions}
-              onChange={handleFilterChange}
-            />
-            <PillToggle
-              label={settings.darkMode ? 'Light' : 'Dark'}
-              active={false}
-              onClick={() => setSettings((s) => ({ ...s, darkMode: !s.darkMode }))}
-            />
-          </div>
-        </div>
-
-        <div className="border-t border-om-border mx-5 shrink-0" />
-
-        {/* Scrollable content */}
-        <div className="flex-1 overflow-y-auto">
-          {state.current && !gameOver ? (
-            <PlacementCard
-              event={state.current}
-              hideDates={settings.hideDates}
-              hardMode={settings.hardMode}
-              onDragStart={dragStartHandler}
-            />
-          ) : (
-            <div className="p-4 space-y-4">
-              {(state.done || state.gameOver) && (
-                <ResultsSummary state={state} settings={settings} allEvents={allEvents} />
-              )}
+    <div
+      className={`app-shell flex overflow-hidden bg-om-bg text-om-text ${
+        split ? 'flex-row' : 'flex-col'
+      }`}
+    >
+      {!split ? (
+        /* ---------------- Mobile: stacked ---------------- */
+        <>
+          <header className="shrink-0 flex items-center justify-between gap-3 px-3 py-2 border-b border-om-border bg-om-surface">
+            <div>
+              <h1 className="text-xl font-serif font-bold text-om-text leading-none">
+                APUSH Timeline
+              </h1>
+              <div className="mt-1 h-[2px] bg-om-gold rounded-full w-full" />
             </div>
-          )}
-
-          <div className="border-t border-om-border mx-4" />
+            <button
+              onClick={() => setSettingsOpen(true)}
+              aria-label="Options"
+              className="shrink-0 h-11 px-4 rounded-full border border-om-border text-sm font-medium text-om-text active:bg-om-slot-hover"
+            >
+              Options
+            </button>
+          </header>
 
           <Scoreboard
+            compact
             score={state.score}
             attempts={state.attempts}
             poolSize={state.pool.length}
@@ -219,48 +239,147 @@ export default function App() {
             done={state.done}
             gameOver={state.gameOver}
           />
-        </div>
 
-        {/* Bottom actions */}
-        <div className="shrink-0 border-t border-om-border p-4 space-y-2">
-          <button
-            onClick={handleNewGame}
-            className="w-full py-3 text-base font-semibold rounded-lg bg-om-accent hover:bg-om-accent-hover text-white transition-colors"
-          >
-            New Game
-          </button>
-          <button
-            onClick={() => setJournalOpen(true)}
-            className="w-full py-2 text-sm text-om-muted hover:text-om-text border border-om-border rounded-lg transition-colors"
-          >
-            Study Journal
-          </button>
-        </div>
-      </div>
+          <div className="shrink-0 border-b border-om-border bg-om-surface">{placementEl}</div>
 
-      {/* Right: Timeline */}
-      <Timeline
-        timeline={state.timeline}
-        tentativeSlot={state.tentativeSlot}
-        hasCurrentEvent={!!state.current && !gameOver}
-        hideDates={settings.hideDates}
-        hardMode={settings.hardMode}
-        notes={notes}
-        lastPlacementCorrect={lastCorrect}
-        onSlotClick={handleSlotClick}
-        onSlotConfirm={handleSlotConfirm}
-        onDrop={handleDrop}
-      />
+          {timelineEl}
+
+          <div className="shrink-0 flex gap-2 border-t border-om-border bg-om-surface p-3">
+            <button
+              onClick={handleNewGame}
+              className="flex-1 h-12 text-base font-semibold rounded-lg bg-om-accent active:bg-om-accent-hover text-om-accent-fg"
+            >
+              New Game
+            </button>
+            <button
+              onClick={() => setJournalOpen(true)}
+              className="h-12 px-5 text-sm font-medium rounded-lg border border-om-border text-om-muted active:bg-om-slot-hover"
+            >
+              Journal
+            </button>
+          </div>
+        </>
+      ) : (
+        /* ---------------- Split: desktop and landscape phones ---------------- */
+        <>
+          <div className="w-1/3 min-w-[300px] max-w-[460px] shrink-0 flex flex-col border-r border-om-border bg-om-surface">
+            <div className={`shrink-0 ${compact ? 'px-3 pt-3 pb-2 space-y-2' : 'px-5 pt-5 pb-4 space-y-4'}`}>
+              <div className="inline-block">
+                <h1
+                  className={`font-serif font-bold text-om-text tracking-tight leading-none ${
+                    compact ? 'text-xl' : 'text-3xl'
+                  }`}
+                >
+                  APUSH Timeline
+                </h1>
+                <div
+                  className={`mt-1 bg-om-gold rounded-full w-full ${
+                    compact ? 'h-[2px]' : 'h-[3px]'
+                  }`}
+                />
+              </div>
+              {compact ? (
+                <button
+                  onClick={() => setSettingsOpen(true)}
+                  className="h-10 w-full rounded-full border border-om-border text-sm font-medium text-om-text hover:bg-om-slot-hover"
+                >
+                  Options
+                </button>
+              ) : (
+                <div className="flex flex-wrap gap-2">{optionPills}</div>
+              )}
+            </div>
+
+            <div className="border-t border-om-border mx-5 shrink-0" />
+
+            <div className="scroll-pane flex-1 min-h-0 overflow-y-auto">
+              {placementEl}
+              <div className="border-t border-om-border mx-4" />
+              <Scoreboard
+                compact={compact}
+                score={state.score}
+                attempts={state.attempts}
+                poolSize={state.pool.length}
+                timelineSize={state.timeline.length}
+                streak={state.streak}
+                done={state.done}
+                gameOver={state.gameOver}
+              />
+            </div>
+
+            <div
+              className={`shrink-0 border-t border-om-border ${
+                compact ? 'p-2 flex gap-2' : 'p-4 space-y-2'
+              }`}
+            >
+              <button
+                onClick={handleNewGame}
+                className={`font-semibold rounded-lg bg-om-accent hover:bg-om-accent-hover text-om-accent-fg transition-colors ${
+                  compact ? 'flex-1 h-11 text-sm' : 'w-full py-3 text-base'
+                }`}
+              >
+                New Game
+              </button>
+              <button
+                onClick={() => setJournalOpen(true)}
+                className={`text-sm text-om-muted hover:text-om-text border border-om-border rounded-lg transition-colors ${
+                  compact ? 'h-11 px-4' : 'w-full py-2'
+                }`}
+              >
+                {compact ? 'Journal' : 'Study Journal'}
+              </button>
+            </div>
+          </div>
+
+          {timelineEl}
+        </>
+      )}
+
+      {/* Card that follows the pointer while dragging */}
+      {drag.isDragging && drag.dragPos && state.current && (
+        <div
+          className="drag-ghost bg-om-surface border border-om-border border-l-[3px] border-l-om-gold rounded-lg px-4 py-3 max-w-[80vw] sm:max-w-sm"
+          style={{ left: drag.dragPos.x, top: drag.dragPos.y }}
+        >
+          <p className="font-bold text-om-text leading-tight truncate">{state.current.title}</p>
+        </div>
+      )}
+
+      {/* Mobile options sheet */}
+      {settingsOpen && (
+        <div className="fixed inset-0 z-50 flex items-end" onClick={() => setSettingsOpen(false)}>
+          <div className="drawer-backdrop absolute inset-0 bg-black/40" />
+          <div
+            className="relative w-full bg-om-surface rounded-t-2xl border-t border-om-border shadow-2xl p-4 pb-8 max-h-[80dvh] overflow-y-auto"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-xl font-serif font-bold text-om-text">Options</h2>
+              <button
+                onClick={() => setSettingsOpen(false)}
+                aria-label="Close options"
+                className="h-10 w-10 rounded-full text-om-muted text-2xl leading-none active:bg-om-slot-hover"
+              >
+                ×
+              </button>
+            </div>
+            <div className="flex flex-wrap gap-2">{optionPills}</div>
+          </div>
+        </div>
+      )}
 
       {/* Journal drawer */}
       {journalOpen && (
         <div className="fixed inset-0 z-50 flex">
-          <div className="drawer-panel w-[80vw] bg-om-surface border-r border-om-border flex flex-col shadow-2xl">
-            <div className="flex items-center justify-between px-6 py-4 border-b border-om-border shrink-0">
-              <h2 className="text-2xl font-serif font-bold text-om-text">Study Journal</h2>
+          <div className="drawer-panel w-full lg:w-[80vw] bg-om-surface border-r border-om-border flex flex-col shadow-2xl">
+            <div className="flex items-center justify-between px-4 sm:px-6 py-3 sm:py-4 border-b border-om-border shrink-0">
+              <h2 className="text-xl sm:text-2xl font-serif font-bold text-om-text">
+                Study Journal
+              </h2>
               <button
                 onClick={() => setJournalOpen(false)}
-                className="text-om-muted hover:text-om-text text-3xl leading-none"
+                aria-label="Close journal"
+                className="h-11 w-11 shrink-0 rounded-full text-om-muted text-3xl leading-none active:bg-om-slot-hover"
               >
                 ×
               </button>
@@ -274,7 +393,7 @@ export default function App() {
             />
           </div>
           <div
-            className="drawer-backdrop flex-1 bg-black/40 cursor-pointer"
+            className="drawer-backdrop hidden lg:block flex-1 bg-black/40 cursor-pointer"
             onClick={() => setJournalOpen(false)}
           />
         </div>
@@ -317,11 +436,11 @@ function PillToggle({
   return (
     <button
       onClick={onClick}
-      className={`px-3.5 py-1.5 rounded-full text-sm font-medium transition-all cursor-pointer ${
+      className={`h-11 px-4 rounded-full text-sm font-medium transition-all cursor-pointer ${
         active
           ? danger
-            ? 'bg-om-error text-white shadow-sm'
-            : 'bg-om-accent text-white shadow-sm'
+            ? 'bg-om-error text-om-error-fg shadow-sm'
+            : 'bg-om-accent text-om-accent-fg shadow-sm'
           : 'bg-om-bg text-om-muted hover:text-om-text hover:bg-om-slot-hover border border-om-border'
       }`}
     >

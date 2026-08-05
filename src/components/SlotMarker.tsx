@@ -27,7 +27,7 @@ export function SlotMarker({
 
   let label: string
   if (isTentative) {
-    label = `Slot ${index + 1} — confirm?`
+    label = 'Tap again to place'
   } else if (isDragOver) {
     label = 'Drop here'
   } else {
@@ -41,17 +41,15 @@ export function SlotMarker({
       aria-label={`Slot ${index + 1}`}
       onClick={handleClick}
       onKeyDown={(e) => e.key === 'Enter' && handleClick()}
-      className={`relative flex items-center justify-center min-h-[48px] sm:min-h-0 h-7 mx-2 rounded transition-all cursor-pointer group ${
+      className={`relative flex items-center justify-center h-12 sm:h-9 mx-1 sm:mx-2 rounded-lg transition-all cursor-pointer group select-none ${
         active
           ? 'bg-om-accent-light border-2 border-om-accent'
-          : 'border-2 border-dashed border-om-border hover:border-om-accent'
+          : 'border-2 border-dashed border-om-border hover:border-om-accent active:border-om-accent'
       }`}
     >
       <span
         className={`text-sm font-semibold px-2 truncate ${
-          active
-            ? 'text-om-accent'
-            : 'text-om-border group-hover:text-om-accent'
+          active ? 'text-om-accent' : 'text-om-border group-hover:text-om-accent'
         }`}
       >
         {label}

@@ -6,6 +6,8 @@ interface Props {
   streak: number
   done: boolean
   gameOver: boolean
+  /** Single-line strip used by the mobile layout. */
+  compact?: boolean
 }
 
 export function Scoreboard({
@@ -16,8 +18,34 @@ export function Scoreboard({
   streak,
   done,
   gameOver,
+  compact,
 }: Props) {
   const total = score + poolSize + (done || gameOver ? 0 : 1)
+
+  if (compact) {
+    return (
+      <div className="flex items-center justify-around gap-2 px-3 py-2 border-b border-om-border bg-om-bg">
+        <Inline label="Score" value={`${score}/${total}`} />
+        <Divider />
+        <div className="flex flex-col items-center leading-none">
+          <span
+            className={`text-2xl font-black tabular-nums ${
+              streak > 0 ? 'streak-rainbow' : 'text-om-text'
+            }`}
+          >
+            {streak}
+          </span>
+          <span className="text-[0.65rem] font-bold text-om-muted uppercase tracking-wider mt-1">
+            Streak
+          </span>
+        </div>
+        <Divider />
+        <Inline label="Left" value={String(poolSize)} />
+        <Divider />
+        <Inline label="Tries" value={String(attempts)} />
+      </div>
+    )
+  }
 
   return (
     <div className="px-5 py-5 space-y-5">
@@ -55,23 +83,26 @@ export function Scoreboard({
   )
 }
 
-function StatCard({
-  label,
-  value,
-  danger,
-}: {
-  label: string
-  value: string
-  danger?: boolean
-}) {
+function Divider() {
+  return <span className="w-px self-stretch bg-om-border" />
+}
+
+function Inline({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="flex flex-col items-center leading-none">
+      <span className="text-lg font-bold text-om-text tabular-nums">{value}</span>
+      <span className="text-[0.65rem] font-bold text-om-muted uppercase tracking-wider mt-1">
+        {label}
+      </span>
+    </div>
+  )
+}
+
+function StatCard({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex flex-col items-center bg-om-bg rounded-xl border border-om-border px-4 py-3">
       <span className="text-xs text-om-muted uppercase tracking-wider font-semibold">{label}</span>
-      <span
-        className={`text-3xl font-bold mt-1 leading-none tabular-nums ${
-          danger ? 'text-om-error' : 'text-om-text'
-        }`}
-      >
+      <span className="text-3xl font-bold mt-1 leading-none tabular-nums text-om-text">
         {value}
       </span>
     </div>

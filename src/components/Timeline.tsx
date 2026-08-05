@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useRef } from 'react'
+import { useEffect, useCallback } from 'react'
 import type { Event, Note } from '../data/types'
 import { EventCard } from './EventCard'
 import { SlotMarker } from './SlotMarker'
@@ -13,9 +13,14 @@ interface Props {
   hardMode: boolean
   notes: Note[]
   lastPlacementCorrect: boolean | null
+  /** Mobile: render collapsed event cards so several fit on screen. */
+  compact?: boolean
+  /** Slot currently under the dragged card, from usePointerDrag. */
+  dragOverSlot: number | null
+  registerSlot: (index: number, el: HTMLElement | null) => void
+  registerScrollContainer: (el: HTMLElement | null) => void
   onSlotClick: (slot: number) => void
   onSlotConfirm: (slot: number) => void
-  onDrop: (slot: number) => void
 }
 
 export function Timeline({
@@ -26,60 +31,13 @@ export function Timeline({
   hardMode,
   notes,
   lastPlacementCorrect,
+  compact,
+  dragOverSlot,
+  registerSlot,
+  registerScrollContainer,
   onSlotClick,
   onSlotConfirm,
-  onDrop,
 }: Props) {
-  const [dragOverSlot, setDragOverSlot] = useState<number | null>(null)
-  const slotRefs = useRef<Map<number, HTMLDivElement>>(new Map())
-
-  const registerSlotRef = useCallback((index: number, el: HTMLDivElement | null) => {
-    if (el) {
-      slotRefs.current.set(index, el)
-    } else {
-      slotRefs.current.delete(index)
-    }
-  }, [])
-
-  const findNearestSlot = useCallback((clientY: number): number | null => {
-    let nearest: number | null = null
-    let minDist = Infinity
-    slotRefs.current.forEach((el, index) => {
-      const rect = el.getBoundingClientRect()
-      const center = rect.top + rect.height / 2
-      const dist = Math.abs(clientY - center)
-      if (dist < minDist) {
-        minDist = dist
-        nearest = index
-      }
-    })
-    return nearest
-  }, [])
-
-  const handleContainerDragOver = useCallback((e: React.DragEvent) => {
-    e.preventDefault()
-    const nearest = findNearestSlot(e.clientY)
-    if (nearest !== null && nearest !== dragOverSlot) {
-      setDragOverSlot(nearest)
-    }
-  }, [findNearestSlot, dragOverSlot])
-
-  const handleContainerDragLeave = useCallback((e: React.DragEvent) => {
-    const container = e.currentTarget as HTMLElement
-    const related = e.relatedTarget as Node | null
-    if (!related || !container.contains(related)) {
-      setDragOverSlot(null)
-    }
-  }, [])
-
-  const handleContainerDrop = useCallback((e: React.DragEvent) => {
-    e.preventDefault()
-    if (dragOverSlot !== null) {
-      onDrop(dragOverSlot)
-    }
-    setDragOverSlot(null)
-  }, [dragOverSlot, onDrop])
-
   const handleKeyDown = useCallback(
     (e: KeyboardEvent) => {
       if (!hasCurrentEvent) return
@@ -111,7 +69,7 @@ export function Timeline({
   const slotCount = timeline.length + 1
 
   const renderSlot = (index: number) => (
-    <div ref={(el) => registerSlotRef(index, el)}>
+    <div ref={(el) => registerSlot(index, el)}>
       <SlotMarker
         index={index}
         slotCount={slotCount}
@@ -121,16 +79,6 @@ export function Timeline({
         onConfirm={() => onSlotConfirm(index)}
       />
     </div>
-  )
-
-  const renderCard = (event: Event, i: number) => (
-    <EventCard
-      event={event}
-      index={i}
-      hideDates={hideDates}
-      hardMode={hardMode}
-      note={noteMap.get(event.id)}
-    />
   )
 
   const items: React.ReactNode[] = []
@@ -146,7 +94,18 @@ export function Timeline({
         <EraBandHeader key={`era-${event.id}`} year={event.year} prevYear={prevYear} />
       )
     }
-    items.push(<div key={event.id}>{renderCard(event, i)}</div>)
+    items.push(
+      <div key={event.id}>
+        <EventCard
+          event={event}
+          index={i}
+          hideDates={hideDates}
+          hardMode={hardMode}
+          note={noteMap.get(event.id)}
+          compact={compact}
+        />
+      </div>
+    )
     if (hasCurrentEvent) {
       items.push(<div key={`slot-${i + 1}`}>{renderSlot(i + 1)}</div>)
     }
@@ -154,10 +113,8 @@ export function Timeline({
 
   return (
     <div
-      className="flex-1 overflow-y-auto p-4 space-y-3"
-      onDragOver={hasCurrentEvent ? handleContainerDragOver : undefined}
-      onDragLeave={hasCurrentEvent ? handleContainerDragLeave : undefined}
-      onDrop={hasCurrentEvent ? handleContainerDrop : undefined}
+      ref={registerScrollContainer}
+      className="scroll-pane flex-1 min-h-0 overflow-y-auto p-3 sm:p-4 space-y-2 sm:space-y-3"
     >
       {lastPlacementCorrect === true && (
         <div className="mb-2 px-3 py-2 bg-om-success-bg border border-om-border rounded text-sm text-om-success font-semibold">

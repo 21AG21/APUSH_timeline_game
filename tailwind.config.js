@@ -25,6 +25,8 @@ export default {
           note:           'var(--om-note)',
           'note-border':  'var(--om-note-border)',
           'note-title':   'var(--om-note-title)',
+          'accent-fg':    'var(--om-accent-fg)',
+          'error-fg':     'var(--om-error-fg)',
         },
       },
       fontFamily: {

@@ -16,9 +16,9 @@ export function GameOverReview({ state, settings, allEvents, onNewGame }: Props)
   ].sort((a, b) => a.year - b.year)
 
   return (
-    <div className="fixed inset-0 bg-black/70 flex items-end sm:items-center justify-center z-50 p-4 overflow-y-auto">
-      <div className="bg-om-surface rounded-t-xl sm:rounded-lg shadow-2xl w-full max-w-2xl my-4">
-        <div className="px-6 py-4 border-b border-om-border flex items-center justify-between">
+    <div className="fixed inset-0 bg-black/70 flex items-end sm:items-center justify-center z-50 p-0 sm:p-4">
+      <div className="bg-om-surface rounded-t-2xl sm:rounded-lg shadow-2xl w-full max-w-2xl max-h-[92dvh] overflow-y-auto">
+        <div className="px-4 sm:px-6 py-4 border-b border-om-border flex items-center justify-between gap-3 sticky top-0 bg-om-surface z-10">
           <div>
             <h2 className="text-lg font-bold text-om-error">Game Over</h2>
             <p className="text-sm text-om-muted">
@@ -27,13 +27,13 @@ export function GameOverReview({ state, settings, allEvents, onNewGame }: Props)
           </div>
           <button
             onClick={onNewGame}
-            className="px-4 py-2 rounded bg-om-accent hover:bg-om-accent-hover text-white text-sm font-medium transition-colors"
+            className="shrink-0 h-11 px-4 rounded-lg bg-om-accent hover:bg-om-accent-hover text-om-accent-fg text-sm font-medium transition-colors"
           >
             New Game
           </button>
         </div>
 
-        <div className="px-6 py-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="px-4 sm:px-6 py-4 grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <ResultsSummary state={state} settings={settings} allEvents={allEvents} />
           </div>

@@ -41,9 +41,9 @@ export function FilterPopover({ allEvents, selectedUnits, selectedRegions, onCha
     <div ref={ref} className="relative">
       <button
         onClick={() => setOpen((v) => !v)}
-        className={`px-3.5 py-1.5 text-sm rounded-full font-medium transition-all ${
+        className={`h-11 px-4 text-sm rounded-full font-medium transition-all ${
           active
-            ? 'bg-om-accent text-white shadow-sm'
+            ? 'bg-om-accent text-om-accent-fg shadow-sm'
             : 'bg-om-bg text-om-muted hover:text-om-text hover:bg-om-slot-hover border border-om-border'
         }`}
       >
@@ -51,7 +51,7 @@ export function FilterPopover({ allEvents, selectedUnits, selectedRegions, onCha
       </button>
 
       {open && (
-        <div className="absolute left-0 top-full mt-1 z-40 bg-om-surface border border-om-border rounded-lg shadow-xl p-4 w-72">
+        <div className="absolute left-0 top-full mt-1 z-40 bg-om-surface border border-om-border rounded-lg shadow-xl p-4 w-[min(18rem,calc(100vw-2rem))] max-h-[60dvh] overflow-y-auto">
           <div className="flex items-center justify-between mb-3">
             <span className="text-sm font-semibold text-om-text uppercase tracking-wide">
               Filter Pool
@@ -104,10 +104,10 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 
 function CheckChip({ label, checked, onChange }: { label: string; checked: boolean; onChange: () => void }) {
   return (
-    <label className="flex items-center gap-1 cursor-pointer select-none">
-      <input type="checkbox" checked={checked} onChange={onChange} className="w-3 h-3 accent-om-accent" />
+    <label className="flex items-center gap-1.5 cursor-pointer select-none">
+      <input type="checkbox" checked={checked} onChange={onChange} className="w-4 h-4 accent-om-accent" />
       <span
-        className={`text-xs px-1.5 py-0.5 rounded border transition-colors ${
+        className={`text-sm px-2 py-1.5 rounded border transition-colors ${
           checked
             ? 'border-om-accent bg-om-accent-light text-om-accent'
             : 'border-om-border text-om-muted'

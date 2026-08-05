@@ -17,9 +17,9 @@ export function UnderstandingModal({ event, onSave, onSkip }: Props) {
   }
 
   return (
-    <div className="fixed inset-0 bg-black/60 flex items-end sm:items-center justify-center z-50 p-4">
-      <div className="bg-om-surface rounded-t-xl sm:rounded-lg shadow-2xl w-full max-w-lg">
-        <div className="px-5 py-4 border-b border-om-border">
+    <div className="fixed inset-0 bg-black/60 flex items-end sm:items-center justify-center z-50 p-0 sm:p-4">
+      <div className="bg-om-surface rounded-t-2xl sm:rounded-lg shadow-2xl w-full max-w-lg max-h-[92dvh] overflow-y-auto">
+        <div className="px-5 py-4 border-b border-om-border sticky top-0 bg-om-surface z-10">
           <div className="flex items-start justify-between gap-3">
             <div>
               <p className="text-sm font-semibold uppercase tracking-wide text-om-success mb-0.5">
@@ -27,7 +27,11 @@ export function UnderstandingModal({ event, onSave, onSkip }: Props) {
               </p>
               <h3 className="font-semibold font-serif text-om-text">{event.title} ({event.year})</h3>
             </div>
-            <button onClick={onSkip} className="text-om-muted hover:text-om-text text-xl leading-none shrink-0">
+            <button
+              onClick={onSkip}
+              aria-label="Skip"
+              className="h-10 w-10 shrink-0 rounded-full text-om-muted hover:text-om-text text-2xl leading-none"
+            >
               ×
             </button>
           </div>
@@ -64,16 +68,16 @@ export function UnderstandingModal({ event, onSave, onSkip }: Props) {
           />
         </div>
 
-        <div className="flex gap-2 px-5 pb-5">
+        <div className="flex gap-2 px-5 pb-6 sm:pb-5 sticky bottom-0 bg-om-surface pt-2">
           <button
             onClick={handleSave}
-            className="flex-1 py-2 rounded bg-om-accent hover:bg-om-accent-hover text-white text-sm font-medium transition-colors"
+            className="flex-1 h-12 rounded-lg bg-om-accent hover:bg-om-accent-hover text-om-accent-fg text-sm font-medium transition-colors"
           >
             Save &amp; Continue
           </button>
           <button
             onClick={onSkip}
-            className="py-2 px-4 rounded border border-om-border text-om-muted text-sm hover:bg-om-slot-hover transition-colors"
+            className="h-12 px-5 rounded-lg border border-om-border text-om-muted text-sm hover:bg-om-slot-hover transition-colors"
           >
             Skip
           </button>

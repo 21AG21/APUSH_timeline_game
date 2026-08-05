@@ -22,6 +22,9 @@
   --om-note:         #F5EDD7;
   --om-note-border:  #DDD0AC;
   --om-note-title:   #7A5A0A;
+  /* Text drawn on top of filled accent/error surfaces. */
+  --om-accent-fg:    #FFFFFF;
+  --om-error-fg:     #FFFFFF;
 }
 
 .dark {
@@ -44,6 +47,9 @@
   --om-note:         #221E10;
   --om-note-border:  #3A3215;
   --om-note-title:   #D4B85A;
+  /* Dark-mode accents are light, so they need dark text on top. */
+  --om-accent-fg:    #0B120E;
+  --om-error-fg:     #2A0F0F;
 }
 
 *, *::before, *::after {
@@ -56,12 +62,56 @@ html, body, #root {
   padding: 0;
 }
 
+/* Responsive base scale — small on phones, large on desktop monitors */
 html {
-  font-size: 22px;
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
 }
+
+@media (min-width: 640px)  { html { font-size: 18px; } }
+@media (min-width: 1024px) { html { font-size: 20px; } }
+@media (min-width: 1536px) { html { font-size: 22px; } }
 
 body {
   font-family: 'DM Sans', system-ui, sans-serif;
+  overscroll-behavior: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Mobile browser chrome makes 100vh overflow — dvh tracks the visible viewport */
+.app-shell {
+  height: 100vh;
+  height: 100dvh;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* Inputs below 16px trigger iOS auto-zoom on focus */
+input, textarea, select {
+  font-size: max(16px, 1em);
+}
+
+/* Momentum scrolling + no scroll-chaining inside panes */
+.scroll-pane {
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+}
+
+/* Drag source: stop the browser from scrolling/selecting mid-drag */
+.drag-source {
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* Floating card that follows the pointer during a drag */
+.drag-ghost {
+  position: fixed;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.95;
+  transform: translate(-50%, -50%) rotate(-1.5deg);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
+  will-change: transform;
 }
 
 /* Rainbow streak animation */

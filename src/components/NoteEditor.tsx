@@ -26,13 +26,14 @@ export function NoteEditor({ eventId, eventTitle, note, onSave, onDelete, onClos
   }
 
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-end sm:items-center justify-center z-50 p-4">
-      <div className="bg-om-surface rounded-t-xl sm:rounded-lg shadow-2xl w-full max-w-md">
-        <div className="flex items-center justify-between px-4 py-3 border-b border-om-border">
-          <h3 className="font-semibold text-om-text text-base">Note: {eventTitle}</h3>
+    <div className="fixed inset-0 bg-black/50 flex items-end sm:items-center justify-center z-50 p-0 sm:p-4">
+      <div className="bg-om-surface rounded-t-2xl sm:rounded-lg shadow-2xl w-full max-w-md max-h-[92dvh] overflow-y-auto">
+        <div className="flex items-center justify-between px-4 py-3 border-b border-om-border sticky top-0 bg-om-surface z-10">
+          <h3 className="font-semibold text-om-text text-base pr-2">Note: {eventTitle}</h3>
           <button
             onClick={onClose}
-            className="text-om-muted hover:text-om-text text-lg leading-none"
+            aria-label="Close"
+            className="h-10 w-10 shrink-0 rounded-full text-om-muted hover:text-om-text text-2xl leading-none"
           >
             ×
           </button>
@@ -60,24 +61,24 @@ export function NoteEditor({ eventId, eventTitle, note, onSave, onDelete, onClos
             color="accent"
           />
         </div>
-        <div className="flex gap-2 px-4 pb-4">
+        <div className="flex gap-2 px-4 pb-6 sm:pb-4 sticky bottom-0 bg-om-surface pt-2">
           <button
             onClick={handleSave}
-            className="flex-1 py-1.5 rounded bg-om-accent hover:bg-om-accent-hover text-white text-sm font-medium transition-colors"
+            className="flex-1 h-11 rounded-lg bg-om-accent hover:bg-om-accent-hover text-om-accent-fg text-sm font-medium transition-colors"
           >
             Save
           </button>
           {note && (
             <button
               onClick={onDelete}
-              className="py-1.5 px-3 rounded border border-om-error text-om-error text-sm hover:bg-om-error-bg transition-colors"
+              className="h-11 px-4 rounded-lg border border-om-error text-om-error text-sm hover:bg-om-error-bg transition-colors"
             >
               Delete
             </button>
           )}
           <button
             onClick={onClose}
-            className="py-1.5 px-3 rounded border border-om-border text-om-muted text-sm hover:bg-om-slot-hover transition-colors"
+            className="h-11 px-4 rounded-lg border border-om-border text-om-muted text-sm hover:bg-om-slot-hover transition-colors"
           >
             Cancel
           </button>
