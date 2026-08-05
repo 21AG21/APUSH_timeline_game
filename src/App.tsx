@@ -179,7 +179,7 @@ export default function App() {
   const trademarkFooter = (
     <button
       onClick={() => setAboutOpen(true)}
-      className="w-full px-3 py-2 text-left text-[0.65rem] leading-snug text-om-muted hover:text-om-text border-t border-om-border bg-om-surface"
+      className="pb-safe w-full px-3 pt-2 text-left text-[0.65rem] leading-snug text-om-muted hover:text-om-text border-t border-om-border bg-om-surface"
     >
       AP<sup>&reg;</sup> and Advanced Placement<sup>&reg;</sup> are trademarks registered by the
       College Board, which is not affiliated with, and does not endorse, this website.{' '}

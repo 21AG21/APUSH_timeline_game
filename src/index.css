@@ -63,6 +63,17 @@
   --om-error-fg:     #2A0F0F;
 }
 
+/* Display-cutout insets, read once here so every consumer shares one source of
+   truth. Held in variables rather than inlined env() calls because env() is not
+   settable from script, which makes a real device's values impossible to
+   reproduce in a headless browser — Chromium always reports 0. Overriding these
+   on <html> simulates a notched phone. */
+:root {
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left:   env(safe-area-inset-left, 0px);
+  --safe-right:  env(safe-area-inset-right, 0px);
+}
+
 *, *::before, *::after {
   box-sizing: border-box;
 }
@@ -93,7 +104,20 @@ body {
 .app-shell {
   height: 100vh;
   height: 100dvh;
-  padding-bottom: env(safe-area-inset-bottom);
+  /* No bottom padding here on purpose. Insetting the shell itself squeezes the
+     whole layout into 100dvh minus the home indicator and leaves a dead strip
+     of background below it — roughly 34px, which reads as the app not filling
+     the phone. The shell now paints edge to edge and only the last row of
+     controls reserves that space (see .pb-safe below). */
+  padding-left: var(--safe-left);
+  padding-right: var(--safe-right);
+}
+
+/* Adds the home-indicator inset on top of the element's own bottom padding, so
+   the final row of controls stays tappable while the app still fills the screen.
+   Devices without an inset resolve this to the fallback and are unaffected. */
+.pb-safe {
+  padding-bottom: calc(0.5rem + var(--safe-bottom));
 }
 
 /* Inputs below 16px trigger iOS auto-zoom on focus */
