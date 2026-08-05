@@ -28,7 +28,7 @@ export function ResultsSummary({ state, settings, allEvents }: Props) {
     .map((id) => allEvents.find((e) => e.id === id)?.title ?? id)
 
   const summary = [
-    `APUSH Timeline — Game Summary`,
+    `US History Timeline — Game Summary`,
     `Score: ${state.score}/${total}`,
     `Accuracy: ${accuracy}%`,
     `Attempts: ${state.attempts}`,

@@ -1,4 +1,4 @@
-# APUSH Timeline
+# US History Timeline
 
 A free, independent study game for AP® U.S. History. You are given a historical
 event and you place it in the correct spot on a growing timeline — by dragging it

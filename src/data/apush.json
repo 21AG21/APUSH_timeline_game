@@ -1355,7 +1355,7 @@
     ],
     "effects": [
       "Explosive growth of Methodist and Baptist denominations",
-      "Camp meetings drawing thousands, especially in the 'burned-over district'",
+      "Frontier camp meetings drawing thousands, from Cane Ridge, Kentucky, onward",
       "New religious movements including the Mormons taking shape"
     ],
     "significance": [
@@ -1465,7 +1465,7 @@
       "Completed the removal of the Southeast's major Native nations",
       "Became the defining case of federal treaty violation and forced displacement"
     ],
-    "region": "West",
+    "region": "South",
     "units": [
       4
     ],
@@ -1748,7 +1748,7 @@
     "id": "secession-fort-sumter",
     "year": 1861,
     "title": "Secession and the Firing on Fort Sumter",
-    "description": "Seven seceded states formed the Confederacy at Montgomery in February, and in April Confederate batteries bombarded the federal garrison holding Fort Sumter in Charleston Harbor.",
+    "description": "Six seceded states formed the Confederacy at Montgomery in February, joined by Texas in March, and in April Confederate batteries bombarded the federal garrison holding Fort Sumter in Charleston Harbor.",
     "cause": "Lincoln's election in November 1860 convinced slaveholding states, starting with South Carolina that December, that they had permanently lost control of the federal government.",
     "effect": "The garrison surrendered after roughly 34 hours of shelling, and Lincoln's call for volunteers pushed four more states into the Confederacy.",
     "causes": [
@@ -1986,15 +1986,15 @@
     "title": "15th Amendment Ratified",
     "description": "Ratified on February 3, 1870, the amendment barred the federal government and the states from denying the vote based on race, color, or previous enslavement.",
     "cause": "Republicans wanted Black male suffrage secured in the Constitution rather than resting on statutes a future Congress could repeal.",
-    "effect": "Black men voted in large numbers and won office throughout the South during the early years of Reconstruction.",
+    "effect": "Constitutionalized the Black male franchise the Reconstruction Acts had already created in the South and extended it nationwide.",
     "causes": [
       "Republican fear that Democratic victories would erase Black suffrage",
       "Desire to extend Black voting beyond the occupied South to border and Northern states",
       "Sustained pressure from Black activists and Radical Republicans"
     ],
     "effects": [
-      "Black men voted and held office across the Reconstruction South",
-      "Split the women's suffrage movement over the exclusion of women",
+      "Extended Black male suffrage to Northern and border states",
+      "Split the women's suffrage movement as it moved through Congress",
       "Prompted Enforcement Acts aimed at Klan violence at the polls"
     ],
     "significance": [
@@ -2126,7 +2126,7 @@
       "Defined the corporate consolidation that shaped the Gilded Age economy",
       "Provoked the antitrust laws and business regulation of the Progressive Era"
     ],
-    "region": "Northeast",
+    "region": "North America",
     "units": [
       6
     ],
@@ -2748,7 +2748,7 @@
     "year": 1925,
     "title": "Scopes Trial & 1920s Cultural Conflict",
     "description": "Tennessee teacher John Scopes was tried in July 1925 for teaching evolution, in a nationally publicized courtroom clash over science, religion, and modern life.",
-    "cause": "Tennessee's Butler Act banned teaching human evolution in public schools, and the ACLU recruited a defendant willing to test the law.",
+    "cause": "Tennessee's Butler Act banned teaching human evolution in public schools, and the ACLU offered to fund a test case that Dayton boosters recruited John Scopes to bring.",
     "effect": "Scopes was convicted and fined $100, though Clarence Darrow's cross-examination of William Jennings Bryan embarrassed fundamentalists in the national press.",
     "causes": [
       "Tennessee's Butler Act barring evolution instruction",
@@ -2982,7 +2982,7 @@
     "id": "nato-berlin-airlift",
     "year": 1949,
     "title": "NATO Founded & the Berlin Airlift",
-    "description": "The United States and eleven allies signed the North Atlantic Treaty in April 1949, while Allied planes kept supplying West Berlin until the Soviet blockade ended in May.",
+    "description": "The United States and eleven allies signed the North Atlantic Treaty in April 1949, while Allied planes supplied West Berlin through a Soviet blockade lifted that May, flying on until September.",
     "cause": "The Soviet blockade of West Berlin, begun in June 1948, convinced Western governments that containment required a standing peacetime military alliance.",
     "effect": "Twelve nations pledged mutual defense under Article 5, and Stalin lifted the Berlin blockade on May 12, 1949.",
     "causes": [

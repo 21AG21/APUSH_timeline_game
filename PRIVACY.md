@@ -2,7 +2,7 @@
 
 **Last updated:** 2026-08-05
 
-APUSH Timeline is a free, independent study game. This policy explains, in plain
+US History Timeline is a free, independent study game. This policy explains, in plain
 terms, what the site does and does not do with information.
 
 ## The short version

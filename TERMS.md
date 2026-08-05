@@ -2,7 +2,7 @@
 
 **Last updated:** 2026-08-05
 
-APUSH Timeline is a free study game offered as a personal, non-commercial
+US History Timeline is a free study game offered as a personal, non-commercial
 project. By using it, you agree to the following.
 
 ## No affiliation with the College Board

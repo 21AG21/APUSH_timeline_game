@@ -234,9 +234,12 @@ export default function App() {
           <header className="shrink-0 flex items-center justify-between gap-3 px-3 py-2 border-b border-om-border bg-om-surface">
             <div>
               <h1 className="text-xl font-serif font-bold text-om-text leading-none">
-                APUSH Timeline
+                US History Timeline
               </h1>
               <div className="mt-1 h-[2px] bg-om-gold rounded-full w-full" />
+              <p className="mt-1 text-[0.65rem] text-om-muted leading-none">
+                A study game for AP<sup>&reg;</sup> U.S. History
+              </p>
             </div>
             <button
               onClick={() => setSettingsOpen(true)}
@@ -290,13 +293,16 @@ export default function App() {
                     compact ? 'text-xl' : 'text-3xl'
                   }`}
                 >
-                  APUSH Timeline
+                  US History Timeline
                 </h1>
                 <div
                   className={`mt-1 bg-om-gold rounded-full w-full ${
                     compact ? 'h-[2px]' : 'h-[3px]'
                   }`}
                 />
+                <p className="mt-1.5 text-xs text-om-muted leading-none">
+                  A study game for AP<sup>&reg;</sup> U.S. History
+                </p>
               </div>
               {compact ? (
                 <button
