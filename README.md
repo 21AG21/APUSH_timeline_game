@@ -6,6 +6,10 @@ or by tapping a slot. Correct placements build a streak; every event carries its
 causes, effects, and long-run significance so the ordering practice doubles as
 review.
 
+There is also a **flashcard mode** built on the same dataset: six cards per event
+(date, identification, causes, effects, significance, period) on a Leitner
+schedule, filterable by period and card type.
+
 Works on phones, tablets, and desktop. Everything runs locally in the browser —
 there is no account and no server.
 
@@ -27,6 +31,11 @@ npx vitest run   # tests
   description, cause/effect, significance, region, and College Board unit(s).
 - **`src/lib/game.ts`** — pure game logic: placement validation, scoring by gap
   tightness, and a weighted draw that resurfaces events you have missed.
+- **`src/lib/flashcards.ts`** — cards are *derived* from the event data rather than
+  authored separately, so correcting an event updates every card drawn from it and
+  the two cannot drift apart. Card ids are stable across rebuilds, so scheduling
+  survives a deploy. Note `maskYear`: ten titles in the deck name their own year
+  ("Election of 1828"), which would give away the answer on a date card.
 - **`src/hooks/usePointerDrag.ts`** — placement dragging. Built on Pointer Events
   rather than HTML5 drag-and-drop, which never fires on touch devices.
 - **`src/hooks/useMediaQuery.ts`** — picks the stacked or split layout from both

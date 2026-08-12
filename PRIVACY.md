@@ -21,6 +21,7 @@ your device and is never transmitted to us or anyone else:
 | `apush-game-state` | Your current game: timeline, score, attempts, streak |
 | `apush-settings` | Your preferences: dark mode, hard mode, filters, analytics choice |
 | `apush-notes` | Study notes you write yourself |
+| `apush-flashcards` | Which flashcards you have answered, and when each is next due |
 | `apush-event-count` | Internal bookkeeping for the event list |
 | `apush-data-version` | Internal bookkeeping so old saves upgrade cleanly |
 

@@ -73,6 +73,33 @@
     "course": "apush"
   },
   {
+    "id": "coronado-expedition",
+    "year": 1540,
+    "title": "Coronado Expedition",
+    "description": "Spanish conquistador Francisco Vásquez de Coronado led an expedition through the American Southwest from 1540 to 1542, documenting Pueblo communities and other indigenous societies with sophisticated agricultural systems, trade networks, and political organizations.",
+    "cause": "Spanish ambition to discover wealth and expand imperial territory in North America.",
+    "effect": "Spanish documented indigenous societies and acquired geographical knowledge of the Southwest.",
+    "causes": [
+      "Spanish desire to locate legendary wealthy cities called the Seven Cities of Cíbola",
+      "Continuation of Spanish imperial expansion and territorial conquest",
+      "Search for mineral wealth and new lands to control"
+    ],
+    "effects": [
+      "Detailed European documentation of diverse Pueblo and Southwestern indigenous societies",
+      "Spanish awareness of complex Native American social structures and economies",
+      "Expansion of Spanish geographical knowledge of the North American interior"
+    ],
+    "significance": [
+      "Revealed the sophistication and regional diversity of indigenous societies in the American Southwest",
+      "Demonstrated that Native American civilizations had developed complex systems independent of European contact"
+    ],
+    "region": "West",
+    "units": [
+      1
+    ],
+    "course": "apush"
+  },
+  {
     "id": "valladolid-debate",
     "year": 1550,
     "title": "Valladolid Debate",
@@ -168,6 +195,32 @@
     "course": "apush"
   },
   {
+    "id": "champlain-founds-quebec",
+    "year": 1608,
+    "title": "French Settlement at Quebec / Samuel Champlain Founds Quebec",
+    "description": "Samuel Champlain established Quebec as a fur-trading post, anchoring French colonization efforts on commerce and indigenous alliances rather than territorial conquest and large-scale European settlement.",
+    "cause": "French merchants sought control of the lucrative North American fur trade, and Champlain's explorations revealed the St. Lawrence River region as a viable colonial location.",
+    "effect": "French colonization established itself through commerce and indigenous alliances, expanding European influence into the continental interior.",
+    "causes": [
+      "French commercial competition for the North American fur trade",
+      "Champlain's earlier explorations mapping the St. Lawrence River region"
+    ],
+    "effects": [
+      "Establishment of permanent French presence in North America centered on fur commerce",
+      "Development of close military and trade alliances with Algonquian and Huron peoples",
+      "Expansion of French influence into the continental interior"
+    ],
+    "significance": [
+      "Established the French colonial model emphasizing commerce over territorial expansion",
+      "Created alliances with indigenous nations that shaped North American geopolitics for generations"
+    ],
+    "region": "North America",
+    "units": [
+      2
+    ],
+    "course": "apush"
+  },
+  {
     "id": "first-africans-point-comfort",
     "year": 1619,
     "title": "First Enslaved Africans Arrive in Virginia",
@@ -241,6 +294,33 @@
       "Foreshadowed the democratic principles embedded in the Constitution"
     ],
     "region": "New England",
+    "units": [
+      2
+    ],
+    "course": "apush"
+  },
+  {
+    "id": "dutch-new-amsterdam",
+    "year": 1626,
+    "title": "Dutch Settlement of New Amsterdam",
+    "description": "Director Peter Minuit of the Dutch West India Company established New Amsterdam on Manhattan Island as the principal settlement of the New Netherland colony, transforming it into a vital trading hub for North American furs and goods destined for European markets.",
+    "cause": "The Dutch West India Company pursued colonization of North America to establish trading networks and acquire furs and other valuable commodities for export.",
+    "effect": "New Amsterdam became the economic and political center of Dutch colonial efforts in North America, anchoring Atlantic commercial networks until the English captured the settlement in 1664.",
+    "causes": [
+      "Dutch West India Company sought profitable trading opportunities in North America's fur markets and Atlantic commerce",
+      "Strategic geographic position of Manhattan Island on the Hudson River provided access to interior trade routes",
+      "European competition for colonial resources and territorial control prompted Dutch settlement efforts"
+    ],
+    "effects": [
+      "New Amsterdam developed as New Netherland's dominant settlement and became a significant Atlantic trading center",
+      "Dutch commercial and cultural presence shaped the demographics and economy of the Hudson River valley region",
+      "The settlement established a foothold in North America that lasted until English conquest forty years later"
+    ],
+    "significance": [
+      "Dutch colonization prioritized commerce and trade alliances over territorial expansion, contrasting with English settlement patterns focused on agricultural communities",
+      "New Amsterdam's multicultural, merchant-oriented society later became foundational to the development of New York City"
+    ],
+    "region": "Northeast",
     "units": [
       2
     ],
@@ -344,6 +424,31 @@
     "course": "apush"
   },
   {
+    "id": "virginia-hereditary-slavery-1662",
+    "year": 1662,
+    "title": "Virginia Establishes Hereditary Slavery Through Maternal Descent",
+    "description": "Virginia's House of Burgesses passes an act declaring that children born to enslaved mothers inherit enslaved status for life, institutionalizing hereditary, permanent slavery as a generational condition tied to maternal descent.",
+    "cause": "Colonial demand for permanent, cheaper labor as the tobacco economy expanded and the supply of indentured servants declined.",
+    "effect": "Established lifelong, heritable slavery inherited through the mother, transforming slavery from a temporary personal condition into a permanent racial classification passed down through generations.",
+    "causes": [
+      "Growing tobacco economy required permanent, expandable labor force as indentured servant supply declined",
+      "Colonial lawmakers sought legal mechanism to make enslaved status hereditary and permanent without relying on English common law precedent of paternal descent"
+    ],
+    "effects": [
+      "Created generational enslaved population inherited maternally, ensuring permanent workforce expansion",
+      "Shift from slavery as temporary contractual servitude to slavery as permanent, racialized, heritable status"
+    ],
+    "significance": [
+      "Foundational Virginia law establishing hereditary racial slavery in British North America",
+      "Marked decisive transformation of slavery from person-based temporary servitude to race-based permanent bondage"
+    ],
+    "region": "Chesapeake",
+    "units": [
+      2
+    ],
+    "course": "apush"
+  },
+  {
     "id": "english-capture-new-amsterdam",
     "year": 1664,
     "title": "English Capture of New Amsterdam (New York)",
@@ -363,6 +468,33 @@
       "Consolidated English geopolitical control over the Atlantic seaboard from Maine to the Carolinas"
     ],
     "region": "Northeast",
+    "units": [
+      2
+    ],
+    "course": "apush"
+  },
+  {
+    "id": "charles-town-founded",
+    "year": 1670,
+    "title": "Charles Town Founded",
+    "description": "English settlers, many of them planters relocating from Barbados, founded Charles Town in Carolina. They carried the West Indian plantation model with them, and the colony grew into the staple-crop, slave-labor society that defined the southern colonial region.",
+    "cause": "Proprietors granted Carolina in 1663 recruited experienced planters from crowded Barbados, who brought both capital and an established system of slave labor.",
+    "effect": "Carolina developed a plantation economy built on enslaved labor, and by the early 1700s the low country held a Black majority.",
+    "causes": [
+      "Proprietary grant of Carolina in 1663 to backers of the restored monarchy",
+      "Barbadian planters seeking land as sugar estates consolidated on the island",
+      "Demand for a mainland colony supplying provisions to the West Indies"
+    ],
+    "effects": [
+      "Transplanted the West Indian plantation and slave-labor model to the mainland",
+      "Rice became the staple export of the Carolina low country",
+      "Enslaved Africans formed a majority of the low country population by the early 1700s"
+    ],
+    "significance": [
+      "Established the plantation society that distinguished the southern colonies from New England",
+      "Carried a harsh Barbadian slave code into mainland British America"
+    ],
+    "region": "South",
     "units": [
       2
     ],
@@ -776,6 +908,31 @@
     "course": "apush"
   },
   {
+    "id": "abigail-adams-women-rights",
+    "year": 1776,
+    "title": "Abigail Adams Advocates for Women's Rights",
+    "description": "In a letter to her husband during the Continental Congress, Abigail Adams urged protection of women's rights and legal status in the new republic, famously asking him to 'remember the ladies' in the laws of the new nation.",
+    "cause": "Women's participation in the independence movement and application of natural rights philosophy to gender",
+    "effect": "Connected women's equality claims to revolutionary principles; inspired republican motherhood concept",
+    "causes": [
+      "Women's active participation and sacrifice during the revolution",
+      "Enlightenment natural rights ideology applied to gender relations"
+    ],
+    "effects": [
+      "Articulated an early argument for women's political equality grounded in natural rights",
+      "Laid groundwork for women's rights activism in the post-revolutionary era"
+    ],
+    "significance": [
+      "One of the first American calls for women's inclusion in political voice and legal protections",
+      "Showed how revolutionary principles of equality could extend beyond male citizens"
+    ],
+    "region": "North America",
+    "units": [
+      3
+    ],
+    "course": "apush"
+  },
+  {
     "id": "declaration-of-independence",
     "year": 1776,
     "title": "Declaration of Independence",
@@ -817,6 +974,31 @@
     "significance": [
       "The definitive military turning point of the war",
       "Transformed a colonial rebellion into a global conflict"
+    ],
+    "region": "Northeast",
+    "units": [
+      3
+    ],
+    "course": "apush"
+  },
+  {
+    "id": "pennsylvania-abolition-act",
+    "year": 1780,
+    "title": "Pennsylvania Abolition of Slavery",
+    "description": "Pennsylvania's legislature passed the first gradual abolition law in the United States, providing for the eventual emancipation of enslaved people. The law reflected revolutionary ideals of natural rights and human equality.",
+    "cause": "Enlightenment principles of natural rights and religious opposition to slavery",
+    "effect": "Created a free-soil North distinct from slave-holding South; inspired abolition laws in other northern states",
+    "causes": [
+      "Enlightenment philosophy emphasizing inalienable human rights and liberty",
+      "Quaker and religious activism against slavery"
+    ],
+    "effects": [
+      "Established an emerging sectional divide between northern free states and southern slave states",
+      "Prompted other northern states to adopt gradual abolition statutes"
+    ],
+    "significance": [
+      "First extensive abolition statute in the western hemisphere",
+      "Demonstrated how revolutionary equality rhetoric could drive legal reform against slavery"
     ],
     "region": "Northeast",
     "units": [
@@ -1305,6 +1487,33 @@
     "course": "apush"
   },
   {
+    "id": "lowell-mills-begin-operations",
+    "year": 1823,
+    "title": "Lowell Mills Begin Operations",
+    "description": "The Merrimack Manufacturing Company began operating textile mills at Lowell, Massachusetts, scaling the integrated factory system pioneered at Waltham into the largest manufacturing complex in the country. The \"Lowell system\" recruited unmarried young women from New England farms as wage laborers, housing them in company boardinghouses.",
+    "cause": "Manufacturers seeking cheap labor and faced with westward-driven male worker shortages recruited unmarried rural women for low-wage factory work, initiating mass female entry into paid industrial labor.",
+    "effect": "Thousands of young women workers urbanized the Northeast, gained economic independence through wages while facing factory discipline, and created visible working-class communities that challenged traditional gender roles and family structures.",
+    "causes": [
+      "Manufacturers sought cheap labor and recruited unmarried rural women for low-wage factory work.",
+      "Capital investments and transportation improvements enabled large-scale manufacturing centers in the Northeast.",
+      "Westward expansion drew male workers away, creating labor shortages manufacturers filled by recruiting female workers."
+    ],
+    "effects": [
+      "Lowell and similar cities urbanized rapidly as thousands of young women arrived seeking factory wages and employment.",
+      "Factory work provided economic independence to women but involved strict discipline and clear class hierarchies between workers and owners.",
+      "Manufacturing replaced household production and semi-subsistence farming with urban wage labor in the industrial Northeast."
+    ],
+    "significance": [
+      "Made wage labor in a factory a normal stage of life for young New England women",
+      "Showed the Market Revolution reorganizing households and work, not just transport and output"
+    ],
+    "region": "New England",
+    "units": [
+      4
+    ],
+    "course": "apush"
+  },
+  {
     "id": "monroe-doctrine",
     "year": 1823,
     "title": "Monroe Doctrine",
@@ -1373,6 +1582,33 @@
       "Cemented the economic and political alliance between the industrial Northeast and agricultural Midwest"
     ],
     "region": "Northeast",
+    "units": [
+      4
+    ],
+    "course": "apush"
+  },
+  {
+    "id": "election-of-1828",
+    "year": 1828,
+    "title": "Election of 1828 (Andrew Jackson's Victory)",
+    "description": "Andrew Jackson defeated incumbent John Quincy Adams in a decisive victory that reflected the growing electoral power of common white men without property. Jackson's triumph demonstrated the practical effects of expanded suffrage and marked the emergence of modern mass politics.",
+    "cause": "Expansion of voting rights among white males and voter mobilization against elite-dominated politics",
+    "effect": "Jackson's presidency advanced democratic participation and consolidated the Democratic Party as a major political force",
+    "causes": [
+      "Widespread removal of property qualifications for voting in northern and western states",
+      "Public backlash against the 1824 Corrupt Bargain and desire for direct popular representation",
+      "Mobilization of common white men through political organizations and campaign activities"
+    ],
+    "effects": [
+      "Jackson's presidency expanded democratic participation and executive power in the national government",
+      "Solidified the Democratic Party and reshaped the American two-party political system",
+      "Demonstrated that electoral politics could be won by appealing to voters beyond the propertied elite"
+    ],
+    "significance": [
+      "Marked the practical realization of expanded white male suffrage through an overwhelming electoral mandate",
+      "Symbolized the transition from deferential republican politics to competitive mass-based democracy"
+    ],
+    "region": "North America",
     "units": [
       4
     ],
@@ -1499,6 +1735,31 @@
     ],
     "significance": [
       "Developed the radical states' rights constitutional arguments that would later justify Southern secession in 1860"
+    ],
+    "region": "South",
+    "units": [
+      4
+    ],
+    "course": "apush"
+  },
+  {
+    "id": "calhoun-positive-good-slavery",
+    "year": 1837,
+    "title": "Calhoun's \"Slavery as a Positive Good\" Speech",
+    "description": "Senator John C. Calhoun of South Carolina delivered an influential congressional address arguing that slavery was a positive moral and social institution, marking a decisive shift from earlier gradualist defenses toward celebration of slavery.",
+    "cause": "Growing abolitionist moral attacks prompted Southern leaders to transition from defensive justification to aggressive celebration of slavery.",
+    "effect": "The speech reinforced sectional divisions and positioned slavery as fundamental to Southern civilization rather than a regrettable institution.",
+    "causes": [
+      "Intensifying Northern abolitionist attacks forced Southern leaders to mount increasingly sophisticated defenses of slavery",
+      "The Deep South's wholesale economic and social dependence on slavery required comprehensive ideological justification"
+    ],
+    "effects": [
+      "Southern political leadership abandoned apologetic \"necessary evil\" positions in favor of explicit proslavery ideology",
+      "Hardened sectional polarization by foreclosing any middle ground between proslavery and antislavery factions"
+    ],
+    "significance": [
+      "Marked the point at which North-South differences became ideologically irreconcilable, not mere policy disagreements",
+      "Foreshadowed the impossibility of further legislative compromise on slavery's expansion"
     ],
     "region": "South",
     "units": [
@@ -1914,6 +2175,31 @@
     "course": "apush"
   },
   {
+    "id": "black-codes-sharecropping",
+    "year": 1865,
+    "title": "Black Codes and the Rise of Sharecropping",
+    "description": "Southern states enacted Black Codes to restrict freedpeople's rights and labor mobility. Unable to acquire land through the failed federal redistribution, formerly enslaved people entered into sharecropping contracts that bound them to plantation labor and debt cycles, perpetuating economic subjugation.",
+    "cause": "Southern planters sought to restore labor control after slavery's end; federal land redistribution promised to freedpeople was reversed; economic desperation of freedpeople",
+    "effect": "Sharecropping system entrapped freedpeople in perpetual debt and labor dependence; Southern planters maintained wealth and regional political power",
+    "causes": [
+      "Southern planters sought labor control and social subordination after slavery ended",
+      "Federal land redistribution promised to freedpeople never materialized; planters retained land ownership"
+    ],
+    "effects": [
+      "Freedpeople failed to achieve land ownership or economic self-sufficiency",
+      "Sharecropping perpetuated economic inequality and social subordination across decades"
+    ],
+    "significance": [
+      "Explains economic mechanism of Reconstruction failure and post-war inequality",
+      "Demonstrates how former slaveholders preserved power despite military defeat and emancipation"
+    ],
+    "region": "South",
+    "units": [
+      5
+    ],
+    "course": "apush"
+  },
+  {
     "id": "freedmens-bureau",
     "year": 1865,
     "title": "Freedmen's Bureau Established",
@@ -2145,6 +2431,56 @@
     "course": "apush"
   },
   {
+    "id": "edison-incandescent-light",
+    "year": 1879,
+    "title": "Thomas Edison Perfects the Incandescent Light Bulb",
+    "description": "Thomas Edison developed a durable, commercially viable incandescent electric lamp, leading to the rapid electrification of American cities, homes, and factories.",
+    "cause": "Demand from businesses and cities for safe, reliable electric lighting; Edison's systematic experimentation with materials and electrical systems.",
+    "effect": "Expansion of central power plants nationwide; extended working hours in factories and enabled new electrical industries.",
+    "causes": [
+      "Demand from cities and businesses for reliable lighting to replace dangerous gas lamps",
+      "Edison's systematic research into materials and electrical systems building on earlier inventions"
+    ],
+    "effects": [
+      "Rapid expansion of central electric power plants and distribution networks across cities and towns",
+      "Extended factory working hours and created entirely new industries around electrical equipment and lighting"
+    ],
+    "significance": [
+      "Exemplified how technological innovation became the primary driver of industrial capitalism and economic transformation",
+      "Enabled factory industrialization and urbanization by eliminating dependence on natural daylight for productive work"
+    ],
+    "region": "Northeast",
+    "units": [
+      6
+    ],
+    "course": "apush"
+  },
+  {
+    "id": "frances-willard-wctu",
+    "year": 1879,
+    "title": "Frances Willard Leads Women's Christian Temperance Union",
+    "description": "Frances Willard became president of the Women's Christian Temperance Union and transformed it into the largest women's organization in America, connecting temperance to campaigns for women's suffrage and political equality.",
+    "cause": "Growing organizing among women seeking expanded political rights; temperance gaining support as moral reform cause.",
+    "effect": "WCTU expanded to millions of members; women gained experience in political organizing for future suffrage campaigns.",
+    "causes": [
+      "Growing organizing among women seeking greater political voice and expanded social and legal rights",
+      "Temperance movement gaining support among middle-class women as a moral social reform crusade"
+    ],
+    "effects": [
+      "WCTU expanded to millions of members, becoming the dominant women's organization in the United States",
+      "Women developed political organizing experience that later fueled suffrage and broader equality movements"
+    ],
+    "significance": [
+      "Demonstrated how women could leverage reform organizations to challenge gender inequality and gain political influence",
+      "Connected temperance reform activism to women's suffrage and broader Progressive Era political reform agenda"
+    ],
+    "region": "North America",
+    "units": [
+      6
+    ],
+    "course": "apush"
+  },
+  {
     "id": "chinese-exclusion-act",
     "year": 1882,
     "title": "Chinese Exclusion Act",
@@ -2240,6 +2576,31 @@
       "Designed to systematically dissolve native tribal identity"
     ],
     "region": "West",
+    "units": [
+      6
+    ],
+    "course": "apush"
+  },
+  {
+    "id": "hull-house-jane-addams",
+    "year": 1889,
+    "title": "Jane Addams Founds Hull House Settlement",
+    "description": "Jane Addams and Ellen Gates Starr established Hull House in a poor Chicago neighborhood, creating a model settlement house that provided social services, education, and advocacy for immigrant communities.",
+    "cause": "Massive urban immigration and poverty; educated reformers convinced that direct community engagement could address social inequality.",
+    "effect": "Settlement house movement spread rapidly across American cities; educated women gained access to professional reform work.",
+    "causes": [
+      "Massive immigration and urbanization creating impoverished tenement neighborhoods in major cities",
+      "Conviction among educated middle-class reformers that direct community engagement could address social problems"
+    ],
+    "effects": [
+      "Settlement house movement expanded across major American cities providing social services and welfare programs",
+      "Created professional opportunities for educated women in social reform outside traditional domestic roles"
+    ],
+    "significance": [
+      "Pioneered integration of educated reformers into immigrant communities to promote social change and welfare",
+      "Influenced Progressive Era social policy and demonstrated power of organized activist approaches to urban poverty"
+    ],
+    "region": "North America",
     "units": [
       6
     ],
@@ -2366,6 +2727,33 @@
       "Its ideas were later adopted during the Progressive Era"
     ],
     "region": "West",
+    "units": [
+      6
+    ],
+    "course": "apush"
+  },
+  {
+    "id": "worlds-columbian-exposition",
+    "year": 1893,
+    "title": "World's Columbian Exposition Opens",
+    "description": "The World's Columbian Exposition opened in Chicago on May 1, 1893, presenting innovative technologies, consumer goods, and leisure activities to millions of middle-class visitors. The fair showcased modern retail concepts and luxury goods, reinforcing consumer culture as central to middle-class identity and promoting new forms of urban entertainment and commercial display.",
+    "cause": "Growing middle-class leisure time, increased consumer goods availability, and American desire to showcase commercial superiority motivated the exposition's creation.",
+    "effect": "The exposition popularized consumer culture and leisure activities among millions of middle-class Americans and influenced retail design and commercial practices.",
+    "causes": [
+      "Rapid industrial production increased availability and variety of consumer goods for middle-class purchase",
+      "Growing leisure time and disposable income among white-collar workers created demand for new entertainment",
+      "American desire to showcase technological and commercial superiority through a world's fair"
+    ],
+    "effects": [
+      "Millions of middle-class visitors adopted new consumer goods and leisure practices demonstrated at the fair",
+      "Department store design and retail strategies evolved based on innovative merchandising displayed at the fair",
+      "Urban entertainment venues and amusement parks expanded to meet middle-class demand for leisure activities"
+    ],
+    "significance": [
+      "Demonstrated how leisure activities and consumer culture became defining features of middle-class identity",
+      "Illustrated how retail merchandising practices shaped the emerging middle-class identity in urban America"
+    ],
+    "region": "North America",
     "units": [
       6
     ],
@@ -2785,6 +3173,60 @@
     "course": "apush"
   },
   {
+    "id": "commercial-radio-broadcasting",
+    "year": 1920,
+    "title": "Commercial Radio Broadcasting Begins",
+    "description": "KDKA Pittsburgh launched the first regularly scheduled commercial radio broadcasts in 1920, initiating the era of radio as a mass medium for entertainment and news.",
+    "cause": "Technological advances in wireless transmission and business interest in nationwide advertising enabled commercial radio to reach mass audiences.",
+    "effect": "Radio rapidly became ubiquitous in American homes, while national networks standardized programming and advertising reached millions of consumers simultaneously.",
+    "causes": [
+      "Wireless technology maturation allowed economically viable commercial broadcasting to mass audiences nationwide",
+      "Business opportunities for advertising through radio reached unprecedented numbers of consumers",
+      "Post-WWI public demand for affordable entertainment and information sources"
+    ],
+    "effects": [
+      "Radio ownership expanded from near-zero to millions of households throughout the 1920s and 1930s",
+      "National broadcast networks like NBC (1926) synchronized programs across the entire country",
+      "Advertisers and politicians gained unprecedented access to mass audiences through broadcast media"
+    ],
+    "significance": [
+      "Transformed American culture by creating shared national experiences in entertainment and information",
+      "Established mass media as a dominant economic force and tool for shaping public opinion and consumer behavior"
+    ],
+    "region": "North America",
+    "units": [
+      7
+    ],
+    "course": "apush"
+  },
+  {
+    "id": "washington-naval-conference",
+    "year": 1921,
+    "title": "Washington Naval Conference & Naval Arms Limitation",
+    "description": "The Washington Naval Conference (1921-1922) produced treaties limiting naval construction and establishing Pacific power arrangements, exemplifying the U.S. interwar approach to international order without the League of Nations.",
+    "cause": "Postwar fears of renewed naval arms racing and Japanese Pacific expansion prompted major powers to negotiate limits on battleship construction and regional agreements.",
+    "effect": "The treaty established naval ratios preserving U.S. advantages, though Japan's later withdrawal showed the limits of agreements without enforcement mechanisms.",
+    "causes": [
+      "Concern that unrestricted naval competition would drain postwar resources and trigger arms racing",
+      "U.S. determination to maintain naval supremacy while avoiding League-dependent enforcement mechanisms",
+      "Japanese territorial expansion and American interests in China and Pacific trade routes"
+    ],
+    "effects": [
+      "Treaty set battleship construction limits maintaining U.S. naval superiority over potential rivals",
+      "Established precedent for managing great power competition through negotiated arms limitation agreements",
+      "Failed to prevent future Japanese aggression when Tokyo repudiated treaty obligations in the 1930s"
+    ],
+    "significance": [
+      "Exemplified interwar foreign policy: international agreements pursued outside League of Nations framework",
+      "Revealed limits of arms treaties when nations withdrew in pursuit of national interests and expansionist goals"
+    ],
+    "region": "Global",
+    "units": [
+      7
+    ],
+    "course": "apush"
+  },
+  {
     "id": "national-origins-act",
     "year": 1924,
     "title": "National Origins Act",
@@ -3021,6 +3463,33 @@
     "course": "apush"
   },
   {
+    "id": "yalta-conference",
+    "year": 1945,
+    "title": "Yalta Conference",
+    "description": "In February 1945, President Franklin D. Roosevelt, British Prime Minister Winston Churchill, and Soviet Leader Joseph Stalin convened at Yalta in Crimea to negotiate the postwar world order. The leaders discussed the founding of the United Nations, the occupation and reparations for Germany, Soviet entry into the Pacific War against Japan in exchange for territorial concessions in Asia, and the political future of Eastern Europe and Poland. The conference represented the apex of the Grand Alliance and the dominant U.S. role in shaping postwar peace settlements.",
+    "cause": "As the Allies neared military victory over Nazi Germany, the major powers needed to negotiate the postwar international order and establish mechanisms for maintaining peace and security after the war ended.",
+    "effect": "The conference established the structural framework for the United Nations, secured Soviet commitment to join the war against Japan, and determined the postwar division and occupation of Germany and Eastern Europe, laying the groundwork for both international institutions and Cold War tensions.",
+    "causes": [
+      "Allied military momentum and imminent victory over Nazi Germany required advance planning for postwar Europe, Asia, and international institutions",
+      "Need to formalize Soviet entry into war against Japan and negotiate territorial compensation in Eastern Europe and Asia",
+      "Desire to establish functioning international peace organization and prevent repeating League of Nations failures"
+    ],
+    "effects": [
+      "United Nations organizational structure and charter framework were shaped by the Big Three agreement, establishing foundation for postwar international order",
+      "Soviet Union committed to enter Pacific War within months in exchange for territorial concessions in Asia, accelerating Japanese defeat",
+      "Postwar occupation zones for Germany and political settlements for Eastern Europe were established, creating divisions that persisted through Cold War era"
+    ],
+    "significance": [
+      "Demonstrated U.S. and Allied commitment to international cooperation and multilateral institutions as basis for postwar peace and security",
+      "Determined territorial and political arrangements in Europe and Asia that shaped international relations and regional conflicts for decades"
+    ],
+    "region": "Global",
+    "units": [
+      7
+    ],
+    "course": "apush"
+  },
+  {
     "id": "truman-doctrine-marshall-plan",
     "year": 1947,
     "title": "Truman Doctrine & Marshall Plan",
@@ -3174,6 +3643,58 @@
     "course": "apush"
   },
   {
+    "id": "federal-aid-highway-act-1956",
+    "year": 1956,
+    "title": "Federal-Aid Highway Act",
+    "description": "President Eisenhower signed the Federal-Aid Highway Act, authorizing construction of a 46,000-mile Interstate Highway System. This legislation represented the largest federal infrastructure investment in American history and directly enabled mass suburban expansion, automobile-centered consumer culture, and broad-based economic growth through construction employment and related industries.",
+    "cause": "Postwar economic prosperity, rising automobile ownership, Cold War national security priorities, and political pressure from suburban development interests combined to support comprehensive federal highway infrastructure.",
+    "effect": "The highway system catalyzed suburbanization, stimulated automobile and petroleum industries, and anchored the postwar consumer economy by enabling car-dependent sprawl and facilitating interstate commerce.",
+    "causes": [
+      "Postwar economic boom and rising automobile ownership created demand for improved interstate roads",
+      "Cold War national security strategy emphasized centralized transportation and communication infrastructure",
+      "Suburban development interests and automobile industry lobbied for massive highway investment"
+    ],
+    "effects": [
+      "Enabled unprecedented suburban migration and housing construction, particularly in Sunbelt regions",
+      "Dramatically increased demand for automobiles, petroleum products, and consumer goods linked to car ownership",
+      "Contributed to economic shift from industrial urban centers toward suburban and Sunbelt growth"
+    ],
+    "significance": [
+      "Represented unprecedented federal infrastructure commitment to suburban development and automobile dependence",
+      "Created basis for postwar mass affluence and consumer culture centered on suburban automobiles and mobility"
+    ],
+    "region": "North America",
+    "units": [
+      8
+    ],
+    "course": "apush"
+  },
+  {
+    "id": "rock-and-roll-youth-rebellion",
+    "year": 1956,
+    "title": "Rock and Roll Challenge to Cultural Conformity",
+    "description": "Rock and roll music, popularized by performers like Elvis Presley, Chuck Berry, and Little Richard, challenged postwar cultural conformity and emerged as a symbol of youth rebellion. Elvis's controversial television performances sparked moral panics among adults over music's influence on sexual behavior and race relations.",
+    "cause": "Youth sought to rebel against 1950s conformity; mass media spread African American musical styles to white teenage audiences",
+    "effect": "Rock and roll became defining feature of emerging youth culture, eroding racial barriers in music while provoking backlash from adults concerned about moral decline",
+    "causes": [
+      "Widespread teenage consumer culture and youth marketing; desire to rebel against parental conformity",
+      "Radio and television spread African American blues and R&B music to white youth audiences"
+    ],
+    "effects": [
+      "Rock and roll emerged as dominant youth culture phenomenon and symbol of generational rebellion",
+      "Moral panics erupted among adults; racial barriers in music industry eroded as white listeners embraced Black artists"
+    ],
+    "significance": [
+      "Exemplified how mass culture homogeneity of 1950s faced challenges from rebellious youth and artists",
+      "Foreshadowed deeper generational conflicts and cultural upheaval of the 1960s counterculture"
+    ],
+    "region": "North America",
+    "units": [
+      8
+    ],
+    "course": "apush"
+  },
+  {
     "id": "little-rock-nine",
     "year": 1957,
     "title": "Little Rock Nine",
@@ -3220,6 +3741,31 @@
     "significance": [
       "Opened the space race as a central front of the Cold War",
       "Recast American schooling as a matter of national security"
+    ],
+    "region": "Global",
+    "units": [
+      8
+    ],
+    "course": "apush"
+  },
+  {
+    "id": "bay-of-pigs-invasion",
+    "year": 1961,
+    "title": "Bay of Pigs Invasion",
+    "description": "CIA-backed Cuban exiles attempted to overthrow Fidel Castro, but Kennedy withdrew air support and the invasion collapsed. The fiasco strengthened Castro and drove Cuba closer to Soviet alliance.",
+    "cause": "U.S. perceived Cuba as a Soviet foothold in the Western Hemisphere during the Cold War competition for hemispheric influence",
+    "effect": "The failed invasion humiliated the Kennedy administration and accelerated Soviet-Cuban relations, setting the stage for the Cuban Missile Crisis",
+    "causes": [
+      "U.S. concern over Castro's communist alignment and threat to American interests in the Caribbean",
+      "Eisenhower-era planning inherited and approved by the new Kennedy administration"
+    ],
+    "effects": [
+      "Humiliating failure vindicated Castro and strengthened his grip on power",
+      "Accelerated Cuba-Soviet alliance and paved path toward Cuban Missile Crisis"
+    ],
+    "significance": [
+      "Demonstrated U.S. willingness to conduct covert interventions to prevent communist expansion in the Western Hemisphere",
+      "Illustrated extent of Cold War competition extending beyond Europe to Latin America and the Caribbean"
     ],
     "region": "Global",
     "units": [
@@ -3718,6 +4264,33 @@
       "Left the United States as the world's sole superpower"
     ],
     "region": "Global",
+    "units": [
+      9
+    ],
+    "course": "apush"
+  },
+  {
+    "id": "california-proposition-187",
+    "year": 1994,
+    "title": "California Proposition 187",
+    "description": "California voters approved Proposition 187, a ballot initiative that would restrict public services and benefits to undocumented immigrants and their children, igniting national debate over immigration policy and demographic change.",
+    "cause": "Rising undocumented immigration from Mexico and Latin America combined with economic concerns fueled nativist political backlash.",
+    "effect": "Courts blocked most provisions on constitutional grounds, though the initiative became emblematic of immigration becoming a lasting partisan divide.",
+    "causes": [
+      "Surge in undocumented immigration from Mexico and Latin America",
+      "Economic recession in early 1990s creating fiscal anxiety",
+      "Nativist backlash against rapid demographic change in California"
+    ],
+    "effects": [
+      "Federal courts struck down majority of provisions as unconstitutional",
+      "Mobilized Latino voters and immigrant rights organizations",
+      "Immigration solidified as a sharp partisan political issue"
+    ],
+    "significance": [
+      "Demonstrated intensifying political conflict over immigration from Latin America and demographic transformation",
+      "Illustrated growing cultural and political divisions surrounding immigration policy in American society"
+    ],
+    "region": "West",
     "units": [
       9
     ],

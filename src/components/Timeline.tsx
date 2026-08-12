@@ -69,7 +69,9 @@ export function Timeline({
   const slotCount = timeline.length + 1
 
   const renderSlot = (index: number) => (
-    <div ref={(el) => registerSlot(index, el)}>
+    // data-slot-index is the only stable handle on a slot: they are registered by
+    // ref, so there is otherwise nothing for a browser test to select.
+    <div data-slot-index={index} ref={(el) => registerSlot(index, el)}>
       <SlotMarker
         index={index}
         slotCount={slotCount}

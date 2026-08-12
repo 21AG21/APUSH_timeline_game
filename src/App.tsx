@@ -13,6 +13,8 @@ import { GameOverReview } from './components/GameOverReview'
 import { ResultsSummary } from './components/ResultsSummary'
 import { FilterPopover } from './components/FilterPopover'
 import { AboutModal } from './components/AboutModal'
+import { Flashcards } from './components/Flashcards'
+import type { ProgressMap } from './lib/flashcards'
 import { useGameState } from './hooks/useGameState'
 import { useLocalStorage } from './hooks/useLocalStorage'
 import { usePointerDrag } from './hooks/usePointerDrag'
@@ -39,6 +41,8 @@ export default function App() {
   const [journalOpen, setJournalOpen] = useState(false)
   const [settingsOpen, setSettingsOpen] = useState(false)
   const [aboutOpen, setAboutOpen] = useState(false)
+  const [cardsOpen, setCardsOpen] = useState(false)
+  const [cardProgress, setCardProgress] = useLocalStorage<ProgressMap>('apush-flashcards', {})
 
   const { split, compact } = useLayout()
 
@@ -273,8 +277,14 @@ export default function App() {
               New Game
             </button>
             <button
+              onClick={() => setCardsOpen(true)}
+              className="h-12 px-4 text-sm font-medium rounded-lg border border-om-border text-om-muted active:bg-om-slot-hover"
+            >
+              Cards
+            </button>
+            <button
               onClick={() => setJournalOpen(true)}
-              className="h-12 px-5 text-sm font-medium rounded-lg border border-om-border text-om-muted active:bg-om-slot-hover"
+              className="h-12 px-4 text-sm font-medium rounded-lg border border-om-border text-om-muted active:bg-om-slot-hover"
             >
               Journal
             </button>
@@ -347,6 +357,14 @@ export default function App() {
                 New Game
               </button>
               <button
+                onClick={() => setCardsOpen(true)}
+                className={`text-sm text-om-muted hover:text-om-text border border-om-border rounded-lg transition-colors ${
+                  compact ? 'h-11 px-4' : 'w-full py-2'
+                }`}
+              >
+                {compact ? 'Cards' : 'Flashcards'}
+              </button>
+              <button
                 onClick={() => setJournalOpen(true)}
                 className={`text-sm text-om-muted hover:text-om-text border border-om-border rounded-lg transition-colors ${
                   compact ? 'h-11 px-4' : 'w-full py-2'
@@ -393,6 +411,24 @@ export default function App() {
             </div>
             <div className="flex flex-wrap gap-2">{optionPills}</div>
           </div>
+        </div>
+      )}
+
+      {/* Flashcards drawer */}
+      {cardsOpen && (
+        <div className="fixed inset-0 z-50 flex">
+          <div className="drawer-panel w-full lg:w-[80vw] bg-om-bg border-r border-om-border flex flex-col shadow-2xl">
+            <Flashcards
+              allEvents={allEvents}
+              progress={cardProgress}
+              onProgress={setCardProgress}
+              onClose={() => setCardsOpen(false)}
+            />
+          </div>
+          <div
+            className="drawer-backdrop hidden lg:block flex-1 bg-black/40 cursor-pointer"
+            onClick={() => setCardsOpen(false)}
+          />
         </div>
       )}
 
