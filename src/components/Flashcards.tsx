@@ -144,7 +144,7 @@ export function Flashcards({ allEvents, progress, onProgress, onClose }: Props) 
               {deck.length === 0
                 ? 'Widen the filter to bring cards back.'
                 : stats.nextDue !== null
-                  ? `Next card is due in ${formatWhenDue(stats.nextDue, Date.now())}. Spacing the reviews out is what makes them stick.`
+                  ? `Next card is due in ${formatWhenDue(stats.nextDue, now)}. Spacing the reviews out is what makes them stick.`
                   : 'Nothing left to review.'}
             </p>
           </div>

@@ -114,11 +114,13 @@ export function Timeline({
   })
 
   // In the split layout this pane runs to the bottom of the screen, so its last
-  // slot has to clear the home indicator on its own.
+  // slot has to clear the home indicator on its own. It also needs min-w-0 as well
+  // as min-h-0 there: as a flex row child it otherwise refuses to shrink below its
+  // content width when the divider is dragged right.
   return (
     <div
       ref={registerScrollContainer}
-      className="scroll-pane flex-1 min-h-0 overflow-y-auto p-3 sm:p-4 pb-[calc(0.75rem+var(--safe-bottom))] sm:pb-[calc(1rem+var(--safe-bottom))] space-y-2 sm:space-y-3"
+      className="scroll-pane flex-1 min-h-0 min-w-0 overflow-y-auto p-3 sm:p-4 pb-[calc(0.75rem+var(--safe-bottom))] sm:pb-[calc(1rem+var(--safe-bottom))] space-y-2 sm:space-y-3"
     >
       {lastPlacementCorrect === true && (
         <div className="mb-2 px-3 py-2 bg-om-success-bg border border-om-border rounded text-sm text-om-success font-semibold">

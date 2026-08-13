@@ -1,6 +1,6 @@
 # Terms of Use
 
-**Last updated:** 2026-08-05
+**Last updated:** 2026-08-13
 
 US History Timeline is a free study game offered as a personal, non-commercial
 project. By using it, you agree to the following.
@@ -37,8 +37,10 @@ that turns out to be inaccurate.
 
 Your game progress and study notes are stored only in your own browser. They are
 not backed up, and they can be lost if you clear your browser data, use private
-browsing, or switch devices. Keep your own copy of anything you care about. See
-[PRIVACY.md](./PRIVACY.md).
+browsing, or switch devices. Keep your own copy of anything you care about.
+
+The site sets **no cookies**. See [PRIVACY.md](./PRIVACY.md) for exactly what is
+kept on your device and how to erase it.
 
 ## Availability
 

@@ -125,6 +125,65 @@ input, textarea, select {
   font-size: max(16px, 1em);
 }
 
+/* Drag handle between the controls panel and the timeline. The hit area is wider
+   than the visible hairline so it is reachable with a finger, per the 44px
+   guidance, without spending that much layout width. */
+.panel-divider {
+  position: relative;
+  width: 12px;
+  /* Negative margins exactly cancel the width, so the handle costs zero layout
+     space. The panel and the timeline then sum to the full viewport, which is what
+     the resize clamp assumes when reserving a minimum width for the timeline. */
+  margin: 0 -6px;
+  z-index: 20;
+  cursor: col-resize;
+  touch-action: none;  /* stop the browser panning instead of resizing */
+}
+
+.panel-divider-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1px;
+  background: var(--om-border);
+  transition: background 120ms, width 120ms;
+}
+
+.panel-divider:hover .panel-divider-line,
+.panel-divider:focus-visible .panel-divider-line,
+.panel-divider.is-dragging .panel-divider-line {
+  width: 3px;
+  background: var(--om-accent);
+}
+
+/* Small vertical grip so the handle reads as draggable rather than decorative. */
+.panel-divider-grip {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 8px;
+  height: 40px;
+  transform: translate(-50%, -50%);
+  border-radius: 4px;
+  background: var(--om-border);
+  opacity: 0;
+  transition: opacity 120ms;
+}
+
+.panel-divider:hover .panel-divider-grip,
+.panel-divider:focus-visible .panel-divider-grip,
+.panel-divider.is-dragging .panel-divider-grip {
+  opacity: 1;
+  background: var(--om-accent);
+}
+
+.panel-divider:focus-visible {
+  outline: 2px solid var(--om-accent);
+  outline-offset: 2px;
+}
+
 /* Momentum scrolling + no scroll-chaining inside panes */
 .scroll-pane {
   -webkit-overflow-scrolling: touch;

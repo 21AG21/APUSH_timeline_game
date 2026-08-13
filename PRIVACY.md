@@ -1,6 +1,6 @@
 # Privacy Policy
 
-**Last updated:** 2026-08-05
+**Last updated:** 2026-08-13
 
 US History Timeline is a free, independent study game. This policy explains, in plain
 terms, what the site does and does not do with information.
@@ -10,6 +10,19 @@ terms, what the site does and does not do with information.
 Everything you do in the game stays in your own browser. There are no accounts.
 We never ask for your name, email address, age, or school. We cannot see your
 study notes.
+
+## Cookies
+
+**This site does not use cookies.** None are set, by us or by anyone else — not for
+analytics, not for preferences, not for anything. There is nothing to consent to,
+which is why you are not shown a cookie banner.
+
+You can verify this: open your browser's developer tools, look under Storage or
+Application, and the cookie list for this site will be empty.
+
+Your preferences are kept in local storage instead, described below. Unlike a
+cookie, local storage is never attached to network requests — it stays on your
+device and is not sent to the server at all.
 
 ## What is stored on your device
 
@@ -22,6 +35,7 @@ your device and is never transmitted to us or anyone else:
 | `apush-settings` | Your preferences: dark mode, hard mode, filters, analytics choice |
 | `apush-notes` | Study notes you write yourself |
 | `apush-flashcards` | Which flashcards you have answered, and when each is next due |
+| `apush-panel-width` | How wide you dragged the controls panel |
 | `apush-event-count` | Internal bookkeeping for the event list |
 | `apush-data-version` | Internal bookkeeping so old saves upgrade cleanly |
 

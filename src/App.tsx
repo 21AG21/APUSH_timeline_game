@@ -14,7 +14,13 @@ import { ResultsSummary } from './components/ResultsSummary'
 import { FilterPopover } from './components/FilterPopover'
 import { AboutModal } from './components/AboutModal'
 import { Flashcards } from './components/Flashcards'
+import { PanelDivider } from './components/PanelDivider'
 import type { ProgressMap } from './lib/flashcards'
+
+/** Panel resize bounds. The upper bound also leaves the timeline room to breathe. */
+const PANEL_MIN = 260
+const PANEL_MAX = 640
+const TIMELINE_MIN = 320
 import { useGameState } from './hooks/useGameState'
 import { useLocalStorage } from './hooks/useLocalStorage'
 import { usePointerDrag } from './hooks/usePointerDrag'
@@ -43,8 +49,40 @@ export default function App() {
   const [aboutOpen, setAboutOpen] = useState(false)
   const [cardsOpen, setCardsOpen] = useState(false)
   const [cardProgress, setCardProgress] = useLocalStorage<ProgressMap>('apush-flashcards', {})
+  // 0 means "not set yet" so the first render can fall back to a third of the
+  // viewport, matching the old fixed w-1/3 rather than jumping on first load.
+  const [panelWidth, setPanelWidth] = useLocalStorage<number>('apush-panel-width', 0)
+  const panelRef = useRef<HTMLDivElement | null>(null)
 
   const { split, compact } = useLayout()
+
+  /** Keep the panel usable, and always leave the timeline at least TIMELINE_MIN. */
+  const clampPanel = useCallback((px: number) => {
+    const ceiling = Math.max(PANEL_MIN, Math.min(PANEL_MAX, window.innerWidth - TIMELINE_MIN))
+    return Math.round(Math.max(PANEL_MIN, Math.min(ceiling, px)))
+  }, [])
+
+  const resolvedPanelWidth = panelWidth || 0
+
+  // A saved width can be too wide for a smaller window on the next visit, or after
+  // a rotate/resize, which would squeeze the timeline out. Re-clamp when that happens.
+  useEffect(() => {
+    if (!split) return
+    const fit = () => {
+      setPanelWidth((w) => {
+        const current = w || Math.round(window.innerWidth / 3)
+        const next = clampPanel(current)
+        return next === w ? w : next
+      })
+    }
+    fit()
+    window.addEventListener('resize', fit)
+    window.addEventListener('orientationchange', fit)
+    return () => {
+      window.removeEventListener('resize', fit)
+      window.removeEventListener('orientationchange', fit)
+    }
+  }, [split, clampPanel, setPanelWidth])
 
   // Feedback state
   const [lastCorrect, setLastCorrect] = useState<boolean | null>(null)
@@ -295,7 +333,13 @@ export default function App() {
       ) : (
         /* ---------------- Split: desktop and landscape phones ---------------- */
         <>
-          <div className="w-1/3 min-w-[300px] max-w-[460px] shrink-0 flex flex-col border-r border-om-border bg-om-surface">
+          <div
+            ref={panelRef}
+            style={resolvedPanelWidth ? { width: resolvedPanelWidth } : undefined}
+            className={`shrink-0 flex flex-col bg-om-surface ${
+              resolvedPanelWidth ? '' : 'w-1/3 min-w-[300px] max-w-[460px]'
+            }`}
+          >
             <div className={`shrink-0 ${compact ? 'px-3 pt-3 pb-2 space-y-2' : 'px-5 pt-5 pb-4 space-y-4'}`}>
               <div className="inline-block">
                 <h1
@@ -376,6 +420,20 @@ export default function App() {
 
             {trademarkFooter}
           </div>
+
+          <PanelDivider
+            width={resolvedPanelWidth || 0}
+            min={PANEL_MIN}
+            max={PANEL_MAX}
+            onDragTo={(clientX) => {
+              const left = panelRef.current?.getBoundingClientRect().left ?? 0
+              setPanelWidth(clampPanel(clientX - left))
+            }}
+            onNudge={(d) =>
+              setPanelWidth((w) => clampPanel((w || Math.round(window.innerWidth / 3)) + d))
+            }
+            onReset={() => setPanelWidth(clampPanel(Math.round(window.innerWidth / 3)))}
+          />
 
           {timelineEl}
         </>
