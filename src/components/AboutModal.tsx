@@ -33,26 +33,30 @@ export function AboutModal({ analyticsOptOut, onToggleAnalytics, onClose }: Prop
       onClick={onClose}
     >
       <div
-        className="bg-om-surface rounded-t-2xl sm:rounded-lg shadow-2xl w-full max-w-lg max-h-[92dvh] overflow-y-auto"
+        className="bg-om-surface border border-om-border shadow-2xl w-full max-w-lg max-h-[92dvh] overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex items-center justify-between px-5 py-4 border-b border-om-border sticky top-0 bg-om-surface z-10">
+        <div className="flex items-center justify-between px-5 py-4 rule-double sticky top-0 bg-om-surface z-10">
           <h2 className="text-xl font-serif font-bold text-om-text">About, privacy &amp; terms</h2>
           <button
             onClick={onClose}
             aria-label="Close about"
-            className="h-10 w-10 shrink-0 rounded-full text-om-muted hover:text-om-text text-2xl leading-none"
+            className="h-10 w-10 shrink-0 text-om-muted hover:text-om-text text-2xl leading-none"
           >
             ×
           </button>
         </div>
 
-        <div className="px-5 py-4 space-y-5 text-sm text-om-muted">
+        <div className="px-5 py-4 space-y-5 text-sm leading-relaxed text-om-body">
           <section className="space-y-2">
-            <h3 className="font-semibold text-om-text">Cookies</h3>
-            <div className="rounded-lg border border-om-border bg-om-bg px-3 py-2.5">
-              <p className="font-semibold text-om-text">This site does not use cookies.</p>
-              <p className="mt-1">
+            <h3 className="label-mono text-om-text">Cookies</h3>
+            <div className="border border-om-border border-l-[3px] border-l-om-accent bg-om-bg px-4 py-3">
+              {/* The headline claim of the whole notice — set as a statement, not
+                  as one of the small mono labels used for section headings. */}
+              <p className="font-serif text-base font-bold text-om-text">
+                This site does not use cookies.
+              </p>
+              <p className="mt-1.5">
                 No cookies are set, by us or by anyone else, so there is nothing to consent to and
                 no cookie banner to dismiss. Nothing here follows you to other websites.
               </p>
@@ -64,7 +68,7 @@ export function AboutModal({ analyticsOptOut, onToggleAnalytics, onClose }: Prop
           </section>
 
           <section className="space-y-2">
-            <h3 className="font-semibold text-om-text">What is saved on your device</h3>
+            <h3 className="label-mono text-om-text">What is saved on your device</h3>
             <p>
               Instead of cookies, the app keeps your progress in your browser&rsquo;s local
               storage. It stays on your device, is never transmitted anywhere, and is not
@@ -74,7 +78,7 @@ export function AboutModal({ analyticsOptOut, onToggleAnalytics, onClose }: Prop
             <ul className="space-y-1 pt-1">
               {STORED.map(([key, what]) => (
                 <li key={key} className="flex flex-col sm:flex-row sm:gap-2">
-                  <code className="text-xs text-om-text font-mono shrink-0">{key}</code>
+                  <code className="label-mono text-om-text shrink-0 normal-case tracking-normal">{key}</code>
                   <span className="text-xs">{what}</span>
                 </li>
               ))}
@@ -87,7 +91,7 @@ export function AboutModal({ analyticsOptOut, onToggleAnalytics, onClose }: Prop
           </section>
 
           <section className="space-y-2">
-            <h3 className="font-semibold text-om-text">Anonymous usage stats</h3>
+            <h3 className="label-mono text-om-text">Anonymous usage stats</h3>
             <p>
               We count page views and loading speed through Vercel Analytics and Speed Insights.
               They set no cookies, cannot identify you, and are served from this site&rsquo;s own
@@ -96,10 +100,10 @@ export function AboutModal({ analyticsOptOut, onToggleAnalytics, onClose }: Prop
             </p>
             <button
               onClick={onToggleAnalytics}
-              className={`h-11 px-4 rounded-full text-sm font-medium transition-all ${
+              className={`label-mono h-11 px-4 border transition-colors ${
                 analyticsOptOut
-                  ? 'bg-om-accent text-om-accent-fg shadow-sm'
-                  : 'bg-om-bg text-om-muted border border-om-border hover:text-om-text'
+                  ? 'bg-om-accent border-om-accent text-om-accent-fg'
+                  : 'border-om-border text-om-muted hover:text-om-text hover:bg-om-slot-hover'
               }`}
             >
               {analyticsOptOut ? 'Analytics off — tap to allow' : 'Turn analytics off'}
@@ -110,7 +114,7 @@ export function AboutModal({ analyticsOptOut, onToggleAnalytics, onClose }: Prop
           </section>
 
           <section className="space-y-2">
-            <h3 className="font-semibold text-om-text">No third parties</h3>
+            <h3 className="label-mono text-om-text">No third parties</h3>
             <p>
               The app loads no third-party scripts, trackers, images, or fonts. Fonts are served
               from this site&rsquo;s own domain specifically so that visiting the page does not
@@ -120,14 +124,14 @@ export function AboutModal({ analyticsOptOut, onToggleAnalytics, onClose }: Prop
           </section>
 
           <section className="space-y-2">
-            <h3 className="font-semibold text-om-text">Terms of use</h3>
+            <h3 className="label-mono text-om-text">Terms of use</h3>
             <p>
-              <span className="font-medium text-om-text">Not affiliated with the College Board.</span>{' '}
+              <span className="font-semibold text-om-text">Not affiliated with the College Board.</span>{' '}
               This is an independent, unofficial project. Nothing here is approved, reviewed, or
               endorsed by the College Board.
             </p>
             <p>
-              <span className="font-medium text-om-text">No warranty on accuracy.</span> The
+              <span className="font-semibold text-om-text">No warranty on accuracy.</span> The
               historical content is provided as is, with no warranty of accuracy or completeness.
               It is a study aid, not a source of record, and not a substitute for your course
               materials, textbook, or teacher. Dates, causes, and effects are compressed into
@@ -136,31 +140,31 @@ export function AboutModal({ analyticsOptOut, onToggleAnalytics, onClose }: Prop
               guarantee any particular score.
             </p>
             <p>
-              <span className="font-medium text-om-text">Limitation of liability.</span> To the
+              <span className="font-semibold text-om-text">Limitation of liability.</span> To the
               fullest extent permitted by law, the authors are not liable for any damages arising
               from your use of, or inability to use, this site — including lost notes or reliance
               on content that turns out to be inaccurate.
             </p>
             <p>
-              <span className="font-medium text-om-text">Your data is not backed up.</span> Progress
+              <span className="font-semibold text-om-text">Your data is not backed up.</span> Progress
               and notes live only in this browser and can be lost if you clear browser data, use
               private browsing, or switch devices. Keep your own copy of anything you care about.
             </p>
             <p>
-              <span className="font-medium text-om-text">Availability.</span> The site is provided
+              <span className="font-semibold text-om-text">Availability.</span> The site is provided
               with no guarantee of availability and may change or be taken down at any time.
             </p>
           </section>
 
           <section className="space-y-2">
-            <h3 className="font-semibold text-om-text">Licence &amp; full documents</h3>
+            <h3 className="label-mono text-om-text">Licence &amp; full documents</h3>
             <p>
               The source code and event dataset are released under the MIT Licence, which covers
               this project&rsquo;s own work and grants no rights in any third-party trademark.
             </p>
             <p className="flex flex-wrap gap-x-4 gap-y-1">
               <a
-                className="underline text-om-text"
+                className="label-mono underline text-om-text"
                 href={`${REPO}/PRIVACY.md`}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -168,7 +172,7 @@ export function AboutModal({ analyticsOptOut, onToggleAnalytics, onClose }: Prop
                 Full privacy policy
               </a>
               <a
-                className="underline text-om-text"
+                className="label-mono underline text-om-text"
                 href={`${REPO}/TERMS.md`}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -176,7 +180,7 @@ export function AboutModal({ analyticsOptOut, onToggleAnalytics, onClose }: Prop
                 Full terms of use
               </a>
               <a
-                className="underline text-om-text"
+                className="label-mono underline text-om-text"
                 href={`${REPO}/LICENSE`}
                 target="_blank"
                 rel="noopener noreferrer"

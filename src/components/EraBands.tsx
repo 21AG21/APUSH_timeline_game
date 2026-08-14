@@ -27,12 +27,15 @@ export function EraBandHeader({ year, prevYear }: EraHeaderProps) {
 
   if (prev && prev.name === current.name) return null
 
+  // A section break in the record rather than a filled band: the label sits on
+  // the baseline of a rule that runs out to the edge of the pane.
   return (
-    <div className="flex items-center gap-2 px-2.5 py-0.5 sm:py-1 rounded-md border border-om-border bg-om-era-band text-xs sm:text-sm font-medium my-1">
-      <span className="text-om-gold font-semibold">{current.name}</span>
-      <span className="text-om-muted">
-        {current.start}–{current.end === 2099 ? 'present' : current.end}
+    <div className="flex items-center gap-3 pt-3 pb-1">
+      <span className="label-mono text-om-gold">{current.name}</span>
+      <span className="label-mono text-om-muted">
+        {current.start}&ndash;{current.end === 2099 ? 'present' : current.end}
       </span>
+      <span className="flex-1 h-px bg-om-border" />
     </div>
   )
 }

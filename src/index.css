@@ -1,11 +1,14 @@
 /* Self-hosted fonts. Loading these from Google's CDN would send every
-   visitor's IP to a third party before the app renders — see PRIVACY.md. */
-@import '@fontsource/cormorant-garamond/400.css';
-@import '@fontsource/cormorant-garamond/600.css';
-@import '@fontsource/cormorant-garamond/700.css';
-@import '@fontsource/dm-sans/400.css';
-@import '@fontsource/dm-sans/500.css';
-@import '@fontsource/dm-sans/600.css';
+   visitor's IP to a third party before the app renders — see PRIVACY.md.
+
+   Three families, three jobs: Bitter sets titles and figures, Source Sans 3
+   sets running prose, JetBrains Mono sets the small uppercase labels that
+   stand in for an archive's rubber stamps. */
+@import '@fontsource/bitter/400.css';
+@import '@fontsource/bitter/600.css';
+@import '@fontsource/bitter/700.css';
+@import '@fontsource/source-sans-3/400.css';
+@import '@fontsource/source-sans-3/600.css';
 @import '@fontsource/jetbrains-mono/400.css';
 @import '@fontsource/jetbrains-mono/500.css';
 
@@ -13,54 +16,64 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Printed-document palette: warm paper, near-black ink, a single deep green
+   accent and an ochre second accent. Surfaces are separated by ruled lines
+   rather than by shadow or radius. */
 :root {
-  --om-bg:           #FAF7F2;
-  --om-surface:      #F0ECE3;
-  --om-text:         #0D1A12;
-  --om-muted:        #3A4A3E;
-  --om-accent:       #2D5A3D;
-  --om-accent-hover: #245030;
-  --om-accent-light: #E8F0EB;
-  --om-gold:         #9A7A2E;
-  --om-success:      #2B6640;
-  --om-success-bg:   #E8F2EC;
-  --om-error:        #7A2E2E;
-  --om-error-bg:     #F2E8E8;
-  --om-border:       #C4BAA9;
-  --om-slot-hover:   #E6E0D3;
-  --om-era-band:     #EBE2CA;
-  --om-tag:          #E6E0D3;
-  --om-note:         #F5EDD7;
-  --om-note-border:  #DDD0AC;
-  --om-note-title:   #7A5A0A;
+  --om-bg:           #F7F6F2;  /* paper — the page itself */
+  --om-surface:      #FBFAF6;  /* leaf — sidebar and filed cards */
+  --om-card:         #FFFFFF;  /* the one card in hand, lifted off the leaf */
+  --om-text:         #1A1A18;  /* ink — titles and figures */
+  --om-body:         #2E2E2B;  /* running prose, a shade lighter than ink */
+  --om-muted:        #57574F;  /* metadata and labels */
+  --om-accent:       #2C5B41;
+  --om-accent-hover: #234A34;
+  --om-accent-light: #E9EFEA;
+  --om-gold:         #7A5A22;  /* second accent, used for EFFECT and notes */
+  --om-success:      #2C5B41;
+  --om-success-bg:   #E9EFEA;
+  --om-error:        #8C2F26;
+  --om-error-bg:     #F4EAE8;
+  --om-border:       #D8D6CD;  /* rule */
+  --om-slot-hover:   #EFEDE5;
+  --om-era-band:     #EFEDE4;
+  --om-tag:          #EDEBE2;
+  --om-note:         #F6F1E4;
+  --om-note-border:  #E0D8C0;
+  --om-note-title:   #7A5A22;
   /* Text drawn on top of filled accent/error surfaces. */
-  --om-accent-fg:    #FFFFFF;
-  --om-error-fg:     #FFFFFF;
+  --om-accent-fg:    #F3F6F0;
+  --om-error-fg:     #F7F6F2;
 }
 
+/* Dark mode drops the green: ink and accent become the same warm off-white, so
+   the interface reads as monochrome rather than as the light theme inverted.
+   Red stays, because it is the only colour carrying meaning on its own. */
 .dark {
-  --om-bg:           #0F1512;
-  --om-surface:      #1A211C;
-  --om-text:         #F0EDE4;
-  --om-muted:        #B0BAB2;
-  --om-accent:       #6BBF82;
-  --om-accent-hover: #5AA86E;
-  --om-accent-light: #192B1E;
-  --om-gold:         #D4B85A;
-  --om-success:      #7DD498;
-  --om-success-bg:   #1A2D1E;
-  --om-error:        #D88080;
-  --om-error-bg:     #2D1A1A;
-  --om-border:       #3A4A3E;
-  --om-slot-hover:   #252D27;
-  --om-era-band:     #1D2118;
-  --om-tag:          #252D27;
-  --om-note:         #221E10;
-  --om-note-border:  #3A3215;
-  --om-note-title:   #D4B85A;
+  --om-bg:           #131312;
+  --om-surface:      #0E0E0D;
+  --om-card:         #191918;
+  --om-text:         #EFEDE8;
+  --om-body:         #D2CFC8;
+  --om-muted:        #9C988F;
+  --om-accent:       #EFEDE8;
+  --om-accent-hover: #DAD7D0;
+  --om-accent-light: #1E1E1C;
+  --om-gold:         #A8A49B;
+  --om-success:      #EFEDE8;
+  --om-success-bg:   #1C1F1C;
+  --om-error:        #D9736A;
+  --om-error-bg:     #2A1917;
+  --om-border:       #302F2C;
+  --om-slot-hover:   #1C1C1A;
+  --om-era-band:     #191918;
+  --om-tag:          #232321;
+  --om-note:         #1C1A15;
+  --om-note-border:  #39352A;
+  --om-note-title:   #BFB6A0;
   /* Dark-mode accents are light, so they need dark text on top. */
-  --om-accent-fg:    #0B120E;
-  --om-error-fg:     #2A0F0F;
+  --om-accent-fg:    #101510;
+  --om-error-fg:     #1A0F0E;
 }
 
 /* Display-cutout insets, read once here so every consumer shares one source of
@@ -95,9 +108,40 @@ html {
 @media (min-width: 1536px) { html { font-size: 22px; } }
 
 body {
-  font-family: 'DM Sans', system-ui, sans-serif;
+  font-family: 'Source Sans 3', system-ui, sans-serif;
   overscroll-behavior: none;
   -webkit-tap-highlight-color: transparent;
+}
+
+/* Square corners throughout, so a visible ring rather than a rounded one. */
+:focus-visible {
+  outline: 2px solid var(--om-accent);
+  outline-offset: 2px;
+}
+
+@layer components {
+  /* Small uppercase mono label — the recurring "stamp" of the design. Placed in
+     the components layer so a utility like text-xs still overrides the size. */
+  .label-mono {
+    font-family: 'JetBrains Mono', Menlo, monospace;
+    font-weight: 500;
+    font-size: 0.6875rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  /* Large serif numeral used for every headline statistic. */
+  .figure {
+    font-family: 'Bitter', Georgia, serif;
+    font-weight: 700;
+    line-height: 1.05;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Double rules bracket the masthead and the footer of the panel — the
+     heaviest separator in the design, reserved for those two edges. */
+  .rule-double     { border-bottom: 3px double var(--om-text); }
+  .rule-double-top { border-top: 3px double var(--om-text); }
 }
 
 /* Mobile browser chrome makes 100vh overflow — dvh tracks the visible viewport */
@@ -163,10 +207,9 @@ input, textarea, select {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 8px;
+  width: 6px;
   height: 40px;
   transform: translate(-50%, -50%);
-  border-radius: 4px;
   background: var(--om-border);
   opacity: 0;
   transition: opacity 120ms;
@@ -179,15 +222,47 @@ input, textarea, select {
   background: var(--om-accent);
 }
 
-.panel-divider:focus-visible {
-  outline: 2px solid var(--om-accent);
-  outline-offset: 2px;
-}
-
 /* Momentum scrolling + no scroll-chaining inside panes */
 .scroll-pane {
   -webkit-overflow-scrolling: touch;
   overscroll-behavior: contain;
+}
+
+/* On a pointer device, give the panes a visible ruled scrollbar rather than the
+   overlay kind that fades out. The controls panel holds more than a short
+   window can show, and an invisible scrollbar makes that cut-off read as a
+   designed edge — the settings below it simply look absent. Touch devices keep
+   the overlay scrollbar, since a finger discovers the overflow by dragging. */
+@media (pointer: fine) {
+  /* Firefox only. Chromium gives the standard properties precedence over the
+     pseudo-elements below and then still draws an overlay bar, so it must not
+     see these — hence the feature split rather than declaring both. */
+  @supports not selector(::-webkit-scrollbar) {
+    .scroll-pane {
+      scrollbar-width: thin;
+      scrollbar-color: var(--om-border) transparent;
+    }
+  }
+
+  .scroll-pane::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  .scroll-pane::-webkit-scrollbar-track {
+    background: transparent;
+    border-left: 1px solid var(--om-border);
+  }
+
+  .scroll-pane::-webkit-scrollbar-thumb {
+    background: var(--om-border);
+    border: 3px solid transparent;
+    background-clip: content-box;
+  }
+
+  .scroll-pane:hover::-webkit-scrollbar-thumb {
+    background: var(--om-muted);
+    background-clip: content-box;
+  }
 }
 
 /* Drag source: stop the browser from scrolling/selecting mid-drag */
@@ -204,24 +279,42 @@ input, textarea, select {
   pointer-events: none;
   opacity: 0.95;
   transform: translate(-50%, -50%) rotate(-1.5deg);
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.22);
   will-change: transform;
 }
 
-/* Rainbow streak animation */
-@keyframes rainbow {
-  0%   { color: #e74c3c; }
-  15%  { color: #e67e22; }
-  30%  { color: #f1c40f; }
-  45%  { color: #2ecc71; }
-  60%  { color: #3498db; }
-  75%  { color: #9b59b6; }
-  90%  { color: #e91e63; }
-  100% { color: #e74c3c; }
+/* The streak figure is the one place colour is allowed to run riot. A static
+   spectrum rather than an animation: it holds the same reading at a glance and
+   never distracts from the card being placed. The plain colour is declared
+   first so the number stays legible if background-clip:text is unsupported —
+   without that fallback an unsupported browser renders it invisible. */
+.streak-gradient {
+  color: var(--om-text);
 }
 
-.streak-rainbow {
-  animation: rainbow 2s linear infinite;
+@supports (background-clip: text) or (-webkit-background-clip: text) {
+  .streak-gradient {
+    background-image: linear-gradient(
+      90deg,
+      #C4423A, #C8862B, #B0A32C, #2C7A4B, #2F6BA8, #6B4A9B
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    width: fit-content;
+  }
+}
+
+/* A wrong placement nudges the card sideways rather than flashing a banner. */
+@keyframes nudge {
+  0%, 100% { transform: translateX(0); }
+  25%      { transform: translateX(-4px); }
+  75%      { transform: translateX(4px); }
+}
+
+.nudge {
+  animation: nudge 0.22s ease;
 }
 
 /* Journal drawer slide-in */
@@ -243,3 +336,10 @@ input, textarea, select {
   animation: fadeIn 0.3s ease-out both;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .nudge,
+  .drawer-panel,
+  .drawer-backdrop {
+    animation: none;
+  }
+}

@@ -14,6 +14,7 @@ import {
   type CardKind,
   type ProgressMap,
 } from '../lib/flashcards'
+import { Ghost } from './ui'
 
 interface Props {
   allEvents: Event[]
@@ -56,78 +57,67 @@ export function Flashcards({ allEvents, progress, onProgress, onClose }: Props) 
 
   return (
     <div className="flex flex-col h-full min-h-0">
-      <div className="shrink-0 flex items-center justify-between px-4 sm:px-6 py-3 border-b border-om-border">
+      <div className="shrink-0 flex items-start justify-between gap-3 px-4 sm:px-6 py-3 rule-double">
         <div>
-          <h2 className="text-xl sm:text-2xl font-serif font-bold text-om-text leading-none">Flashcards</h2>
-          <p className="mt-1 text-xs text-om-muted">
+          <h2 className="text-xl sm:text-2xl font-serif font-bold text-om-text leading-none">
+            Flashcards
+          </h2>
+          <p className="label-mono mt-2 text-om-muted">
             {stats.due} due · {stats.unseen} new · {stats.mastered} mastered · {stats.total} total
           </p>
         </div>
         <button
           onClick={onClose}
           aria-label="Close flashcards"
-          className="h-11 w-11 shrink-0 rounded-full text-om-muted text-3xl leading-none active:bg-om-slot-hover"
+          className="h-11 w-11 shrink-0 text-om-muted hover:text-om-text text-3xl leading-none"
         >
           ×
         </button>
       </div>
 
       <div className="shrink-0 px-4 sm:px-6 py-2 border-b border-om-border flex items-center gap-2">
-        <button
-          onClick={() => setFiltersOpen((o) => !o)}
-          className="h-10 px-4 rounded-full border border-om-border text-sm font-medium text-om-text active:bg-om-slot-hover"
-        >
+        <Ghost onClick={() => setFiltersOpen((o) => !o)} className="h-10">
           Filter{units.length || kinds.length ? ` (${units.length + kinds.length})` : ''}
-        </button>
+        </Ghost>
         {(units.length > 0 || kinds.length > 0) && (
           <button
             onClick={() => {
               setUnits([])
               setKinds([])
             }}
-            className="h-10 px-3 text-sm text-om-muted underline"
+            className="label-mono h-10 px-2 text-om-muted underline"
           >
             Clear
           </button>
         )}
-        <span className="ml-auto text-xs text-om-muted tabular-nums">{graded} done this session</span>
+        <span className="label-mono ml-auto text-om-muted">{graded} done this session</span>
       </div>
 
       {filtersOpen && (
-        <div className="shrink-0 px-4 sm:px-6 py-3 border-b border-om-border bg-om-bg space-y-3">
+        <div className="shrink-0 px-4 sm:px-6 py-3 border-b border-om-border bg-om-surface space-y-3">
           <div>
-            <p className="text-xs font-semibold text-om-muted mb-1.5">Period</p>
+            <p className="label-mono text-om-muted mb-1.5">Period</p>
             <div className="flex flex-wrap gap-1.5">
               {UNITS.map((u) => (
-                <button
+                <Chip
                   key={u}
+                  label={`${u} · ${PERIOD_LABEL[u]}`}
+                  active={units.includes(u)}
                   onClick={() => toggle(units, u, setUnits)}
-                  className={`h-9 px-3 rounded-full text-xs font-medium border transition-colors ${
-                    units.includes(u)
-                      ? 'bg-om-accent border-om-accent text-om-accent-fg'
-                      : 'border-om-border text-om-muted active:bg-om-slot-hover'
-                  }`}
-                >
-                  {u} · {PERIOD_LABEL[u]}
-                </button>
+                />
               ))}
             </div>
           </div>
           <div>
-            <p className="text-xs font-semibold text-om-muted mb-1.5">Card type</p>
+            <p className="label-mono text-om-muted mb-1.5">Card type</p>
             <div className="flex flex-wrap gap-1.5">
               {KINDS.map((k) => (
-                <button
+                <Chip
                   key={k}
+                  label={KIND_LABEL[k]}
+                  active={kinds.includes(k)}
                   onClick={() => toggle(kinds, k, setKinds)}
-                  className={`h-9 px-3 rounded-full text-xs font-medium border transition-colors ${
-                    kinds.includes(k)
-                      ? 'bg-om-accent border-om-accent text-om-accent-fg'
-                      : 'border-om-border text-om-muted active:bg-om-slot-hover'
-                  }`}
-                >
-                  {KIND_LABEL[k]}
-                </button>
+                />
               ))}
             </div>
           </div>
@@ -140,7 +130,7 @@ export function Flashcards({ allEvents, progress, onProgress, onClose }: Props) 
             <p className="text-2xl font-serif font-bold text-om-text">
               {deck.length === 0 ? 'No cards match' : 'All caught up'}
             </p>
-            <p className="text-sm text-om-muted max-w-xs">
+            <p className="text-sm text-om-body max-w-xs">
               {deck.length === 0
                 ? 'Widen the filter to bring cards back.'
                 : stats.nextDue !== null
@@ -150,20 +140,21 @@ export function Flashcards({ allEvents, progress, onProgress, onClose }: Props) 
           </div>
         ) : (
           <div className="max-w-2xl mx-auto">
-            <div className="flex items-center gap-2 mb-3">
-              <span className="px-2 py-0.5 rounded bg-om-tag text-[0.7rem] font-semibold text-om-muted uppercase tracking-wide">
-                {KIND_LABEL[card.kind]}
-              </span>
-              <span className="text-[0.7rem] text-om-muted">
+            <div className="flex items-baseline gap-2 mb-2">
+              <span className="label-mono text-om-accent">{KIND_LABEL[card.kind]}</span>
+              {/* Letter-spaced mono runs two labels together without a mark
+                  between them, so the separator is explicit. */}
+              <span aria-hidden className="label-mono text-om-border">&middot;</span>
+              <span className="label-mono text-om-muted">
                 {card.units.map((u) => `Unit ${u}`).join(', ')}
               </span>
-              <span className="ml-auto text-[0.7rem] text-om-muted tabular-nums">
+              <span className="label-mono ml-auto text-om-muted">
                 {box === 0 ? 'new' : `box ${box}/${MAX_BOX}`}
               </span>
             </div>
 
-            <div className="bg-om-surface border border-om-border rounded-xl p-5 sm:p-6 min-h-[9rem] flex items-center">
-              <p className="text-lg sm:text-xl font-medium text-om-text whitespace-pre-line leading-snug">
+            <div className="bg-om-card border border-om-border border-t-[3px] border-t-om-accent p-5 sm:p-6 min-h-[9rem] flex items-center">
+              <p className="font-serif text-lg sm:text-xl font-bold text-om-text whitespace-pre-line leading-snug">
                 {card.prompt}
               </p>
             </div>
@@ -171,42 +162,44 @@ export function Flashcards({ allEvents, progress, onProgress, onClose }: Props) 
             {!revealed ? (
               <button
                 onClick={() => setRevealed(true)}
-                className="mt-4 w-full h-14 rounded-xl bg-om-accent text-om-accent-fg text-base font-semibold active:bg-om-accent-hover"
+                className="label-mono mt-3 w-full h-14 bg-om-accent border border-om-accent text-om-accent-fg hover:bg-om-accent-hover transition-colors"
               >
                 Show answer
               </button>
             ) : (
               <>
-                <div className="mt-4 bg-om-accent-light border border-om-border rounded-xl p-5">
+                <div className="mt-3 bg-om-accent-light border border-om-border border-l-[3px] border-l-om-accent p-5">
                   {card.answer.length === 1 ? (
-                    <p className="text-lg font-semibold text-om-text">{card.answer[0]}</p>
+                    <p className="font-serif text-lg font-bold text-om-text">{card.answer[0]}</p>
                   ) : (
-                    <ul className="space-y-1.5">
+                    <ul className="space-y-2">
                       {card.answer.map((a, i) => (
-                        <li key={i} className="text-base text-om-text flex gap-2">
-                          <span className="text-om-gold">•</span>
+                        <li key={i} className="text-base leading-relaxed text-om-text flex gap-3">
+                          <span className="label-mono text-om-gold pt-[0.3rem] shrink-0">
+                            {String(i + 1).padStart(2, '0')}
+                          </span>
                           <span>{a}</span>
                         </li>
                       ))}
                     </ul>
                   )}
                   {card.footnote && (
-                    <p className="mt-3 pt-3 border-t border-om-border text-sm text-om-muted">
+                    <p className="mt-3 pt-3 border-t border-om-border text-sm leading-relaxed text-om-body">
                       {card.footnote}
                     </p>
                   )}
                 </div>
 
-                <div className="mt-4 flex gap-3">
+                <div className="mt-3 flex gap-2">
                   <button
                     onClick={() => answer(false)}
-                    className="flex-1 h-14 rounded-xl border-2 border-om-error text-om-error text-base font-semibold active:bg-om-error-bg"
+                    className="label-mono flex-1 h-14 border border-om-error text-om-error hover:bg-om-error-bg transition-colors"
                   >
                     Again
                   </button>
                   <button
                     onClick={() => answer(true)}
-                    className="flex-1 h-14 rounded-xl bg-om-success text-om-accent-fg text-base font-semibold active:opacity-90"
+                    className="label-mono flex-1 h-14 bg-om-accent border border-om-accent text-om-accent-fg hover:bg-om-accent-hover transition-colors"
                   >
                     Got it
                   </button>
@@ -214,12 +207,28 @@ export function Flashcards({ allEvents, progress, onProgress, onClose }: Props) 
               </>
             )}
 
-            <p className="mt-4 text-center text-xs text-om-muted">
+            <p className="label-mono mt-4 text-center text-om-muted">
               {queue.length} due in this deck
             </p>
           </div>
         )}
       </div>
     </div>
+  )
+}
+
+function Chip({ label, active, onClick }: { label: string; active: boolean; onClick: () => void }) {
+  return (
+    <button
+      aria-pressed={active}
+      onClick={onClick}
+      className={`inline-flex items-center h-9 px-2.5 text-sm border transition-colors ${
+        active
+          ? 'bg-om-accent border-om-accent text-om-accent-fg font-semibold'
+          : 'border-om-border text-om-muted hover:text-om-text'
+      }`}
+    >
+      {label}
+    </button>
   )
 }

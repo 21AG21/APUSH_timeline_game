@@ -8,7 +8,9 @@ export default {
         om: {
           bg:             'var(--om-bg)',
           surface:        'var(--om-surface)',
+          card:           'var(--om-card)',
           text:           'var(--om-text)',
+          body:           'var(--om-body)',
           muted:          'var(--om-muted)',
           accent:         'var(--om-accent)',
           'accent-hover': 'var(--om-accent-hover)',
@@ -30,8 +32,8 @@ export default {
         },
       },
       fontFamily: {
-        serif: ['Cormorant Garamond', 'Georgia', 'serif'],
-        sans:  ['DM Sans', 'system-ui', 'sans-serif'],
+        serif: ['Bitter', 'Georgia', 'serif'],
+        sans:  ['Source Sans 3', 'system-ui', 'sans-serif'],
         mono:  ['JetBrains Mono', 'Menlo', 'monospace'],
       },
     },

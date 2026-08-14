@@ -35,30 +35,31 @@ export function FilterPopover({ allEvents, selectedUnits, selectedRegions, onCha
 
   const reset = () => onChange([], [])
 
-  const active = selectedUnits.length > 0 || selectedRegions.length > 0
+  const count = selectedUnits.length + selectedRegions.length
+  const active = count > 0
 
   return (
     <div ref={ref} className="relative">
+      {/* Sized to match a Segment so the Deck row lines up with the rows above it. */}
       <button
         onClick={() => setOpen((v) => !v)}
-        className={`h-11 px-4 text-sm rounded-full font-medium transition-all ${
+        aria-expanded={open}
+        className={`inline-flex items-center justify-center border px-3 h-10 sm:h-9 text-sm transition-colors ${
           active
-            ? 'bg-om-accent text-om-accent-fg shadow-sm'
-            : 'bg-om-bg text-om-muted hover:text-om-text hover:bg-om-slot-hover border border-om-border'
+            ? 'font-semibold bg-om-accent border-om-accent text-om-accent-fg'
+            : 'border-om-border text-om-muted hover:text-om-text'
         }`}
       >
-        Filter{active ? ` (${selectedUnits.length + selectedRegions.length})` : ''}
+        {active ? `Filtered (${count})` : 'All events'}
       </button>
 
       {open && (
-        <div className="absolute left-0 top-full mt-1 z-40 bg-om-surface border border-om-border rounded-lg shadow-xl p-4 w-[min(18rem,calc(100vw-2rem))] max-h-[60dvh] overflow-y-auto">
-          <div className="flex items-center justify-between mb-3">
-            <span className="text-sm font-semibold text-om-text uppercase tracking-wide">
-              Filter Pool
-            </span>
+        <div className="absolute right-0 top-full mt-1 z-40 bg-om-surface border border-om-border shadow-xl p-4 w-[min(20rem,calc(100vw-2rem))] max-h-[60dvh] overflow-y-auto">
+          <div className="flex items-center justify-between gap-3 mb-3 border-b border-om-border pb-2">
+            <span className="label-mono text-om-text">Filter pool</span>
             {active && (
-              <button onClick={reset} className="text-xs text-om-accent hover:underline">
-                Reset all
+              <button onClick={reset} className="label-mono text-om-accent underline">
+                Reset
               </button>
             )}
           </div>
@@ -84,8 +85,8 @@ export function FilterPopover({ allEvents, selectedUnits, selectedRegions, onCha
             </div>
           </Section>
 
-          <p className="mt-3 text-xs text-om-muted">
-            Empty selection = all. Changing filter starts a new game.
+          <p className="mt-3 border-t border-om-border pt-2 text-xs text-om-muted">
+            Nothing selected means everything. Changing the filter deals a new game.
           </p>
         </div>
       )}
@@ -96,7 +97,7 @@ export function FilterPopover({ allEvents, selectedUnits, selectedRegions, onCha
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div className="mb-3">
-      <p className="text-sm font-medium text-om-muted mb-1.5">{title}</p>
+      <p className="label-mono text-om-muted mb-1.5">{title}</p>
       {children}
     </div>
   )
@@ -104,13 +105,13 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 
 function CheckChip({ label, checked, onChange }: { label: string; checked: boolean; onChange: () => void }) {
   return (
-    <label className="flex items-center gap-1.5 cursor-pointer select-none">
-      <input type="checkbox" checked={checked} onChange={onChange} className="w-4 h-4 accent-om-accent" />
+    <label className="cursor-pointer select-none">
+      <input type="checkbox" checked={checked} onChange={onChange} className="sr-only peer" />
       <span
-        className={`text-sm px-2 py-1.5 rounded border transition-colors ${
+        className={`inline-flex items-center h-9 px-2.5 text-sm border transition-colors peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-om-accent ${
           checked
-            ? 'border-om-accent bg-om-accent-light text-om-accent'
-            : 'border-om-border text-om-muted'
+            ? 'border-om-accent bg-om-accent text-om-accent-fg font-semibold'
+            : 'border-om-border text-om-muted hover:text-om-text'
         }`}
       >
         {label}

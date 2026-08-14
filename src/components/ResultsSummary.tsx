@@ -49,36 +49,40 @@ export function ResultsSummary({ state, settings, allEvents }: Props) {
   }
 
   return (
-    <div className="bg-om-surface border border-om-border rounded-lg p-4 space-y-3">
-      <h3 className="font-semibold text-om-text text-base">Game Summary</h3>
-      <div className="grid grid-cols-2 gap-2 text-sm">
+    <div className="bg-om-card border border-om-border border-t-[3px] border-t-om-accent p-4 space-y-3">
+      <h3 className="font-serif font-bold text-om-text text-lg leading-none">Game summary</h3>
+
+      <div className="grid grid-cols-2 gap-x-4 gap-y-2 border-y border-om-border py-3">
         <Kv label="Score" value={`${state.score} / ${total}`} />
         <Kv label="Accuracy" value={`${accuracy}%`} />
         <Kv label="Attempts" value={String(state.attempts)} />
-        <Kv label="Best Streak" value={String(state.bestStreak)} />
+        <Kv label="Best streak" value={String(state.bestStreak)} />
       </div>
+
       {modes.length > 0 && (
-        <p className="text-sm text-om-muted">
-          <span className="font-medium">Modes:</span> {modes.join(' · ')}
+        <p className="text-xs text-om-muted">
+          <span className="label-mono text-om-muted">Modes</span> {modes.join(' · ')}
         </p>
       )}
+
       {missedTitles.length > 0 ? (
         <div>
-          <p className="text-sm font-medium text-om-error mb-1">
-            Missed ({missedTitles.length}):
-          </p>
-          <ul className="text-sm text-om-muted space-y-0.5">
-            {missedTitles.map((t) => <li key={t}>• {t}</li>)}
+          <p className="label-mono text-om-error mb-1">Missed ({missedTitles.length})</p>
+          <ul className="text-sm text-om-body space-y-0.5">
+            {missedTitles.map((t) => (
+              <li key={t}>{t}</li>
+            ))}
           </ul>
         </div>
       ) : (
-        <p className="text-sm text-om-success font-medium">No events missed!</p>
+        <p className="label-mono text-om-success">Nothing missed</p>
       )}
+
       <button
         onClick={handleCopy}
-        className="w-full py-1.5 rounded border border-om-border text-sm text-om-text hover:bg-om-slot-hover transition-colors"
+        className="label-mono w-full h-10 border border-om-border text-om-muted hover:text-om-text hover:bg-om-slot-hover transition-colors"
       >
-        {copied ? 'Copied!' : 'Copy summary'}
+        {copied ? 'Copied' : 'Copy summary'}
       </button>
     </div>
   )
@@ -86,9 +90,9 @@ export function ResultsSummary({ state, settings, allEvents }: Props) {
 
 function Kv({ label, value }: { label: string; value: string }) {
   return (
-    <div className="bg-om-bg rounded px-2 py-1.5">
-      <p className="text-om-muted text-sm">{label}</p>
-      <p className="font-bold text-om-text">{value}</p>
+    <div>
+      <p className="label-mono text-om-muted">{label}</p>
+      <p className="figure text-xl text-om-text">{value}</p>
     </div>
   )
 }

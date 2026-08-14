@@ -2,109 +2,121 @@ interface Props {
   score: number
   attempts: number
   poolSize: number
-  timelineSize: number
   streak: number
+  bestStreak: number
   done: boolean
   gameOver: boolean
-  /** Single-line strip used by the mobile layout. */
+  /** Tighter type and padding where vertical space is scarce. */
   compact?: boolean
+  /** One line, no sub-labels — for a landscape phone, where every row of the
+      panel competes with the card the player has to drag. */
+  dense?: boolean
 }
 
+/**
+ * Three ruled columns of headline figures. The same block serves both layouts —
+ * only the scale changes — so the numbers sit in the same order wherever you
+ * read them.
+ */
 export function Scoreboard({
   score,
   attempts,
   poolSize,
-  timelineSize,
   streak,
+  bestStreak,
   done,
   gameOver,
   compact,
+  dense,
 }: Props) {
   const total = score + poolSize + (done || gameOver ? 0 : 1)
 
-  if (compact) {
+  if (dense) {
     return (
-      <div className="flex items-center justify-around gap-2 px-3 py-2 border-b border-om-border bg-om-bg">
-        <Inline label="Score" value={`${score}/${total}`} />
-        <Divider />
-        <div className="flex flex-col items-center leading-none">
-          <span
-            className={`text-2xl font-black tabular-nums ${
-              streak > 0 ? 'streak-rainbow' : 'text-om-text'
-            }`}
-          >
-            {streak}
-          </span>
-          <span className="text-[0.65rem] font-bold text-om-muted uppercase tracking-wider mt-1">
-            Streak
-          </span>
-        </div>
-        <Divider />
-        <Inline label="Left" value={String(poolSize)} />
-        <Divider />
-        <Inline label="Tries" value={String(attempts)} />
+      // No "N left" here: the score already reads as a fraction of the total,
+      // and a fourth item overruns the width a landscape panel has to spare.
+      <div className="flex items-baseline justify-between gap-2 px-3 py-1.5">
+        <DenseStat label="Streak" value={String(streak)} gradient={streak > 0} />
+        <DenseStat label="Score" value={`${score}/${total}`} />
+        <DenseStat label="Tries" value={String(attempts)} />
       </div>
     )
   }
 
   return (
-    <div className="px-5 py-5 space-y-5">
-      <div className="grid grid-cols-2 gap-3">
-        <StatCard label="Score" value={`${score}/${total}`} />
-        <StatCard label="Attempts" value={String(attempts)} />
-      </div>
-
-      <div className="flex flex-col items-center py-3 bg-om-bg rounded-xl border border-om-border">
-        <span
-          className={`text-6xl font-black leading-none tabular-nums ${
-            streak > 0 ? 'streak-rainbow' : 'text-om-text'
-          }`}
-        >
-          {streak}
-        </span>
-        <span className="text-sm font-bold text-om-muted uppercase tracking-[0.2em] mt-2">
-          Streak
-        </span>
-      </div>
-
-      <div className="grid grid-cols-2 gap-3">
-        <StatCard label="Timeline" value={String(timelineSize)} />
-        <StatCard label="Remaining" value={String(poolSize)} />
+    <div className={compact ? 'px-3 py-2.5' : 'px-5 py-3'}>
+      <div className="flex items-stretch gap-4">
+        <Stat
+          label="Streak"
+          value={String(streak)}
+          sub={`best ${bestStreak}`}
+          compact={compact}
+          gradient={streak > 0}
+        />
+        <Rule />
+        <Stat label="Score" value={String(score)} sub={`of ${total}`} compact={compact} />
+        <Rule />
+        <Stat label="Tries" value={String(attempts)} sub={`${poolSize} left`} compact={compact} />
       </div>
 
       {done && !gameOver && (
-        <div className="text-center py-2 bg-om-success-bg rounded-lg border border-om-border">
-          <p className="text-base font-bold text-om-success">
-            Complete! {score}/{total}
-          </p>
-        </div>
+        <p className="label-mono mt-3 border border-om-border bg-om-success-bg px-3 py-2 text-om-success">
+          Record complete — {score} of {total}
+        </p>
       )}
     </div>
   )
 }
 
-function Divider() {
+function Rule() {
   return <span className="w-px self-stretch bg-om-border" />
 }
 
-function Inline({ label, value }: { label: string; value: string }) {
+function DenseStat({
+  label,
+  value,
+  gradient,
+}: {
+  label: string
+  value: string
+  gradient?: boolean
+}) {
   return (
-    <div className="flex flex-col items-center leading-none">
-      <span className="text-lg font-bold text-om-text tabular-nums">{value}</span>
-      <span className="text-[0.65rem] font-bold text-om-muted uppercase tracking-wider mt-1">
-        {label}
+    <span className="flex items-baseline gap-1.5 shrink-0">
+      <span className="label-mono text-om-muted">{label}</span>
+      <span
+        className={`figure text-base ${gradient ? 'streak-gradient' : 'text-om-text'}`}
+      >
+        {value}
       </span>
-    </div>
+    </span>
   )
 }
 
-function StatCard({ label, value }: { label: string; value: string }) {
+function Stat({
+  label,
+  value,
+  sub,
+  compact,
+  gradient,
+}: {
+  label: string
+  value: string
+  sub: string
+  compact?: boolean
+  gradient?: boolean
+}) {
   return (
-    <div className="flex flex-col items-center bg-om-bg rounded-xl border border-om-border px-4 py-3">
-      <span className="text-xs text-om-muted uppercase tracking-wider font-semibold">{label}</span>
-      <span className="text-3xl font-bold mt-1 leading-none tabular-nums text-om-text">
+    <div className="flex-1 min-w-0">
+      <div className="label-mono text-om-muted">{label}</div>
+      <div
+        className={`figure ${compact ? 'text-2xl' : 'text-4xl'} ${
+          gradient ? 'streak-gradient' : 'text-om-text'
+        }`}
+      >
         {value}
-      </span>
+      </div>
+      <div className="text-xs text-om-muted truncate">{sub}</div>
     </div>
   )
 }

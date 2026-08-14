@@ -15,6 +15,7 @@ import { FilterPopover } from './components/FilterPopover'
 import { AboutModal } from './components/AboutModal'
 import { Flashcards } from './components/Flashcards'
 import { PanelDivider } from './components/PanelDivider'
+import { Ghost, ScrollHint, Segment, SettingRow, Stamp } from './components/ui'
 import type { ProgressMap } from './lib/flashcards'
 
 /** Panel resize bounds. The upper bound also leaves the timeline room to breathe. */
@@ -25,6 +26,7 @@ import { useGameState } from './hooks/useGameState'
 import { useLocalStorage } from './hooks/useLocalStorage'
 import { usePointerDrag } from './hooks/usePointerDrag'
 import { useLayout } from './hooks/useMediaQuery'
+import { useScrollHint } from './hooks/useScrollHint'
 import { filterPool, isGameOver } from './lib/game'
 
 const allEvents = apushEvents as Event[]
@@ -55,6 +57,8 @@ export default function App() {
   const panelRef = useRef<HTMLDivElement | null>(null)
 
   const { split, compact } = useLayout()
+  const [panelScrollRef, panelHasMore] = useScrollHint<HTMLDivElement>()
+  const [cardScrollRef, cardHasMore] = useScrollHint<HTMLDivElement>()
 
   /** Keep the panel usable, and always leave the timeline at least TIMELINE_MIN. */
   const clampPanel = useCallback((px: number) => {
@@ -85,7 +89,9 @@ export default function App() {
   }, [split, clampPanel, setPanelWidth])
 
   // Feedback state
-  const [lastCorrect, setLastCorrect] = useState<boolean | null>(null)
+  const [feedback, setFeedback] = useState<{ ok: boolean; text: string } | null>(null)
+  /** Increments only on wrong placements, so the card in hand can nudge. */
+  const [wrongCount, setWrongCount] = useState(0)
   const [understandingEvent, setUnderstandingEvent] = useState<Event | null>(null)
   const feedbackTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
   const prevAttempts = useRef(state.attempts)
@@ -106,18 +112,24 @@ export default function App() {
   useEffect(() => {
     if (state.attempts !== prevAttempts.current) {
       const correct = state.score > prevScore.current
-      setLastCorrect(correct)
+      const placed = lastPlacedEventRef.current
       if (feedbackTimer.current) clearTimeout(feedbackTimer.current)
 
       if (correct) {
-        if (settings.showUnderstanding && !settings.hardMode) {
-          if (lastPlacedEventRef.current) {
-            setUnderstandingEvent(lastPlacedEventRef.current)
-          }
+        // Naming the year is the payoff for a correct placement, but not while
+        // dates are hidden — that would hand back the very fact being tested.
+        setFeedback({
+          ok: true,
+          text: settings.hideDates || !placed ? 'Correct.' : `Correct — ${placed.year}.`,
+        })
+        if (settings.showUnderstanding && !settings.hardMode && placed) {
+          setUnderstandingEvent(placed)
         }
-        feedbackTimer.current = setTimeout(() => setLastCorrect(null), 2000)
+        feedbackTimer.current = setTimeout(() => setFeedback(null), 2000)
       } else {
-        feedbackTimer.current = setTimeout(() => setLastCorrect(null), 4000)
+        setFeedback({ ok: false, text: 'Not there.' })
+        setWrongCount((n) => n + 1)
+        feedbackTimer.current = setTimeout(() => setFeedback(null), 4000)
       }
     }
     prevScore.current = state.score
@@ -146,7 +158,7 @@ export default function App() {
     prevAttempts.current = 0
     prevScore.current = 0
     newGame(filtered)
-    setLastCorrect(null)
+    setFeedback(null)
     setUnderstandingEvent(null)
   }
 
@@ -184,49 +196,95 @@ export default function App() {
     setNotes((ns) => ns.filter((n) => n.eventId !== eventId))
   }
 
-  const optionPills = (
-    <>
-      <PillToggle
-        label="Hide Dates"
-        active={settings.hideDates}
-        onClick={() => setSettings((s) => ({ ...s, hideDates: !s.hideDates }))}
-      />
-      <PillToggle
-        label="Understanding"
-        active={settings.showUnderstanding}
-        onClick={() => setSettings((s) => ({ ...s, showUnderstanding: !s.showUnderstanding }))}
-      />
-      <PillToggle
-        label="Hard Mode"
-        active={settings.hardMode}
-        onClick={() => setSettings((s) => ({ ...s, hardMode: !s.hardMode }))}
-        danger
-      />
-      <FilterPopover
-        allEvents={allEvents}
-        selectedUnits={settings.filterUnits}
-        selectedRegions={settings.filterRegions}
-        onChange={handleFilterChange}
-      />
-      <PillToggle
-        label={settings.darkMode ? 'Light' : 'Dark'}
-        active={false}
-        onClick={() => setSettings((s) => ({ ...s, darkMode: !s.darkMode }))}
-      />
-    </>
+  const set = <K extends keyof Settings>(key: K, value: Settings[K]) =>
+    setSettings((s) => ({ ...s, [key]: value }))
+
+  /* Each setting reads as a statement with a current value rather than as a
+     button whose label describes the thing it would do — "Year on card: hidden"
+     instead of a "Hide dates" pill that is ambiguous once it is lit up. */
+  const settingRows = (
+    <div className="space-y-2.5">
+      <SettingRow label="Year on card">
+        <Segment label="Shown" active={!settings.hideDates} onClick={() => set('hideDates', false)} />
+        <Segment label="Hidden" active={settings.hideDates} onClick={() => set('hideDates', true)} />
+      </SettingRow>
+
+      <SettingRow label="Reflection">
+        <Segment
+          label="Off"
+          active={!settings.showUnderstanding}
+          onClick={() => set('showUnderstanding', false)}
+        />
+        <Segment
+          label="On"
+          active={settings.showUnderstanding}
+          onClick={() => set('showUnderstanding', true)}
+        />
+      </SettingRow>
+
+      <SettingRow label="Hard mode">
+        <Segment
+          label="Off"
+          tone="ink"
+          active={!settings.hardMode}
+          onClick={() => set('hardMode', false)}
+        />
+        <Segment
+          label="On"
+          tone="danger"
+          active={settings.hardMode}
+          onClick={() => set('hardMode', true)}
+        />
+      </SettingRow>
+
+      <SettingRow label="Deck" asGroup={false}>
+        <FilterPopover
+          allEvents={allEvents}
+          selectedUnits={settings.filterUnits}
+          selectedRegions={settings.filterRegions}
+          onChange={handleFilterChange}
+        />
+      </SettingRow>
+    </div>
   )
 
   /* College Board's guidelines require this attribution on the page itself,
      not only inside a legal page. */
-  const trademarkFooter = (
+  const trademarkFooter = (dense?: boolean) => (
     <button
       onClick={() => setAboutOpen(true)}
-      className="pb-safe w-full px-3 pt-2 text-left text-[0.65rem] leading-snug text-om-muted hover:text-om-text border-t border-om-border bg-om-surface"
+      className={`pb-safe w-full px-3 pt-2 text-left text-[0.65rem] leading-snug text-om-muted hover:text-om-text border-t border-om-border bg-om-surface ${
+        dense ? 'truncate' : ''
+      }`}
     >
-      AP<sup>&reg;</sup> and Advanced Placement<sup>&reg;</sup> are trademarks registered by the
-      College Board, which is not affiliated with, and does not endorse, this website.{' '}
-      <span className="underline whitespace-nowrap">About &amp; privacy</span>
+      {dense ? (
+        <>
+          AP<sup>&reg;</sup> is a College Board trademark; this site is unaffiliated.{' '}
+          <span className="underline whitespace-nowrap">About &amp; privacy</span>
+        </>
+      ) : (
+        <>
+          AP<sup>&reg;</sup> and Advanced Placement<sup>&reg;</sup> are trademarks registered by
+          the College Board, which is not affiliated with, and does not endorse, this website.{' '}
+          <span className="underline whitespace-nowrap">About &amp; privacy</span>
+        </>
+      )}
     </button>
+  )
+
+  const masthead = (
+    <div>
+      <h1
+        className={`font-serif font-bold text-om-text tracking-tight leading-none ${
+          compact ? 'text-xl' : 'text-3xl'
+        }`}
+      >
+        US History Timeline
+      </h1>
+      <p className="label-mono mt-2 text-om-muted">
+        A study game for AP<sup>&reg;</sup> U.S. History
+      </p>
+    </div>
   )
 
   const timelineEl = (
@@ -237,7 +295,7 @@ export default function App() {
       hideDates={settings.hideDates}
       hardMode={settings.hardMode}
       notes={notes}
-      lastPlacementCorrect={lastCorrect}
+      feedback={feedback}
       compact={compact}
       dragOverSlot={drag.isDragging ? drag.activeSlot : null}
       registerSlot={drag.registerSlot}
@@ -254,6 +312,7 @@ export default function App() {
       hardMode={settings.hardMode}
       compact={compact}
       isDragging={drag.isDragging}
+      nudgeCount={wrongCount}
       onPointerDown={drag.start}
     />
   ) : (
@@ -262,6 +321,26 @@ export default function App() {
         <ResultsSummary state={state} settings={settings} allEvents={allEvents} />
       )}
     </div>
+  )
+
+  const scoreboardEl = (dense?: boolean) => (
+    <Scoreboard
+      compact={compact}
+      dense={dense}
+      score={state.score}
+      attempts={state.attempts}
+      poolSize={state.pool.length}
+      streak={state.streak}
+      bestStreak={state.bestStreak}
+      done={state.done}
+      gameOver={state.gameOver}
+    />
+  )
+
+  const themeGhost = (
+    <Ghost onClick={() => set('darkMode', !settings.darkMode)}>
+      {settings.darkMode ? 'Light' : 'Dark'}
+    </Ghost>
   )
 
   return (
@@ -273,62 +352,28 @@ export default function App() {
       {!split ? (
         /* ---------------- Mobile: stacked ---------------- */
         <>
-          <header className="shrink-0 flex items-center justify-between gap-3 px-3 py-2 border-b border-om-border bg-om-surface">
-            <div>
-              <h1 className="text-xl font-serif font-bold text-om-text leading-none">
-                US History Timeline
-              </h1>
-              <div className="mt-1 h-[2px] bg-om-gold rounded-full w-full" />
-              <p className="mt-1 text-[0.65rem] text-om-muted leading-none">
-                A study game for AP<sup>&reg;</sup> U.S. History
-              </p>
-            </div>
-            <button
-              onClick={() => setSettingsOpen(true)}
-              aria-label="Options"
-              className="shrink-0 h-11 px-4 rounded-full border border-om-border text-sm font-medium text-om-text active:bg-om-slot-hover"
-            >
+          <header className="shrink-0 flex items-center justify-between gap-3 px-3 py-2.5 rule-double bg-om-surface">
+            {masthead}
+            <Ghost onClick={() => setSettingsOpen(true)} className="shrink-0">
               Options
-            </button>
+            </Ghost>
           </header>
 
-          <Scoreboard
-            compact
-            score={state.score}
-            attempts={state.attempts}
-            poolSize={state.pool.length}
-            timelineSize={state.timeline.length}
-            streak={state.streak}
-            done={state.done}
-            gameOver={state.gameOver}
-          />
+          <div className="shrink-0 border-b border-om-border bg-om-surface">{scoreboardEl()}</div>
 
           <div className="shrink-0 border-b border-om-border bg-om-surface">{placementEl}</div>
 
           {timelineEl}
 
-          <div className="shrink-0 flex gap-2 border-t border-om-border bg-om-surface p-3">
-            <button
-              onClick={handleNewGame}
-              className="flex-1 h-12 text-base font-semibold rounded-lg bg-om-accent active:bg-om-accent-hover text-om-accent-fg"
-            >
-              New Game
-            </button>
-            <button
-              onClick={() => setCardsOpen(true)}
-              className="h-12 px-4 text-sm font-medium rounded-lg border border-om-border text-om-muted active:bg-om-slot-hover"
-            >
-              Cards
-            </button>
-            <button
-              onClick={() => setJournalOpen(true)}
-              className="h-12 px-4 text-sm font-medium rounded-lg border border-om-border text-om-muted active:bg-om-slot-hover"
-            >
-              Journal
-            </button>
+          <div className="shrink-0 flex gap-2 rule-double-top bg-om-surface p-3">
+            <Stamp onClick={handleNewGame} className="flex-1">
+              New game
+            </Stamp>
+            <Ghost onClick={() => setCardsOpen(true)}>Cards</Ghost>
+            <Ghost onClick={() => setJournalOpen(true)}>Journal</Ghost>
           </div>
 
-          {trademarkFooter}
+          {trademarkFooter()}
         </>
       ) : (
         /* ---------------- Split: desktop and landscape phones ---------------- */
@@ -336,89 +381,86 @@ export default function App() {
           <div
             ref={panelRef}
             style={resolvedPanelWidth ? { width: resolvedPanelWidth } : undefined}
-            className={`shrink-0 flex flex-col bg-om-surface ${
+            className={`shrink-0 flex flex-col bg-om-surface border-r border-om-border ${
               resolvedPanelWidth ? '' : 'w-1/3 min-w-[300px] max-w-[460px]'
             }`}
           >
-            <div className={`shrink-0 ${compact ? 'px-3 pt-3 pb-2 space-y-2' : 'px-5 pt-5 pb-4 space-y-4'}`}>
-              <div className="inline-block">
-                <h1
-                  className={`font-serif font-bold text-om-text tracking-tight leading-none ${
-                    compact ? 'text-xl' : 'text-3xl'
-                  }`}
-                >
-                  US History Timeline
-                </h1>
-                <div
-                  className={`mt-1 bg-om-gold rounded-full w-full ${
-                    compact ? 'h-[2px]' : 'h-[3px]'
-                  }`}
-                />
-                <p className="mt-1.5 text-xs text-om-muted leading-none">
-                  A study game for AP<sup>&reg;</sup> U.S. History
-                </p>
-              </div>
-              {compact ? (
-                <button
-                  onClick={() => setSettingsOpen(true)}
-                  className="h-10 w-full rounded-full border border-om-border text-sm font-medium text-om-text hover:bg-om-slot-hover"
-                >
-                  Options
-                </button>
-              ) : (
-                <div className="flex flex-wrap gap-2">{optionPills}</div>
-              )}
-            </div>
+            {compact ? (
+              /* A landscape phone has almost no vertical space. Sharing one
+                 scroll region pushes the card in hand entirely below the fold —
+                 the thing you have to drag is off-screen on load. So the header
+                 and stats are pinned and the card gets the remaining height. */
+              <>
+                <header className="shrink-0 flex items-center justify-between gap-2 px-3 py-2 rule-double">
+                  <h1 className="font-serif font-bold text-om-text text-sm leading-none truncate">
+                    US History Timeline
+                  </h1>
+                  <Ghost onClick={() => setSettingsOpen(true)} className="shrink-0 h-10 px-2.5">
+                    Options
+                  </Ghost>
+                </header>
 
-            <div className="border-t border-om-border mx-5 shrink-0" />
+                <div className="shrink-0 border-b border-om-border">{scoreboardEl(true)}</div>
 
-            <div className="scroll-pane flex-1 min-h-0 overflow-y-auto">
-              {placementEl}
-              <div className="border-t border-om-border mx-4" />
-              <Scoreboard
-                compact={compact}
-                score={state.score}
-                attempts={state.attempts}
-                poolSize={state.pool.length}
-                timelineSize={state.timeline.length}
-                streak={state.streak}
-                done={state.done}
-                gameOver={state.gameOver}
-              />
-            </div>
+                <div className="relative flex-1 min-h-0 flex flex-col">
+                  <div ref={cardScrollRef} className="scroll-pane flex-1 min-h-0 overflow-y-auto">
+                    <div>{placementEl}</div>
+                  </div>
+                  <ScrollHint show={cardHasMore} />
+                </div>
 
-            <div
-              className={`shrink-0 border-t border-om-border ${
-                compact ? 'p-2 flex gap-2' : 'p-4 space-y-2'
-              }`}
-            >
-              <button
-                onClick={handleNewGame}
-                className={`font-semibold rounded-lg bg-om-accent hover:bg-om-accent-hover text-om-accent-fg transition-colors ${
-                  compact ? 'flex-1 h-11 text-sm' : 'w-full py-3 text-base'
-                }`}
-              >
-                New Game
-              </button>
-              <button
-                onClick={() => setCardsOpen(true)}
-                className={`text-sm text-om-muted hover:text-om-text border border-om-border rounded-lg transition-colors ${
-                  compact ? 'h-11 px-4' : 'w-full py-2'
-                }`}
-              >
-                {compact ? 'Cards' : 'Flashcards'}
-              </button>
-              <button
-                onClick={() => setJournalOpen(true)}
-                className={`text-sm text-om-muted hover:text-om-text border border-om-border rounded-lg transition-colors ${
-                  compact ? 'h-11 px-4' : 'w-full py-2'
-                }`}
-              >
-                {compact ? 'Journal' : 'Study Journal'}
-              </button>
-            </div>
+                <div className="shrink-0 rule-double-top p-2 flex gap-2">
+                  <Stamp onClick={handleNewGame} className="flex-1 h-10 px-3">
+                    New
+                  </Stamp>
+                  <Ghost onClick={() => setCardsOpen(true)} className="flex-1 h-10 px-3">
+                    Cards
+                  </Ghost>
+                  <Ghost onClick={() => setJournalOpen(true)} className="flex-1 h-10 px-3">
+                    Journal
+                  </Ghost>
+                </div>
+              </>
+            ) : (
+              /* One scroll region for the whole column, as in the source design.
+                 Scrolling only the middle of it leaves the card in hand cut off
+                 mid-sentence against a fixed footer, with nothing to say the rest
+                 is reachable — and pushes the settings out of sight entirely. */
+              <>
+                <div className="relative flex-1 min-h-0 flex flex-col">
+                  <div ref={panelScrollRef} className="scroll-pane flex-1 min-h-0 overflow-y-auto">
+                    <div>
+                      <div className="rule-double px-5 pt-5 pb-3">{masthead}</div>
 
-            {trademarkFooter}
+                      <div className="border-b border-om-border">{scoreboardEl()}</div>
+
+                      <div className="border-b border-om-border">{placementEl}</div>
+
+                      <div className="px-5 py-3">{settingRows}</div>
+                    </div>
+                  </div>
+
+                  <ScrollHint show={panelHasMore} />
+                </div>
+
+                <div className="shrink-0 rule-double-top space-y-2 px-5 py-3">
+                  <Stamp onClick={handleNewGame} className="w-full">
+                    New game
+                  </Stamp>
+                  <div className="flex gap-2">
+                    <Ghost onClick={() => setCardsOpen(true)} className="flex-1">
+                      Cards
+                    </Ghost>
+                    <Ghost onClick={() => setJournalOpen(true)} className="flex-1">
+                      Journal
+                    </Ghost>
+                    {themeGhost}
+                  </div>
+                </div>
+              </>
+            )}
+
+            {trademarkFooter(compact)}
           </div>
 
           <PanelDivider
@@ -442,10 +484,12 @@ export default function App() {
       {/* Card that follows the pointer while dragging */}
       {drag.isDragging && drag.dragPos && state.current && (
         <div
-          className="drag-ghost bg-om-surface border border-om-border border-l-[3px] border-l-om-gold rounded-lg px-4 py-3 max-w-[80vw] sm:max-w-sm"
+          className="drag-ghost bg-om-card border border-om-border border-t-[3px] border-t-om-accent px-4 py-3 max-w-[80vw] sm:max-w-sm"
           style={{ left: drag.dragPos.x, top: drag.dragPos.y }}
         >
-          <p className="font-bold text-om-text leading-tight truncate">{state.current.title}</p>
+          <p className="font-serif font-bold text-om-text leading-tight truncate">
+            {state.current.title}
+          </p>
         </div>
       )}
 
@@ -454,7 +498,7 @@ export default function App() {
         <div className="fixed inset-0 z-50 flex items-end" onClick={() => setSettingsOpen(false)}>
           <div className="drawer-backdrop absolute inset-0 bg-black/40" />
           <div
-            className="relative w-full bg-om-surface rounded-t-2xl border-t border-om-border shadow-2xl p-4 pb-8 max-h-[80dvh] overflow-y-auto"
+            className="relative w-full bg-om-surface rule-double-top shadow-2xl p-4 pb-8 max-h-[80dvh] overflow-y-auto"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center justify-between mb-4">
@@ -462,12 +506,13 @@ export default function App() {
               <button
                 onClick={() => setSettingsOpen(false)}
                 aria-label="Close options"
-                className="h-10 w-10 rounded-full text-om-muted text-2xl leading-none active:bg-om-slot-hover"
+                className="h-10 w-10 text-om-muted text-2xl leading-none active:bg-om-slot-hover"
               >
                 ×
               </button>
             </div>
-            <div className="flex flex-wrap gap-2">{optionPills}</div>
+            {settingRows}
+            <div className="mt-4 border-t border-om-border pt-4">{themeGhost}</div>
           </div>
         </div>
       )}
@@ -494,14 +539,14 @@ export default function App() {
       {journalOpen && (
         <div className="fixed inset-0 z-50 flex">
           <div className="drawer-panel w-full lg:w-[80vw] bg-om-surface border-r border-om-border flex flex-col shadow-2xl">
-            <div className="flex items-center justify-between px-4 sm:px-6 py-3 sm:py-4 border-b border-om-border shrink-0">
+            <div className="flex items-center justify-between px-4 sm:px-6 py-3 sm:py-4 rule-double shrink-0">
               <h2 className="text-xl sm:text-2xl font-serif font-bold text-om-text">
                 Study Journal
               </h2>
               <button
                 onClick={() => setJournalOpen(false)}
                 aria-label="Close journal"
-                className="h-11 w-11 shrink-0 rounded-full text-om-muted text-3xl leading-none active:bg-om-slot-hover"
+                className="h-11 w-11 shrink-0 text-om-muted text-3xl leading-none active:bg-om-slot-hover"
               >
                 ×
               </button>
@@ -559,32 +604,5 @@ export default function App() {
         </>
       )}
     </div>
-  )
-}
-
-function PillToggle({
-  label,
-  active,
-  onClick,
-  danger,
-}: {
-  label: string
-  active: boolean
-  onClick: () => void
-  danger?: boolean
-}) {
-  return (
-    <button
-      onClick={onClick}
-      className={`h-11 px-4 rounded-full text-sm font-medium transition-all cursor-pointer ${
-        active
-          ? danger
-            ? 'bg-om-error text-om-error-fg shadow-sm'
-            : 'bg-om-accent text-om-accent-fg shadow-sm'
-          : 'bg-om-bg text-om-muted hover:text-om-text hover:bg-om-slot-hover border border-om-border'
-      }`}
-    >
-      {label}
-    </button>
   )
 }

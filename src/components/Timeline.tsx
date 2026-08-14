@@ -12,7 +12,8 @@ interface Props {
   hideDates: boolean
   hardMode: boolean
   notes: Note[]
-  lastPlacementCorrect: boolean | null
+  /** One-line verdict on the last placement, shown above the record. */
+  feedback: { ok: boolean; text: string } | null
   /** Mobile: render collapsed event cards so several fit on screen. */
   compact?: boolean
   /** Slot currently under the dragged card, from usePointerDrag. */
@@ -30,7 +31,7 @@ export function Timeline({
   hideDates,
   hardMode,
   notes,
-  lastPlacementCorrect,
+  feedback,
   compact,
   dragOverSlot,
   registerSlot,
@@ -66,7 +67,6 @@ export function Timeline({
   }, [handleKeyDown])
 
   const noteMap = new Map(notes.map((n) => [n.eventId, n]))
-  const slotCount = timeline.length + 1
 
   const renderSlot = (index: number) => (
     // data-slot-index is the only stable handle on a slot: they are registered by
@@ -74,7 +74,6 @@ export function Timeline({
     <div data-slot-index={index} ref={(el) => registerSlot(index, el)}>
       <SlotMarker
         index={index}
-        slotCount={slotCount}
         isTentative={tentativeSlot === index}
         isDragOver={dragOverSlot === index}
         onClick={() => onSlotClick(index)}
@@ -120,18 +119,16 @@ export function Timeline({
   return (
     <div
       ref={registerScrollContainer}
-      className="scroll-pane flex-1 min-h-0 min-w-0 overflow-y-auto p-3 sm:p-4 pb-[calc(0.75rem+var(--safe-bottom))] sm:pb-[calc(1rem+var(--safe-bottom))] space-y-2 sm:space-y-3"
+      className="scroll-pane flex-1 min-h-0 min-w-0 overflow-y-auto p-3 sm:p-4 pb-[calc(0.75rem+var(--safe-bottom))] sm:pb-[calc(1rem+var(--safe-bottom))] space-y-1.5"
     >
-      {lastPlacementCorrect === true && (
-        <div className="mb-2 px-3 py-2 bg-om-success-bg border border-om-border rounded text-sm text-om-success font-semibold">
-          Correct!
-        </div>
-      )}
-      {lastPlacementCorrect === false && (
-        <div className="mb-2 px-3 py-2 bg-om-error-bg border border-om-border rounded text-sm text-om-error font-semibold">
-          Incorrect.
-        </div>
-      )}
+      {/* Reserves its line whether or not there is a verdict, so the record
+          below does not jump every time one appears or times out. */}
+      <p
+        aria-live="polite"
+        className={`min-h-[1.5rem] text-sm ${feedback?.ok ? 'text-om-accent' : 'text-om-error'}`}
+      >
+        {feedback?.text ?? ''}
+      </p>
       {items}
     </div>
   )

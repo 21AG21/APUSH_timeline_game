@@ -11,6 +11,7 @@ interface Props {
   compact?: boolean
 }
 
+/** A card already filed in the record: ruled box, left accent rail, indexed. */
 export function EventCard({ event, index, hideDates, hardMode, note, compact }: Props) {
   const [expanded, setExpanded] = useState(false)
   const showDetails = !compact || expanded
@@ -19,77 +20,102 @@ export function EventCard({ event, index, hideDates, hardMode, note, compact }: 
   return (
     <div
       onClick={compact && hasDetails ? () => setExpanded((v) => !v) : undefined}
-      className={`bg-om-surface border border-om-border rounded-lg shadow-sm ${
-        compact ? 'px-3 py-2.5 active:bg-om-slot-hover' : 'p-5'
+      className={`bg-om-surface border border-om-border border-l-[3px] border-l-om-accent ${
+        compact ? 'px-3 py-2.5 active:bg-om-slot-hover' : 'px-5 py-4'
       }`}
     >
-      <div className="flex items-start justify-between gap-2">
-        <div className="flex items-baseline gap-2 min-w-0">
-          <span className="text-xs font-bold text-om-muted shrink-0 tabular-nums">
-            {index + 1}
+      <div className="flex items-baseline justify-between gap-3">
+        <div className="flex items-baseline gap-3 min-w-0">
+          <span className="label-mono shrink-0 text-om-muted">
+            {String(index + 1).padStart(2, '0')}
           </span>
           <h3
-            className={`font-bold text-om-text leading-tight ${
+            className={`font-serif font-bold text-om-text leading-tight ${
               compact ? 'text-base' : 'text-xl'
             }`}
           >
             {event.title}
           </h3>
         </div>
-        <div className="flex items-center gap-1.5 shrink-0">
+        <div className="flex items-baseline gap-2 shrink-0">
           {!hideDates && (
-            <span className="text-sm font-mono text-om-muted">{event.year}</span>
+            <span className="font-serif font-bold text-om-accent tabular-nums">{event.year}</span>
           )}
           {compact && hasDetails && (
-            <span className="text-om-muted text-xs leading-none">{expanded ? '▲' : '▼'}</span>
+            <span className="text-om-muted text-[0.6rem] leading-none">
+              {expanded ? '▲' : '▼'}
+            </span>
           )}
         </div>
       </div>
 
       {showDetails && (
-        <div className={compact ? 'mt-2' : ''}>
-          <p className={`text-sm text-om-muted ${compact ? '' : 'mt-1 ml-7'}`}>
-            {event.description}
-          </p>
+        <div className={compact ? 'mt-2' : 'mt-2 ml-[3.25rem]'}>
+          <p className="text-sm leading-relaxed text-om-body">{event.description}</p>
 
           {!hardMode && (
-            <div className={`space-y-1 ${compact ? 'mt-2' : 'mt-2 ml-7'}`}>
-              <p className="text-sm text-om-muted">
-                <span className="font-semibold text-om-gold">Cause:</span> {event.cause}
-              </p>
-              <p className="text-sm text-om-muted">
-                <span className="font-semibold text-om-success">Effect:</span> {event.effect}
-              </p>
-            </div>
+            <LabelledRows
+              rows={[
+                { label: 'Cause', text: event.cause, tone: 'accent' },
+                { label: 'Effect', text: event.effect, tone: 'gold' },
+              ]}
+            />
           )}
 
           {note && (
-            <div
-              className={`bg-om-note border border-om-note-border rounded p-2 text-sm ${
-                compact ? 'mt-2' : 'mt-2 ml-7'
-              }`}
-            >
-              <p className="font-semibold text-om-note-title mb-0.5">Your notes</p>
-              {note.cause && (
-                <p className="text-om-text mt-0.5">
-                  <span className="font-medium text-om-gold">Cause:</span> {note.cause}
-                </p>
-              )}
-              {note.effect && (
-                <p className="text-om-muted mt-0.5">
-                  <span className="font-medium text-om-success">Effect:</span> {note.effect}
-                </p>
-              )}
-              {note.significance && (
-                <p className="text-om-muted mt-0.5">
-                  <span className="font-medium text-om-accent">Significance:</span>{' '}
-                  {note.significance}
-                </p>
-              )}
+            <div className="mt-3 border-t border-om-border pt-3">
+              <p className="label-mono text-om-note-title mb-1.5">Your notes</p>
+              <LabelledRows
+                bare
+                rows={[
+                  { label: 'Cause', text: note.cause, tone: 'accent' },
+                  { label: 'Effect', text: note.effect, tone: 'gold' },
+                  { label: 'Meaning', text: note.significance, tone: 'muted' },
+                ]}
+              />
             </div>
           )}
         </div>
       )}
+    </div>
+  )
+}
+
+type Tone = 'accent' | 'gold' | 'muted'
+
+const TONE: Record<Tone, string> = {
+  accent: 'text-om-accent',
+  gold: 'text-om-gold',
+  muted: 'text-om-muted',
+}
+
+/**
+ * Two-column ledger of stamped label against prose — the pattern used wherever
+ * cause, effect and significance appear together.
+ */
+export function LabelledRows({
+  rows,
+  bare,
+}: {
+  rows: { label: string; text?: string; tone: Tone }[]
+  /** Skip the leading rule, for use inside a block that already has one. */
+  bare?: boolean
+}) {
+  const present = rows.filter((r) => r.text)
+  if (present.length === 0) return null
+
+  return (
+    <div
+      className={`grid grid-cols-[3.75rem_1fr] gap-x-3 gap-y-2 ${
+        bare ? '' : 'mt-3 border-t border-om-border pt-3'
+      }`}
+    >
+      {present.map((r) => (
+        <div key={r.label} className="contents">
+          <div className={`label-mono pt-[0.2rem] ${TONE[r.tone]}`}>{r.label}</div>
+          <div className="text-sm leading-relaxed text-om-body">{r.text}</div>
+        </div>
+      ))}
     </div>
   )
 }

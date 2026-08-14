@@ -40,6 +40,35 @@ npx vitest run   # tests
   rather than HTML5 drag-and-drop, which never fires on touch devices.
 - **`src/hooks/useMediaQuery.ts`** — picks the stacked or split layout from both
   viewport width *and* height, so landscape phones get the split view.
+- **`src/hooks/useScrollHint.ts`** — reports whether a pane has content below the
+  fold. Browsers with overlay scrollbars show nothing, which made the controls
+  panel's cut-off read as a designed edge rather than as "scroll for more".
+
+### Design language
+
+The interface is styled as a printed archive rather than as an app: square
+corners everywhere, surfaces separated by ruled lines instead of radius or
+shadow, and three typefaces with one job each — **Bitter** for titles and
+figures, **Source Sans 3** for prose, **JetBrains Mono** for the small uppercase
+labels that act as stamps (`.label-mono` in `src/index.css`).
+
+Two conventions carry meaning and are worth keeping:
+
+- **Rails.** A 3px accent rule on the **left** edge marks a card filed in the
+  record; on the **top** edge it marks the single card in hand. That is the
+  fastest way to tell the draggable card from the placed ones.
+- **Dark mode is monochrome.** `--om-accent` collapses to the ink colour, so the
+  green disappears entirely and only red — the one colour carrying meaning on
+  its own — survives. Dark mode is not the light theme inverted.
+
+Colours live only as `--om-*` custom properties in `src/index.css`; components
+reference them through Tailwind's `om-*` names and never hard-code a hex value,
+so a palette change is a one-file edit. `src/components/ui.tsx` holds the shared
+controls (`Stamp`, `Ghost`, `Segment`, `SettingRow`).
+
+Settings are stated as a value rather than as an action — "Year on card:
+Shown / Hidden" instead of a "Hide dates" toggle, which is ambiguous once it is
+lit up.
 
 ### Units and periods
 
