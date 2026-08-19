@@ -10,6 +10,8 @@ There is also a **flashcard mode** built on the same dataset: six cards per even
 (date, identification, causes, effects, significance, period) on a Leitner
 schedule, filterable by period and card type.
 
+**Flashcard data:** [`APUSH_flashcards.json`](./APUSH_flashcards.json) exports all 1,026 cards as JSON (171 events × 6 card types).
+
 Works on phones, tablets, and desktop. Everything runs locally in the browser —
 there is no account and no server.
 
